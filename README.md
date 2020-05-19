@@ -10,7 +10,7 @@ https://gluonhq.com/products/javafx/
 
 RichTextFX:
 
-https://github.com/FXMisc/RichTextFX/releases/download/v0.10.5/richtextfx-0.10.5.jar
+https://github.com/FXMisc/RichTextFX/releases/download/v0.10.5/richtextfx-fat-0.10.5.jar
 
 Pierdolnik do kształtów 3D:
 
