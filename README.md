@@ -22,7 +22,7 @@ https://repo1.maven.org/maven2/org/fxyz3d/fxyz3d/0.5.2/fxyz3d-0.5.2.jar
 
 #### Konfiguracja wstępna
 
-* File -> Reload All from Disk
+* File -> Reload All from Disk && Invalidate Caches / Restart...
 * File -> Project Structure
     * Project (SDK, Project compiler output - ustaw na folder out)
     * Modules ("RichTextFX" oraz "Pierdolnik do kształtów 3D")
