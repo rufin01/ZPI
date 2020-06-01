@@ -1,8 +1,8 @@
 package zpi;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -15,17 +15,18 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
-        primaryStage.setTitle("ZPI");
+        primaryStage.setTitle("zpi");
 
         Scene scene = new Scene(root, 1024, 768);
         primaryStage.setScene(scene);
 
-        primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(1000);
+        primaryStage.setMinHeight(800);
 
         primaryStage.show();
 
         addCodeArea(scene);
+        addVisualisationArea(scene);
     }
 
     private void addCodeArea(Scene scene) {
@@ -39,6 +40,19 @@ public class Main extends Application {
 
         codeArea.prefWidthProperty().bind(codeAreaAnchorPane.widthProperty());
         codeArea.prefHeightProperty().bind(codeAreaAnchorPane.heightProperty());
+    }
+
+    private void addVisualisationArea(Scene scene){
+        Group group = new Group();
+        Model3DView viewArea = new Model3DView(scene, group);
+        viewArea.createScene();
+        //viewArea.handleMouse(scene, group);
+
+        AnchorPane visualisationAnchorPane = (AnchorPane) scene.lookup("#visualisationAreaAnchorPane");
+        visualisationAnchorPane.getChildren().add(group);
+
+        group.translateXProperty().bind(visualisationAnchorPane.widthProperty().divide(2));
+        group.translateYProperty().bind(visualisationAnchorPane.heightProperty().divide(2));
     }
 
 
