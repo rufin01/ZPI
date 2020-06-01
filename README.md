@@ -20,6 +20,7 @@ https://repo1.maven.org/maven2/org/fxyz3d/fxyz3d/0.5.2/fxyz3d-0.5.2.jar
 
 https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/
 
+
 ##### Wszystkie biblioteki należy wrzucić do folderu libs
 
 ##
@@ -29,8 +30,8 @@ https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/
 * File -> Reload All from Disk && Invalidate Caches / Restart...
 * File -> Project Structure
     * Project (SDK, Project compiler output - ustaw na folder out)
-    * Modules ("RichTextFX" oraz "Pierdolnik do kształtów 3D")
-    * Libraries (Punkt "Add the JavaFX library﻿" - https://www.jetbrains.com/help/idea/javafx.html?fbclid=IwAR0bH4XfeMjbF5JQRrvYriKi284PiOGw3hVEyBQmKbwEEm1ciS2eE3GIaIs#vm-options)
+    * Modules (RichTextFX)
+    * Libraries (Punkt "Add the JavaFX library﻿" - https://www.jetbrains.com/help/idea/javafx.html?fbclid=IwAR0bH4XfeMjbF5JQRrvYriKi284PiOGw3hVEyBQmKbwEEm1ciS2eE3GIaIs#add-javafx-lib)
 * Folder src -> Mark Directory as -> Sources Root
 * Run Main
 * Run -> Edit Configurations...
