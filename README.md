@@ -16,6 +16,10 @@ https://github.com/FXMisc/RichTextFX/releases/download/v0.10.5/richtextfx-fat-0.
 
 https://repo1.maven.org/maven2/org/fxyz3d/fxyz3d/0.5.2/fxyz3d-0.5.2.jar
 
+##### Do serializacji hashmap:
+
+https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/
+
 ##### Wszystkie biblioteki należy wrzucić do folderu libs
 
 ##
