@@ -38,3 +38,9 @@ Za semantykę odpowiadają pliki w folderze ```/expression```, które nie są je
 Na ten moment w pełni działającym elementem kompilatora jest budowanie tzw. <span style="color: #EFD020">ParseTree</span>, oraz sprawdzanie poprawności wpisywanego kodu pod względem składni językowej. 
 
 Moduł kompilatora odpowiadający za rozumienie oraz wykonanie podanego kodu jest rozpoczęty, jednak ubogi. Kompilator jest budowany za pomocą wzorca(?) <span style="color: #EFD020">visitor</span>
+
+
+## Przykład:
+
+![Picture not found!](readmeres/kod.PNG)
+![Picture not found!](readmeres/drzewo.PNG)
