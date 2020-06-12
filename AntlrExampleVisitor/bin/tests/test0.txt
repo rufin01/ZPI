@@ -1,0 +1,29 @@
+
+-- PRZYKLADOWY KOD
+
+i: INT = 5;
+mojGraph: GRAPH; -- No wlasnie... co
+
+tempNode: NODE[];
+
+-- deklaracja funkcji
+
+fun: VOID (graph: GRAPH) {
+	-- co moze robic graf
+	i = i - 1;
+	return;
+}
+
+   fun(mojGraph); --wywolanie
+
+if i == 4 then i = i + 1;
+
+while i >= 2 do {
+	i = i - 1;
+}
+
+
+-- typy prymimtiwne: INT, FLOAT, VOID, GRAPH, NODE, EDGE
+-- czy z GRAPH, NODE, EDGE zrobic jakies typy zlozone
+
+
