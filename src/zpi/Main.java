@@ -1,5 +1,6 @@
 package zpi;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
@@ -54,9 +55,27 @@ public class Main extends Application {
         Model3D model3D = new Model3D();
         model3D.addNode(node1, "node1");
         model3D.addNode(node2, "node2");
-        model3D.addNode(node3,"3");
+        //model3D.addNode(node3,"3");
         model3D.connectNodes("node1", "node2", "edge");
-        model3D.connectNodes("node2", "3","w");
+        //model3D.connectNodes("node2", "3","w");
+        AnimationTimer animationTimer = new AnimationTimer() {
+            boolean right = true;
+            long counter = 0;
+            long counter2 = 0;
+            @Override
+            public void handle(long l) {
+                if(counter%100==0)right=!right;
+                if(right){
+                    counter++;
+                }else counter--;
+                counter2++;
+                //model3D.deleteEdge1("edge");
+                //model3D.getModel().getChildren().remove(2);
+                model3D.moveNode("node1", counter/2,0,0,counter2/2,counter2/2,counter2/2);
+                //System.out.print(model3D.connectNodes("node1", "node2", "edge"));
+
+            }
+        };
 
         PerspectiveCamera camera = new PerspectiveCamera(true);
         camera.getTransforms().addAll(rotateX, rotateY, new Translate(0, 0, -35));
@@ -90,6 +109,8 @@ public class Main extends Application {
         subScene.setOnScroll((ScrollEvent se) -> {
             camera.setTranslateZ(camera.getTranslateZ() + se.getDeltaY()/10);
         });
+
+        animationTimer.start();
     }
 
     private void addCodeArea(Scene scene) {
