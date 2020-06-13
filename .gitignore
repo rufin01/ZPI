@@ -3,3 +3,4 @@ out/
 !out/.gitkeep
 libs/*
 !libs/.gitkeep
+/.metadata/
