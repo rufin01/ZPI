@@ -9,7 +9,10 @@ public class GMLNode {
         this.point = GMLPoint;
         this.vpoint = vpoint;
         this.apoint = apoint;
-    };
+    }
+    public GMLNode(){
+        this.point = new GMLPoint(0,0,0);
+    }
 
     public GMLNode(GMLPoint point){
         this.point = point;

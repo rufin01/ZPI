@@ -5,9 +5,9 @@ public class GMLPoint {
     public double x;
     public double y;
     public double z;
-    public float theta;
-    public float phi;
-    public float psi;
+    public float theta;   //manipulation in X axis
+    public float phi;     //manipulation in Y axis
+    public float psi;     //manipulation in Z axis
     public double time;
 
     public GMLPoint(double x, double y, double z, float theta, float phi, float psi, double time){
