@@ -62,12 +62,12 @@ public class Model3D {
             return false;
         }
         else {
-            Point3D origin = new Point3D(node1XForm.getTranslateX(),
-                    node1XForm.getTranslateY(),
-                    node1XForm.getTranslateZ());
-            Point3D target = new Point3D(node2XForm.getTranslateX(),
-                    node2XForm.getTranslateY(),
-                    node2XForm.getTranslateZ());
+            Point3D origin = new Point3D(node1XForm.getTx(),
+                    node1XForm.getTy(),
+                    node1XForm.getTz());
+            Point3D target = new Point3D(node2XForm.getTx(),
+                    node2XForm.getTy(),
+                    node2XForm.getTz());
             Point3D yAxis = new Point3D(0, 1, 0);
             Point3D diff = target.subtract(origin);
             double height = target.distance(origin);

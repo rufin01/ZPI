@@ -49,15 +49,15 @@ public class Main extends Application {
         node2.getPoint().z = 5;
         GMLNode node3 = new GMLNode();
         node3.getPoint().x = -5;
-        node3.getPoint().y = 25;
+        node3.getPoint().y = 2;
         node3.getPoint().z = -15;
 
         Model3D model3D = new Model3D();
         model3D.addNode(node1, "node1");
         model3D.addNode(node2, "node2");
-        //model3D.addNode(node3,"3");
+        model3D.addNode(node3,"3");
         model3D.connectNodes("node1", "node2", "edge");
-        //model3D.connectNodes("node2", "3","w");
+        model3D.connectNodes("3", "node1","w");
         AnimationTimer animationTimer = new AnimationTimer() {
             boolean right = true;
             long counter = 0;
@@ -71,7 +71,7 @@ public class Main extends Application {
                 counter2++;
                 //model3D.deleteEdge1("edge");
                 //model3D.getModel().getChildren().remove(2);
-                model3D.moveNode("node1", counter/2,0,0,counter2/2,counter2/2,counter2/2);
+                //model3D.moveNode("node1", counter/2,0,0,counter2/2,counter2/2,counter2/2);
                 //System.out.print(model3D.connectNodes("node1", "node2", "edge"));
 
             }
