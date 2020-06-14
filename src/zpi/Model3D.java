@@ -4,7 +4,6 @@ import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
@@ -144,7 +143,7 @@ public class Model3D {
 
     public boolean nameExists(String name){
         for(Node n : model.getChildren()){
-            if(((XForm)n).getId()==name){
+            if(n.getId()==name){
                 return true;
             }
         }
