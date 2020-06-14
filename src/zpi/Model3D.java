@@ -33,7 +33,7 @@ public class Model3D {
         if(nameExists(nodeName))return false;
         NodeXForm nodeGroup = new NodeXForm();
         nodeGroup.setId(nodeName);
-        Box nodeModel = new Box(2,2,2);
+        Sphere nodeModel = new Sphere(2);
         nodeModel.setMaterial(nodeColour);
         nodeGroup.setTx(node.getPoint().x);
         nodeGroup.setTy(node.getPoint().y);
