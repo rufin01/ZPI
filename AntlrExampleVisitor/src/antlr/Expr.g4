@@ -40,7 +40,8 @@ expr: ID '(' exprList? ')'			# FunctionExpression
 	| NUM							# Number
 	| BOOL							# TrueFalse
 	| STRING						# String
-//	| GML							# GraphElement
+	| gml							# GraphElement
+	| map							# MapStructure
 	| '(' expr ')'					# Parens
 	;
 	
@@ -64,6 +65,32 @@ ifstat:   'if' expr 'then' stat ('else' stat)?
 		
 whilestat: 	 'while' expr 'do' stat
 	;
+	
+map: BEGM tuples? ENDM;				// [("nazwaNode'a", nodeVariable), ...]
+
+tuples: tuple ( SEP tuple )*;
+
+tuple: '(' STRING ',' expr ')';
+
+
+graph: 'graph(' expr SEP expr ')';
+
+node: 'node(' expr SEP expr SEP expr ')';
+
+edge: 'edge(' expr SEP expr ')';
+
+point: 'point(' expr SEP expr SEP expr (SEP expr (SEP expr SEP expr)?)? ')';
+
+gml:  graph
+	| node
+	| edge
+	| point
+	;
+
+BEGM: '[';
+ENDM: ']';
+SEP: ',';
+
 		
 	
 /* Tokens */
@@ -88,12 +115,6 @@ ESC: '\\"' | '\\\\';
 BOOL: 'True' 
 	| 'False'
 	;
-	
-//GML:  GRAPH
-//	| NODE
-//	| EDGE
-//	| POINT
-//	;
 
 
 TYPE: BASIC_TYPE '[]'?	
