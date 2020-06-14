@@ -4,7 +4,6 @@ import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
@@ -27,18 +26,37 @@ public class Model3D {
         GREY_MATERIAL.setDiffuseColor(Color.DARKGREY);
         GREY_MATERIAL.setSpecularColor(Color.GREY);
         model = new XForm();
+        Cylinder Xaxis = new Cylinder(0.1, 100);
+        Cylinder Yaxis = new Cylinder(0.1, 100);
+        Cylinder Zaxis = new Cylinder(0.1, 100);
+        Xaxis.setMaterial(new PhongMaterial());
+        Yaxis.setMaterial(new PhongMaterial());
+        Zaxis.setMaterial(new PhongMaterial());
+        ((PhongMaterial)Xaxis.getMaterial()).setDiffuseColor(Color.BLUE);
+        ((PhongMaterial)Yaxis.getMaterial()).setDiffuseColor(Color.GREEN);
+        ((PhongMaterial)Zaxis.getMaterial()).setDiffuseColor(Color.YELLOW);
+        Xaxis.setRotationAxis(new Point3D(1,0,0));
+        Yaxis.setRotationAxis(new Point3D(0,1,0));
+        Zaxis.setRotationAxis(new Point3D(0,0,1));
+        Xaxis.setRotate(90);
+        Yaxis.setRotate(90);
+        Zaxis.setRotate(90);
+        model.getChildren().addAll(Xaxis, Yaxis, Zaxis);
+
+
     }
 
     public boolean addNode(GMLNode node, String nodeName){
         if(nameExists(nodeName))return false;
         NodeXForm nodeGroup = new NodeXForm();
         nodeGroup.setId(nodeName);
-        Box nodeModel = new Box(2,2,2);
+        Sphere nodeModel = new Sphere(2);
         nodeModel.setMaterial(nodeColour);
-        nodeGroup.setTranslateX(node.getPoint().x);
-        nodeGroup.setTranslateY(node.getPoint().y);
-        nodeGroup.setTranslateZ(node.getPoint().z);
+        nodeGroup.setTx(node.getPoint().x);
+        nodeGroup.setTy(node.getPoint().y);
+        nodeGroup.setTz(node.getPoint().z);
 
+        nodeGroup.setOrigin(node);
         nodeGroup.getChildren().add(nodeModel);
         model.getChildren().add(nodeGroup);
         return true;
@@ -62,12 +80,12 @@ public class Model3D {
             return false;
         }
         else {
-            Point3D origin = new Point3D(node1XForm.getTranslateX(),
-                    node1XForm.getTranslateY(),
-                    node1XForm.getTranslateZ());
-            Point3D target = new Point3D(node2XForm.getTranslateX(),
-                    node2XForm.getTranslateY(),
-                    node2XForm.getTranslateZ());
+            Point3D origin = new Point3D(node1XForm.getTx(),
+                    node1XForm.getTy(),
+                    node1XForm.getTz());
+            Point3D target = new Point3D(node2XForm.getTx(),
+                    node2XForm.getTy(),
+                    node2XForm.getTz());
             Point3D yAxis = new Point3D(0, 1, 0);
             Point3D diff = target.subtract(origin);
             double height = target.distance(origin);
@@ -79,7 +97,7 @@ public class Model3D {
             double angle = Math.acos(diff.normalize().dotProduct(yAxis));
             Rotate rotateAroundCenter = new Rotate(-Math.toDegrees(angle), axisOfRotation);
 
-            Cylinder edge = new Cylinder(0.5, height);
+            Cylinder edge = new Cylinder(0.2, height);
             edge.setMaterial(edgeColour);
             edge.getTransforms().addAll(moveToMidpoint, rotateAroundCenter);
 
@@ -106,7 +124,9 @@ public class Model3D {
         if(nodeXForm==null){
             return;
         }else {
-            nodeXForm.setTranslate(nodeXForm.getTranslateX()+x, y, z);
+            nodeXForm.setTx(x);
+            nodeXForm.setTy(y);
+            nodeXForm.setTz(z);
             nodeXForm.setRotate(theta, phi, psi);
         }
         for(EdgeXForm edge : nodeXForm.getEdges()){
@@ -115,12 +135,12 @@ public class Model3D {
     }
 
     public void updateEdge(EdgeXForm edge){
-        Point3D origin = new Point3D(edge.getOriginNode().getTranslateX(),
-                edge.getOriginNode().getTranslateY(),
-                edge.getOriginNode().getTranslateZ());
-        Point3D target = new Point3D(edge.getTargetNode().getTranslateX(),
-                edge.getTargetNode().getTranslateY(),
-                edge.getTargetNode().getTranslateZ());
+        Point3D origin = new Point3D(edge.getOriginNode().getTx(),
+                edge.getOriginNode().getTy(),
+                edge.getOriginNode().getTz());
+        Point3D target = new Point3D(edge.getTargetNode().getTx(),
+                edge.getTargetNode().getTy(),
+                edge.getTargetNode().getTz());
         Point3D yAxis = new Point3D(0, 1, 0);
         Point3D diff = target.subtract(origin);
         double height = target.distance(origin);
@@ -132,15 +152,23 @@ public class Model3D {
         double angle = Math.acos(diff.normalize().dotProduct(yAxis));
         Rotate rotateAroundCenter = new Rotate(-Math.toDegrees(angle), axisOfRotation);
 
-        Cylinder edgeModel = (Cylinder)edge.getChildren().get(0);
-        edgeModel.getTransforms().clear();
-        edgeModel.setHeight(height);
+        Cylinder edgeModel = new Cylinder(0.2, height);
+        edgeModel.setMaterial(edgeColour);
         edgeModel.getTransforms().addAll(moveToMidpoint, rotateAroundCenter);
+
+        edge.getChildren().clear();
+        edge.getChildren().add(edgeModel);
+    }
+
+    public void updateNode(NodeXForm node){
+        node.setTx(node.getOrigin().getPoint().x);
+        node.setTy(node.getOrigin().getPoint().y);
+        node.setTz(node.getOrigin().getPoint().z);
     }
 
     public boolean nameExists(String name){
         for(Node n : model.getChildren()){
-            if(((XForm)n).getId()==name){
+            if(n.getId()==name){
                 return true;
             }
         }
