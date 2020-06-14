@@ -69,6 +69,16 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitParens(@NotNull ExprParser.ParensContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExprParser#gml}.
+	 * @param ctx the parse tree
+	 */
+	void enterGml(@NotNull ExprParser.GmlContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#gml}.
+	 * @param ctx the parse tree
+	 */
+	void exitGml(@NotNull ExprParser.GmlContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code String}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
@@ -103,6 +113,28 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitWhilestat(@NotNull ExprParser.WhilestatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExprParser#point}.
+	 * @param ctx the parse tree
+	 */
+	void enterPoint(@NotNull ExprParser.PointContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#point}.
+	 * @param ctx the parse tree
+	 */
+	void exitPoint(@NotNull ExprParser.PointContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code MapStructure}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMapStructure(@NotNull ExprParser.MapStructureContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MapStructure}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMapStructure(@NotNull ExprParser.MapStructureContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code FunctionDeclaration}
 	 * labeled alternative in {@link ExprParser#functionDecl}.
 	 * @param ctx the parse tree
@@ -126,6 +158,26 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIfStatement(@NotNull ExprParser.IfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExprParser#tuple}.
+	 * @param ctx the parse tree
+	 */
+	void enterTuple(@NotNull ExprParser.TupleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#tuple}.
+	 * @param ctx the parse tree
+	 */
+	void exitTuple(@NotNull ExprParser.TupleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExprParser#edge}.
+	 * @param ctx the parse tree
+	 */
+	void enterEdge(@NotNull ExprParser.EdgeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#edge}.
+	 * @param ctx the parse tree
+	 */
+	void exitEdge(@NotNull ExprParser.EdgeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code FunctionExpression}
 	 * labeled alternative in {@link ExprParser#expr}.
@@ -163,6 +215,18 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitNumber(@NotNull ExprParser.NumberContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code GraphElement}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterGraphElement(@NotNull ExprParser.GraphElementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code GraphElement}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitGraphElement(@NotNull ExprParser.GraphElementContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code VariableDeclaration}
 	 * labeled alternative in {@link ExprParser#variableDecl}.
 	 * @param ctx the parse tree
@@ -194,6 +258,16 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFormalParameter(@NotNull ExprParser.FormalParameterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExprParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void enterMap(@NotNull ExprParser.MapContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void exitMap(@NotNull ExprParser.MapContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Program}
 	 * labeled alternative in {@link ExprParser#prog}.
@@ -255,6 +329,16 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitUnaryMinus(@NotNull ExprParser.UnaryMinusContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExprParser#graph}.
+	 * @param ctx the parse tree
+	 */
+	void enterGraph(@NotNull ExprParser.GraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#graph}.
+	 * @param ctx the parse tree
+	 */
+	void exitGraph(@NotNull ExprParser.GraphContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code instatementDeclaration}
 	 * labeled alternative in {@link ExprParser#stat}.
 	 * @param ctx the parse tree
@@ -276,6 +360,16 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIfstat(@NotNull ExprParser.IfstatContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExprParser#node}.
+	 * @param ctx the parse tree
+	 */
+	void enterNode(@NotNull ExprParser.NodeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#node}.
+	 * @param ctx the parse tree
+	 */
+	void exitNode(@NotNull ExprParser.NodeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExprParser#exprList}.
 	 * @param ctx the parse tree
@@ -332,4 +426,14 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturnExpression(@NotNull ExprParser.ReturnExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExprParser#tuples}.
+	 * @param ctx the parse tree
+	 */
+	void enterTuples(@NotNull ExprParser.TuplesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#tuples}.
+	 * @param ctx the parse tree
+	 */
+	void exitTuples(@NotNull ExprParser.TuplesContext ctx);
 }
