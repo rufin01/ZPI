@@ -23,8 +23,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     private double mousePosX, mousePosY;
     private double mouseOldX, mouseOldY;
-    private final Rotate rotateX = new Rotate(-20, Rotate.X_AXIS);
-    private final Rotate rotateY = new Rotate(-20, Rotate.Y_AXIS);
+    private final Rotate rotateX = new Rotate(190, Rotate.X_AXIS);
+    private final Rotate rotateY = new Rotate(190, Rotate.Y_AXIS);
 
     private Button runButton;
     private CodeArea codeArea;
@@ -124,16 +124,42 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         });
 
         subScene.setOnMouseDragged((MouseEvent me) -> {
-            mousePosX = me.getSceneX();
-            mousePosY = me.getSceneY();
-            rotateX.setAngle(rotateX.getAngle()-(mousePosY - mouseOldY));
-            rotateY.setAngle(rotateY.getAngle()+(mousePosX - mouseOldX));
-            mouseOldX = mousePosX;
-            mouseOldY = mousePosY;
+            if(me.isPrimaryButtonDown()){
+                mousePosX = me.getSceneX();
+                mousePosY = me.getSceneY();
+                rotateX.setAngle(rotateX.getAngle()-(mousePosY - mouseOldY));
+                rotateY.setAngle(rotateY.getAngle()+(mousePosX - mouseOldX));
+                mouseOldX = mousePosX;
+                mouseOldY = mousePosY;
+            }
+            if(me.isSecondaryButtonDown()){
+                mousePosX = me.getSceneX();
+                mousePosY = me.getSceneY();
+                camera.setTranslateX(camera.getTranslateX()+((mousePosX - mouseOldX)/100));
+                camera.setTranslateY(camera.getTranslateY()+((mousePosY - mouseOldY)/100));
+                mouseOldX = mousePosX;
+                mouseOldY = mousePosY;
+            }
+            if(me.isMiddleButtonDown()){
+                mousePosX = me.getSceneX();
+                mousePosY = me.getSceneY();
+                camera.setTranslateZ(camera.getTranslateZ()+((mousePosX - mouseOldX)/100));
+                mouseOldX = mousePosX;
+                mouseOldY = mousePosY;
+            }
         });
 
-        subScene.setOnScroll((ScrollEvent se) -> {
-            camera.setTranslateZ(camera.getTranslateZ() + se.getDeltaY()/10);
+        subScene.setOnScroll((ScrollEvent event) -> {
+            double zoomFactor = 1.05;
+            double deltaY = event.getDeltaY();
+            if (deltaY < 0){
+                zoomFactor = 2.0 - zoomFactor;
+            }
+            System.out.println(zoomFactor);
+            model3D.getModel().setScaleX(model3D.getModel().getScaleX() * zoomFactor);
+            model3D.getModel().setScaleY(model3D.getModel().getScaleY() * zoomFactor);
+            model3D.getModel().setScaleZ(model3D.getModel().getScaleZ() * zoomFactor);
+            event.consume();
         });
 
         animationTimer.start();

@@ -26,6 +26,24 @@ public class Model3D {
         GREY_MATERIAL.setDiffuseColor(Color.DARKGREY);
         GREY_MATERIAL.setSpecularColor(Color.GREY);
         model = new XForm();
+        Cylinder Xaxis = new Cylinder(0.1, 100);
+        Cylinder Yaxis = new Cylinder(0.1, 100);
+        Cylinder Zaxis = new Cylinder(0.1, 100);
+        Xaxis.setMaterial(new PhongMaterial());
+        Yaxis.setMaterial(new PhongMaterial());
+        Zaxis.setMaterial(new PhongMaterial());
+        ((PhongMaterial)Xaxis.getMaterial()).setDiffuseColor(Color.BLUE);
+        ((PhongMaterial)Yaxis.getMaterial()).setDiffuseColor(Color.GREEN);
+        ((PhongMaterial)Zaxis.getMaterial()).setDiffuseColor(Color.YELLOW);
+        Xaxis.setRotationAxis(new Point3D(1,0,0));
+        Yaxis.setRotationAxis(new Point3D(0,1,0));
+        Zaxis.setRotationAxis(new Point3D(0,0,1));
+        Xaxis.setRotate(90);
+        Yaxis.setRotate(90);
+        Zaxis.setRotate(90);
+        model.getChildren().addAll(Xaxis, Yaxis, Zaxis);
+
+
     }
 
     public boolean addNode(GMLNode node, String nodeName){
@@ -38,6 +56,7 @@ public class Model3D {
         nodeGroup.setTy(node.getPoint().y);
         nodeGroup.setTz(node.getPoint().z);
 
+        nodeGroup.setOrigin(node);
         nodeGroup.getChildren().add(nodeModel);
         model.getChildren().add(nodeGroup);
         return true;
@@ -139,6 +158,12 @@ public class Model3D {
 
         edge.getChildren().clear();
         edge.getChildren().add(edgeModel);
+    }
+
+    public void updateNode(NodeXForm node){
+        node.setTx(node.getOrigin().getPoint().x);
+        node.setTy(node.getOrigin().getPoint().y);
+        node.setTz(node.getOrigin().getPoint().z);
     }
 
     public boolean nameExists(String name){
