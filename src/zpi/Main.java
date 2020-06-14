@@ -2,17 +2,16 @@ package zpi;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Box;
-import javafx.scene.shape.Cylinder;
-import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
@@ -20,12 +19,15 @@ import library.GMLNode;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 
-public class Main extends Application {
+public class Main extends Application implements EventHandler<ActionEvent> {
 
     private double mousePosX, mousePosY;
     private double mouseOldX, mouseOldY;
     private final Rotate rotateX = new Rotate(-20, Rotate.X_AXIS);
     private final Rotate rotateY = new Rotate(-20, Rotate.Y_AXIS);
+
+    private Button runButton;
+    private CodeArea codeArea;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -39,6 +41,9 @@ public class Main extends Application {
 
         primaryStage.setTitle("zpi");
         primaryStage.show();
+
+        runButton = (Button) scene.lookup("#runButton");
+        runButton.setOnAction(this);
 
         addCodeArea(scene);
 
@@ -114,7 +119,7 @@ public class Main extends Application {
     }
 
     private void addCodeArea(Scene scene) {
-        CodeArea codeArea = new CodeArea();
+        codeArea = new CodeArea();
 
         // add line numbers to the left of area
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
@@ -128,5 +133,13 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+        if (event.getSource() == runButton) {
+            String code = codeArea.getText();
+            // System.out.println(code);
+        }
     }
 }
