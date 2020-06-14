@@ -20,13 +20,14 @@ public class ExpressionProcessor {
 		values = new HashMap<>();
 	}
 	
-	public List<String> getEvaluationResults() {
-		List<String> evaluations = new ArrayList<>();
-		
+	public List<Object> getEvaluationResults() {
+		List<Object> evaluations = new ArrayList<>();
+
 		for (Expression e: list) {
 			if(e instanceof VariableDeclaration) {
 				VariableDeclaration decl = (VariableDeclaration) e;
 				values.put(decl.id,  (Object) decl.value);
+				evaluations.add((Object) decl.value);
 			}
 			else if (e instanceof Number || e instanceof Variable || e instanceof Addition || e instanceof Addition){	// e instanceof Number, Variable, Addition, Multiplication
 				String input = e.toString();
@@ -37,16 +38,15 @@ public class ExpressionProcessor {
 			else {	// 	e instanceof Node Point
 				String input = e.toString();
 				Object result = getStructureResult(e);
-				
 			}
 		}
-		
-		
+
 		return evaluations;
 	}
 	
 	private Object getStructureResult(Expression e) {
 		// TODO Auto-generated method stub
+		System.out.println("test");
 		return null;
 	}
 

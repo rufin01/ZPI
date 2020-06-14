@@ -8,7 +8,7 @@ import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
-import library.GMLNode;
+import expression.GMLNode;
 
 public class Model3D {
     final PhongMaterial RED_MATERIAL = new PhongMaterial();

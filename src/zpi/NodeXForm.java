@@ -1,6 +1,6 @@
 package zpi;
 
-import library.GMLNode;
+import expression.GMLNode;
 
 import java.util.ArrayList;
 

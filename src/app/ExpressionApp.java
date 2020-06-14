@@ -17,14 +17,14 @@ import expression.SyntaxErrorListener;
 public class ExpressionApp {
 
 	public static void main(String[] args) {
-		String fileName = "C:\\Users\\meh-PC\\Documents\\Workspace\\ZPI\\AntlrExampleVisitor\\src\\tests\\test3.txt";
+		String fileName = "C:\\Users\\meh-PC\\Documents\\Workspace\\ZPI\\src\\tests\\test3.txt";
 		ExprParser parser = getParser(fileName);
 
 		// tell ANTLR to build parse tree
 		// parse from the start symbol 'prog'
 		ParseTree antlrAST = parser.prog();
 
-		if(SyntaxErrorListener.hasError) {
+		if (SyntaxErrorListener.hasError) {
 			/*let the syntax error be reported */
 		}
 		else {
@@ -34,7 +34,7 @@ public class ExpressionApp {
 
 			if(progVisitor.semanticErrors.isEmpty()) {
 				ExpressionProcessor ep = new ExpressionProcessor(prog.expressions);
-				for(String evaluation: ep.getEvaluationResults()) {
+				for(Object evaluation: ep.getEvaluationResults()) {
 					System.out.println(evaluation);
 				}
 			}
@@ -46,23 +46,16 @@ public class ExpressionApp {
 		}
 	}
 	
-	private static ExprParser getParser(String fileName) {
-		ExprParser parser = null;
-		
-		try {
-			CharStream input = CharStreams.fromFileName(fileName);
-			ExprLexer lexer = new ExprLexer(input);
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			parser = new ExprParser(tokens);
-			
-			// syntax error handling
-			parser.removeErrorListeners();
-			parser.addErrorListener(new SyntaxErrorListener());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	private static ExprParser getParser(String code) {
+		CharStream input = CharStreams.fromString(code);
+		ExprLexer lexer = new ExprLexer(input);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		ExprParser parser = new ExprParser(tokens);
+
+		// syntax error handling
+		parser.removeErrorListeners();
+		parser.addErrorListener(new SyntaxErrorListener());
+
 		return parser;
 	}
 
