@@ -7,31 +7,31 @@ grammar Expr;
 }
 
 // Start Symbol
-prog: ( decl | stat )+ EOF		# Program		// # - label -> gonna create visitors
+prog: ( variableDecl | expr )+ EOF		# Program		// # - label -> gonna create visitors	//change expr to statement in later versions
 	;
 	
-decl: variableDecl	
-	| functionDecl
-	;
+//decl: variableDecl	
+//	| functionDecl
+//	;
 	
 variableDecl: ID ':' TYPE ('=' expr)? END					# VariableDeclaration		// ()? - everything in parens is optional
 	;
 	
-// FUNCTION SECTOR------------------------------------
-functionDecl: ID ':' TYPE '(' formalParameters? ')' block	# FunctionDeclaration		// fun: VOID (x: INT, y: FLOAT) {...}
-	;
-	
-formalParameters: formalParameter (',' formalParameter)*
-	;
-	
-formalParameter: ID ':' TYPE
-	;
-// ---------------------------------------------------	
+//// FUNCTION SECTOR------------------------------------
+//functionDecl: ID ':' TYPE '(' formalParameters? ')' block	# FunctionDeclaration		// fun: VOID (x: INT, y: FLOAT) {...}
+//	;
+//	
+//formalParameters: formalParameter (',' formalParameter)*
+//	;
+//	
+//formalParameter: ID ':' TYPE
+//	;
+//// ---------------------------------------------------	
 	
 	
 /* ANTLR resolves ambiguities in favor of the alternative given first.  */
-expr: ID '(' exprList? ')'			# FunctionExpression
-	| '-' expr						# UnaryMinus
+expr: //ID '(' exprList? ')'			# FunctionExpression
+	 '-' expr						# UnaryMinus
 	| expr op=(GEQ|SEQ|EQU) expr	# BooleanBinary
 	| '!' expr						# BoolNot
 	| expr op=(MUL|DIV) expr		# MulDiv
@@ -46,25 +46,25 @@ expr: ID '(' exprList? ')'			# FunctionExpression
 	;
 	
 	
-exprList: expr (',' expr)*;			// used mostly as function arguments list
+//exprList: expr (',' expr)*;			// used mostly as function arguments list
 
-// stat - statement, implementation should look like a switch
-stat: block							# statementsBlock
-	| ifstat						# IfStatement
-	| whilestat						# WhileStatement
-	| 'return' expr? END			# returnExpression
-	| expr '=' expr END				# assignment
-	| expr END						# funcCall				// function call
-	| decl							# instatementDeclaration
-	;
-	
-block: '{' stat* '}' ;		// possibly empty statement block
-	
-ifstat:   'if' expr 'then' stat ('else' stat)?
-	;
-		
-whilestat: 	 'while' expr 'do' stat
-	;
+//// stat - statement, implementation should look like a switch
+//stat: block							# statementsBlock
+//	| ifstat						# IfStatement
+//	| whilestat						# WhileStatement
+//	| 'return' expr? END			# returnExpression
+//	| expr '=' expr END				# assignment
+//	| expr END						# funcCall				// function call
+//	| decl							# instatementDeclaration
+//	;
+//	
+//block: '{' stat* '}' ;		// possibly empty statement block
+//	
+//ifstat:   'if' expr 'then' stat ('else' stat)?
+//	;
+//		
+//whilestat: 	 'while' expr 'do' stat
+//	;
 	
 map: BEGM tuples? ENDM;				// [("nazwaNode'a", nodeVariable), ...]
 
@@ -73,13 +73,17 @@ tuples: tuple ( SEP tuple )*;
 tuple: '(' STRING ',' expr ')';
 
 
-graph: 'graph(' expr SEP expr ')';
+graph: 'graph(' expr SEP expr ')'					# GraphDeclaration
+	;	
 
-node: 'node(' expr SEP expr SEP expr ')';
+node: 'node(' expr SEP expr SEP expr ')'			# NodeDeclaration
+	;				
 
-edge: 'edge(' expr SEP expr ')';
+edge: 'edge(' expr SEP expr ')'						# EdgeDeclaration
+	;
 
-point: 'point(' expr SEP expr SEP expr (SEP expr (SEP expr SEP expr)?)? ')';
+point: 'point(' expr SEP expr SEP expr (SEP expr (SEP expr SEP expr SEP expr)?)? ')'		# PointDeclaration
+	;
 
 gml:  graph
 	| node

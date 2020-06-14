@@ -1,0 +1,6 @@
+
+node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0), point(.0, .0, .0));
+
+
+
+

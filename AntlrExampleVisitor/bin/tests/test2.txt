@@ -32,7 +32,7 @@ mapa1: NODE[] = [("node1", node(point(.0,.0,.0), point(.0,.0,.0), point(.0,.0,.0
 
 graf1: GRAPH = graph(mapa1, mapa1);
 
-edge1: EDGE = edge(node(point(.0,.0,.0), point(.0,.0,.0), point(.0,.0,.0)), node(point(.0,.0,.1), point(.0,.0,.1), point(.0,.0,.1)))
+edge1: EDGE = edge(node(point(.0,.0,.0), point(.0,.0,.0), point(.0,.0,.0)), node(point(.0,.0,.1), point(.0,.0,.1), point(.0,.0,.1)));
 
 
 

@@ -13,7 +13,7 @@ import operators.Subtraction;
 
 public class ExpressionProcessor {
 	List<Expression> list;
-	public Map<String, Integer> values;	/* symbol table for storing values of variables */
+	public Map<String, Object> values;	/* symbol table for storing values of variables */
 	
 	public ExpressionProcessor(List<Expression> list) {
 		this.list = list;
@@ -26,12 +26,17 @@ public class ExpressionProcessor {
 		for (Expression e: list) {
 			if(e instanceof VariableDeclaration) {
 				VariableDeclaration decl = (VariableDeclaration) e;
-				values.put(decl.id,  (Integer) decl.value);
+				values.put(decl.id,  (Object) decl.value);
 			}
-			else {	// e instanceof Number, Variable, Addition, Multiplication
+			else if (e instanceof Number || e instanceof Variable || e instanceof Addition || e instanceof Addition){	// e instanceof Number, Variable, Addition, Multiplication
 				String input = e.toString();
 				Object result = getEvalResult(e);
 				evaluations.add(input + " is " + result);
+			}
+			else {	// 	e instanceof Node Point
+				String input = e.toString();
+				Object result = getStructureResult(e);
+				
 			}
 		}
 		
@@ -39,6 +44,11 @@ public class ExpressionProcessor {
 		return evaluations;
 	}
 	
+	private Object getStructureResult(Expression e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private Object getEvalResult(Expression e) {
 		Object result = 0;
 		

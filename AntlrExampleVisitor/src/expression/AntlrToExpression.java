@@ -4,12 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 import antlr.ExprBaseVisitor;
 import antlr.ExprParser;
 import antlr.ExprParser.AddSubContext;
+import antlr.ExprParser.ExprContext;
+import antlr.ExprParser.GraphElementContext;
 import antlr.ExprParser.MulDivContext;
+import antlr.ExprParser.NodeContext;
+import antlr.ExprParser.NodeDeclarationContext;
 import antlr.ExprParser.NumberContext;
+import antlr.ExprParser.PointDeclarationContext;
+import antlr.ExprParser.UnaryMinusContext;
 import antlr.ExprParser.VariableContext;
 import antlr.ExprParser.VariableDeclarationContext;
 import operators.Addition;
@@ -51,32 +59,44 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 			vars.add(id);
 		}
 		
-		String type = ctx.expr().getText();
+		String type = ctx.TYPE().getText();
 		Object value = null;
 		
 		
-		switch(ctx.TYPE().getSymbol().getType()){
-			case ExprParser.INT:
+		switch(ctx.TYPE().getSymbol().getText()){
+			case "INT":
 				if(!ctx.expr().isEmpty()) value = Integer.valueOf(ctx.expr().getText());
 				return new VariableDeclaration<Integer>(id, type, (Integer) value);
-			case ExprParser.FLOAT:
+			case "FLOAT":
 				if(!ctx.expr().isEmpty()) value = Double.valueOf(ctx.expr().getText());
 				return new VariableDeclaration<Double>(id, type, (Double) value);
-//			case ExprParser.GRAPH:
-//				/*
-//				 * jakos tak to pewnie by wygladalo:
-//				 * 
-//				 * return new VariableDeclaration<GMLGraph>(id, type, (GMLGraph) value);
-//				 * 
-//				 */
-//				break;
-//			case ExprParser.EDGE:
-//				break;
-//			case ExprParser.NODE:
+			case "NODE":
+				/*
+				 * jakos tak to pewnie by wygladalo:
+				 * 
+				 * return new VariableDeclaration<GMLGraph>(id, type, (GMLGraph) value);
+				 * 
+				 */
+				GMLNode temp = null;
+				if(!ctx.expr().isEmpty()) {
+					value = ctx.expr();
+					System.out.println(value);
+					temp = (GMLNode)this.visit((GraphElementContext)value);
+				}
+				
+				System.out.println(ctx.expr().getText());
+				
+				
+				return new VariableDeclaration<GMLNode>(id, type, temp);
+				
+			case "GRAPH":
+				break;
+//			case ExprParser.RULE_graph:
 				
 			default:
 				return new VariableDeclaration<Object>(id, type, value);		// should not ever reach this code
 		}
+		return new VariableDeclaration<Object>(id, type, value);
 		
 	}
 
@@ -112,8 +132,39 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 	@Override
 	public Expression visitNumber(NumberContext ctx) {
 		String numText = ctx.getChild(0).getText();
-		int num = Integer.parseInt(numText);
-		return new Number<Integer>(num);
+		if(numText.contains(".")) return new Number<Double>(Double.valueOf(numText));
+		return new Number<Integer>(Integer.valueOf(numText));
 	}
+	
+	public Expression visitUnaryMinus(UnaryMinusContext ctx) {
+		NumberContext expr = (NumberContext)ctx.getChild(1);
+		return visitNumber(expr);
+	}
+	
+	public Expression visitGraphElementExpression(GraphElementContext ctx) {
+		return this.visit(ctx.getChild(0));
+	}
+	
+	public Expression visitNodeDeclaration(NodeDeclarationContext ctx) {
+		
+		GMLPoint p1 = (GMLPoint)this.visit(ctx.expr(0));
+		GMLPoint p2 = (GMLPoint)this.visit(ctx.expr(1));
+		GMLPoint p3 = (GMLPoint)this.visit(ctx.expr(2));
+		
+		return new GMLNode(p1, p2, p3);	
+	}
+	
+	public Expression visitPointDeclaration(PointDeclarationContext ctx) {
+		ArrayList<Number<Double>> dlist = new ArrayList<>();
+		for(ExprContext ex: ctx.expr()) {
+			dlist.add((Number<Double>)this.visit(ex));
+		}
+		
+		if(dlist.size() == 3) return new GMLPoint(dlist.get(0).num, dlist.get(1).num, dlist.get(2).num);
+		if(dlist.size() == 4) return new GMLPoint(dlist.get(0).num, dlist.get(1).num, dlist.get(2).num, dlist.get(3).num);
+		if(dlist.size() > 0) return new GMLPoint(dlist.get(0).num, dlist.get(1).num, dlist.get(2).num, dlist.get(3).num, dlist.get(4).num, dlist.get(5).num, dlist.get(6).num);
+		return null;
+	}
+
 	
 }

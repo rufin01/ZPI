@@ -20,37 +20,12 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(ExprParser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExprParser#decl}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDecl(ExprParser.DeclContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code VariableDeclaration}
 	 * labeled alternative in {@link ExprParser#variableDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitVariableDeclaration(ExprParser.VariableDeclarationContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code FunctionDeclaration}
-	 * labeled alternative in {@link ExprParser#functionDecl}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionDeclaration(ExprParser.FunctionDeclarationContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExprParser#formalParameters}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFormalParameters(ExprParser.FormalParametersContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExprParser#formalParameter}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFormalParameter(ExprParser.FormalParameterContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code TrueFalse}
 	 * labeled alternative in {@link ExprParser#expr}.
@@ -59,12 +34,26 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTrueFalse(ExprParser.TrueFalseContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code MapStructure}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMapStructure(ExprParser.MapStructureContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitVariable(ExprParser.VariableContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Number}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumber(ExprParser.NumberContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code BooleanBinary}
 	 * labeled alternative in {@link ExprParser#expr}.
@@ -94,47 +83,19 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParens(ExprParser.ParensContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code UnaryMinus}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUnaryMinus(ExprParser.UnaryMinusContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code String}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitString(ExprParser.StringContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code MapStructure}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMapStructure(ExprParser.MapStructureContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code FunctionExpression}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionExpression(ExprParser.FunctionExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Number}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNumber(ExprParser.NumberContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code GraphElement}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitGraphElement(ExprParser.GraphElementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code UnaryMinus}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryMinus(ExprParser.UnaryMinusContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code BoolNot}
 	 * labeled alternative in {@link ExprParser#expr}.
@@ -143,78 +104,12 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBoolNot(ExprParser.BoolNotContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExprParser#exprList}.
+	 * Visit a parse tree produced by the {@code String}
+	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExprList(ExprParser.ExprListContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code statementsBlock}
-	 * labeled alternative in {@link ExprParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatementsBlock(ExprParser.StatementsBlockContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code IfStatement}
-	 * labeled alternative in {@link ExprParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIfStatement(ExprParser.IfStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code WhileStatement}
-	 * labeled alternative in {@link ExprParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhileStatement(ExprParser.WhileStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code returnExpression}
-	 * labeled alternative in {@link ExprParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitReturnExpression(ExprParser.ReturnExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code assignment}
-	 * labeled alternative in {@link ExprParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssignment(ExprParser.AssignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code funcCall}
-	 * labeled alternative in {@link ExprParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFuncCall(ExprParser.FuncCallContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code instatementDeclaration}
-	 * labeled alternative in {@link ExprParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInstatementDeclaration(ExprParser.InstatementDeclarationContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExprParser#block}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBlock(ExprParser.BlockContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExprParser#ifstat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIfstat(ExprParser.IfstatContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExprParser#whilestat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhilestat(ExprParser.WhilestatContext ctx);
+	T visitString(ExprParser.StringContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExprParser#map}.
 	 * @param ctx the parse tree
@@ -234,29 +129,33 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTuple(ExprParser.TupleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExprParser#graph}.
+	 * Visit a parse tree produced by the {@code GraphDeclaration}
+	 * labeled alternative in {@link ExprParser#graph}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGraph(ExprParser.GraphContext ctx);
+	T visitGraphDeclaration(ExprParser.GraphDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExprParser#node}.
+	 * Visit a parse tree produced by the {@code NodeDeclaration}
+	 * labeled alternative in {@link ExprParser#node}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNode(ExprParser.NodeContext ctx);
+	T visitNodeDeclaration(ExprParser.NodeDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExprParser#edge}.
+	 * Visit a parse tree produced by the {@code EdgeDeclaration}
+	 * labeled alternative in {@link ExprParser#edge}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEdge(ExprParser.EdgeContext ctx);
+	T visitEdgeDeclaration(ExprParser.EdgeDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExprParser#point}.
+	 * Visit a parse tree produced by the {@code PointDeclaration}
+	 * labeled alternative in {@link ExprParser#point}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPoint(ExprParser.PointContext ctx);
+	T visitPointDeclaration(ExprParser.PointDeclarationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExprParser#gml}.
 	 * @param ctx the parse tree
