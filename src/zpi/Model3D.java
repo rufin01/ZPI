@@ -35,9 +35,9 @@ public class Model3D {
         nodeGroup.setId(nodeName);
         Box nodeModel = new Box(2,2,2);
         nodeModel.setMaterial(nodeColour);
-        nodeGroup.setTranslateX(node.getPoint().x);
-        nodeGroup.setTranslateY(node.getPoint().y);
-        nodeGroup.setTranslateZ(node.getPoint().z);
+        nodeGroup.setTx(node.getPoint().x);
+        nodeGroup.setTy(node.getPoint().y);
+        nodeGroup.setTz(node.getPoint().z);
 
         nodeGroup.getChildren().add(nodeModel);
         model.getChildren().add(nodeGroup);
@@ -79,7 +79,7 @@ public class Model3D {
             double angle = Math.acos(diff.normalize().dotProduct(yAxis));
             Rotate rotateAroundCenter = new Rotate(-Math.toDegrees(angle), axisOfRotation);
 
-            Cylinder edge = new Cylinder(0.5, height);
+            Cylinder edge = new Cylinder(0.2, height);
             edge.setMaterial(edgeColour);
             edge.getTransforms().addAll(moveToMidpoint, rotateAroundCenter);
 
@@ -106,7 +106,9 @@ public class Model3D {
         if(nodeXForm==null){
             return;
         }else {
-            nodeXForm.setTranslate(nodeXForm.getTranslateX()+x, y, z);
+            nodeXForm.setTx(x);
+            nodeXForm.setTy(y);
+            nodeXForm.setTz(z);
             nodeXForm.setRotate(theta, phi, psi);
         }
         for(EdgeXForm edge : nodeXForm.getEdges()){
@@ -115,12 +117,12 @@ public class Model3D {
     }
 
     public void updateEdge(EdgeXForm edge){
-        Point3D origin = new Point3D(edge.getOriginNode().getTranslateX(),
-                edge.getOriginNode().getTranslateY(),
-                edge.getOriginNode().getTranslateZ());
-        Point3D target = new Point3D(edge.getTargetNode().getTranslateX(),
-                edge.getTargetNode().getTranslateY(),
-                edge.getTargetNode().getTranslateZ());
+        Point3D origin = new Point3D(edge.getOriginNode().getTx(),
+                edge.getOriginNode().getTy(),
+                edge.getOriginNode().getTz());
+        Point3D target = new Point3D(edge.getTargetNode().getTx(),
+                edge.getTargetNode().getTy(),
+                edge.getTargetNode().getTz());
         Point3D yAxis = new Point3D(0, 1, 0);
         Point3D diff = target.subtract(origin);
         double height = target.distance(origin);
@@ -132,10 +134,12 @@ public class Model3D {
         double angle = Math.acos(diff.normalize().dotProduct(yAxis));
         Rotate rotateAroundCenter = new Rotate(-Math.toDegrees(angle), axisOfRotation);
 
-        Cylinder edgeModel = (Cylinder)edge.getChildren().get(0);
-        edgeModel.getTransforms().clear();
-        edgeModel.setHeight(height);
+        Cylinder edgeModel = new Cylinder(0.2, height);
+        edgeModel.setMaterial(edgeColour);
         edgeModel.getTransforms().addAll(moveToMidpoint, rotateAroundCenter);
+
+        edge.getChildren().clear();
+        edge.getChildren().add(edgeModel);
     }
 
     public boolean nameExists(String name){

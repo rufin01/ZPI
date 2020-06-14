@@ -137,6 +137,10 @@ public class XForm extends Group {
         ip.setZ(0.0);
     }
 
+    public double getTx(){return t.getX();}
+    public double getTy(){return t.getY();}
+    public double getTz(){return t.getZ();}
+
     public void debug() {
         System.out.println("t = (" +
                 t.getX() + ", " +
