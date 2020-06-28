@@ -81,39 +81,27 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         rfeet.getPoint().x = 4;
 
         model3D = new Model3D();
-//        model3D.addNode(head, "head");
-//        model3D.addNode(chest, "chest");
-//        model3D.addNode(ass,"ass");
-//        model3D.addNode(rhand, "rhand");
-//        model3D.addNode(lhand, "lhand");
-//        model3D.addNode(lfeet, "lfeet");
-//        model3D.addNode(rfeet, "rfeet");
-//
-//        model3D.connectNodes("head", "chest", "neck");
-//        model3D.connectNodes("chest", "ass","stomach");
-//        model3D.connectNodes("chest", "rhand", "rarm");
-//        model3D.connectNodes("chest", "lhand", "larm");
-//        model3D.connectNodes("ass", "rfeet", "rleg");
-//        model3D.connectNodes("ass", "lfeet", "lleg");
-//
-//        AnimationTimer animationTimer = new AnimationTimer() {
-//            boolean right = true;
-//            long counter = 25;
-//            long counter2 = 0;
-//            @Override
-//            public void handle(long l) {
-//                if(counter%25==0&&counter!=0)right=!right;
-//                if(right){
-//                    counter++;
-//                }else counter--;
-//                counter2++;
-//                model3D.moveNode("lhand",-6,10,counter/2,0,0,0);
-//                model3D.moveNode("rhand",6,10,-counter/2,0,0,0);
-//                model3D.moveNode("lfeet",-4,0,-counter/2,0,0,0);
-//                model3D.moveNode("rfeet",4,0,counter/2,0,0,0);
-//
-//            }
-//        };
+        model3D.addNode(head, "head");
+        model3D.addNode(chest, "chest");
+        model3D.addNode(ass,"ass");
+        model3D.addNode(rhand, "rhand");
+        model3D.addNode(lhand, "lhand");
+        model3D.addNode(lfeet, "lfeet");
+        model3D.addNode(rfeet, "rfeet");
+
+        model3D.connectNodes("head", "chest", "neck");
+        model3D.connectNodes("chest", "ass","stomach");
+        model3D.connectNodes("chest", "rhand", "rarm");
+        model3D.connectNodes("chest", "lhand", "larm");
+        model3D.connectNodes("ass", "rfeet", "rleg");
+        model3D.connectNodes("ass", "lfeet", "lleg");
+
+        model3D.addSpeedToNode("lhand",0,0,-2,0,0,0);
+        model3D.addSpeedToNode("rhand",0,0,2,0,0,0);
+        model3D.addSpeedToNode("lfeet",0,0,2,0,0,0);
+        model3D.addSpeedToNode("rfeet",0,0,-2,0,0,0);
+
+        model3D.startMovement();
 
         PerspectiveCamera camera = new PerspectiveCamera(true);
         camera.getTransforms().addAll(rotateX, rotateY, new Translate(0, 0, -35));
@@ -172,8 +160,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             model3D.getModel().setScaleZ(model3D.getModel().getScaleZ() * zoomFactor);
             event.consume();
         });
-
-//        animationTimer.start();
     }
 
     private void addCodeArea(Scene scene) {

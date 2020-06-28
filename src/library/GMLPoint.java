@@ -20,6 +20,15 @@ public class GMLPoint {
         this.time = time;
     }
 
+    public GMLPoint(double x, double y, double z, float theta, float phi, float psi){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.theta = theta;
+        this.phi = phi;
+        this.psi = psi;
+    }
+
     public GMLPoint(double x, double y, double z, double time){
         this.x = x;
         this.y = y;

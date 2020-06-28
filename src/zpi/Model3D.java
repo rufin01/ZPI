@@ -1,5 +1,7 @@
 package zpi;
 
+import expression.GMLPoint;
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -17,6 +19,7 @@ public class Model3D {
     private XForm model;
     private PhongMaterial nodeColour = RED_MATERIAL;
     private PhongMaterial edgeColour = GREY_MATERIAL;
+    public static long actTime = 0;
 
     public Model3D(){
         RED_MATERIAL.setDiffuseColor(Color.DARKRED);
@@ -42,8 +45,44 @@ public class Model3D {
         Yaxis.setRotate(90);
         Zaxis.setRotate(90);
         model.getChildren().addAll(Xaxis, Yaxis, Zaxis);
+    }
 
-
+    public void startMovement(){
+        AnimationTimer animationTimer = new AnimationTimer() {
+            boolean right = true;
+            @Override
+            public void handle(long l) {
+                if(right){
+                    actTime++;
+                }else actTime--;
+                for(Node n: model.getChildren()){
+                    if(n.getClass().equals(NodeXForm.class)){
+                        System.out.println("Moving node: " + n.getId());
+                        NodeXForm node = (NodeXForm)n;
+                        GMLPoint point = node.getOrigin().getPoint();
+                        GMLPoint vPoint = node.getOrigin().getVpoint();
+                        GMLPoint aPoint = node.getOrigin().getApoint();
+                        if(actTime%10==0 && actTime!= 0){
+                            right = !right;
+                            addSpeedToNode("lhand",0,0,-2,0,0,0);
+                            addSpeedToNode("rhand",0,0,2,0,0,0);
+                            addSpeedToNode("lfeet",0,0,2,0,0,0);
+                            addSpeedToNode("rfeet",0,0,-2,0,0,0);
+                        }
+                        node.setTx(point.x + vPoint.x*actTime + aPoint.x*actTime*actTime);
+                        node.setTy(point.y + vPoint.x*actTime + aPoint.x*actTime*actTime);
+                        node.setTz(point.z + vPoint.z*actTime + aPoint.z*actTime*actTime);
+                        node.setRx(point.theta + vPoint.theta*actTime + aPoint.theta*actTime*actTime);
+                        node.setRy(point.phi + vPoint.phi*actTime + aPoint.phi*actTime*actTime);
+                        node.setRz(point.psi + vPoint.psi*actTime + aPoint.phi*actTime*actTime);
+                        for(EdgeXForm edge : node.getEdges()){
+                            updateEdge(edge);
+                        }
+                    }
+                }
+            }
+        };
+        animationTimer.start();
     }
 
     public boolean addNode(GMLNode node, String nodeName){
@@ -128,9 +167,39 @@ public class Model3D {
             nodeXForm.setTy(y);
             nodeXForm.setTz(z);
             nodeXForm.setRotate(theta, phi, psi);
+            nodeXForm.getOrigin().setPoint(new GMLPoint(x, y, z, theta, phi, psi, 0));
         }
         for(EdgeXForm edge : nodeXForm.getEdges()){
             updateEdge(edge);
+        }
+    }
+
+    public void addSpeedToNode(String nodeName, double Vx, double Vy, double Vz, float Vtheta, float Vphi, float Vpsi){
+        NodeXForm nodeXForm = null;
+        for(Node n : model.getChildren()) {
+            if (n.getId() == nodeName) {               //find 1st node
+                nodeXForm = (NodeXForm) n;
+            }
+        }
+        if(nodeXForm==null){
+            return;
+        }else {
+            System.out.println("Changing speed of node: " + nodeXForm.getId());
+            nodeXForm.getOrigin().setVpoint(new GMLPoint(Vx, Vy, Vz, Vtheta, Vphi, Vpsi));
+        }
+    }
+
+    public void addAccelerationToNode(String nodeName, double Ax, double Ay, double Az, float Atheta, float Aphi, float Apsi){
+        NodeXForm nodeXForm = null;
+        for(Node n : model.getChildren()) {
+            if (n.getId() == nodeName) {               //find 1st node
+                nodeXForm = (NodeXForm) n;
+            }
+        }
+        if(nodeXForm==null){
+            return;
+        }else {
+            nodeXForm.getOrigin().setApoint(new GMLPoint(Ax, Ay, Az, Atheta, Aphi, Apsi));
         }
     }
 

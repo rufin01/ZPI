@@ -12,6 +12,8 @@ public class GMLNode extends Expression {
     }
     public GMLNode(){
         this.point = new GMLPoint(0,0,0);
+        this.vpoint = new GMLPoint(0,0,0);
+        this.apoint = new GMLPoint(0,0,0);
     }
 
     public GMLNode(GMLPoint point){
