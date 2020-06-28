@@ -2,10 +2,7 @@ package zpi;
 
 import antlr.ExprLexer;
 import antlr.ExprParser;
-import expression.AntlrToProgram;
-import expression.ExpressionProcessor;
-import expression.Program;
-import expression.SyntaxErrorListener;
+import expression.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -21,7 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
-import expression.GMLNode;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -59,61 +55,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         addCodeArea(scene);
 
-        GMLNode head = new GMLNode();
-        head.getPoint().y=22;
-
-        GMLNode chest = new GMLNode();
-        chest.getPoint().y = 15;
-
-        GMLNode lhand = new GMLNode();
-        lhand.getPoint().x = -6;
-        lhand.getPoint().y = 10;
-        GMLNode rhand = new GMLNode();
-        rhand.getPoint().x = 6;
-        rhand.getPoint().y = 10;
-
-        GMLNode ass = new GMLNode();
-        ass.getPoint().y = 10;
-
-        GMLNode lfeet = new GMLNode();
-        lfeet.getPoint().x = -4;
-        GMLNode rfeet = new GMLNode();
-        rfeet.getPoint().x = 4;
-
         model3D = new Model3D();
-//        model3D.addNode(head, "head");
-//        model3D.addNode(chest, "chest");
-//        model3D.addNode(ass,"ass");
-//        model3D.addNode(rhand, "rhand");
-//        model3D.addNode(lhand, "lhand");
-//        model3D.addNode(lfeet, "lfeet");
-//        model3D.addNode(rfeet, "rfeet");
-//
-//        model3D.connectNodes("head", "chest", "neck");
-//        model3D.connectNodes("chest", "ass","stomach");
-//        model3D.connectNodes("chest", "rhand", "rarm");
-//        model3D.connectNodes("chest", "lhand", "larm");
-//        model3D.connectNodes("ass", "rfeet", "rleg");
-//        model3D.connectNodes("ass", "lfeet", "lleg");
-//
-//        AnimationTimer animationTimer = new AnimationTimer() {
-//            boolean right = true;
-//            long counter = 25;
-//            long counter2 = 0;
-//            @Override
-//            public void handle(long l) {
-//                if(counter%25==0&&counter!=0)right=!right;
-//                if(right){
-//                    counter++;
-//                }else counter--;
-//                counter2++;
-//                model3D.moveNode("lhand",-6,10,counter/2,0,0,0);
-//                model3D.moveNode("rhand",6,10,-counter/2,0,0,0);
-//                model3D.moveNode("lfeet",-4,0,-counter/2,0,0,0);
-//                model3D.moveNode("rfeet",4,0,counter/2,0,0,0);
-//
-//            }
-//        };
 
         PerspectiveCamera camera = new PerspectiveCamera(true);
         camera.getTransforms().addAll(rotateX, rotateY, new Translate(0, 0, -35));
@@ -221,11 +163,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
                 if(progVisitor.semanticErrors.isEmpty()) {
                     ExpressionProcessor ep = new ExpressionProcessor(prog.expressions);
-                    for(Object evaluation: ep.getEvaluationResults()) {
-                        GMLNode node = (GMLNode) evaluation;
-
-                        String randomName = "node" + String.valueOf(Math.random() * 100);
-                        model3D.addNode(node, randomName);
+                    for(Object evaluation: ep.getEvaluationResults().subList(1, 2)) {
+//                        GMLPoint_copy point_copy = (GMLPoint_copy) evaluation;
+//                        System.out.println("Point(" + point_copy.x + ", " + point_copy.y + ", " + point_copy.z + ")");
+//                        String randomName = "node" + String.valueOf(Math.random() * 100);
+//                        model3D.addNode(node, randomName);
                     }
                 }
                 else {

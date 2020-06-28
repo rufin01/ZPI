@@ -24,8 +24,14 @@ public class ExpressionProcessor {
 		List<Object> evaluations = new ArrayList<>();
 
 		for (Expression e: list) {
+
+			System.out.println(e.getClass());
+
 			if(e instanceof VariableDeclaration) {
 				VariableDeclaration decl = (VariableDeclaration) e;
+
+
+
 				values.put(decl.id,  (Object) decl.value);
 				evaluations.add((Object) decl.value);
 			}
@@ -48,7 +54,8 @@ public class ExpressionProcessor {
 				evaluations.add(result);
 			}
 			else if (e instanceof GMLPoint){	// e instanceof Number, Variable, Addition, Multiplication
-				GMLPoint result = (GMLPoint)getEvalResult(e);
+				GMLPoint_copy result = (GMLPoint_copy)getStructureResult(e);
+				System.out.println("Point(" + result.x + ", " + result.y + ", " + result.z + ")");
 				evaluations.add(result);
 			}
 			else {	// 	e instanceof Node Point
@@ -66,20 +73,20 @@ public class ExpressionProcessor {
 		if(e instanceof GMLGraph){
 
 		}
-		else if(e instanceof GMLEdge){
-			Expression expr1 = ((GMLEdge) e).getNode1();
-			Expression expr2 = ((GMLEdge) e).getNode2();
-
-			GMLNode expr1_value = null;
-			if(expr1 instanceof Variable){
-				expr1_value = (GMLNode)getEvalResult(expr1);
-			}
-			Object expr1_eval = getStructureResult(expr1);
-			Object expr2_eval = getStructureResult(expr2);
-			if(expr1_eval instanceof GMLNode && expr2_eval instanceof GMLNode){
-
-			}
-			GMLEdge_copy e_copy = new GMLEdge_copy();
+		else if(e instanceof GMLEdge) {
+//			Expression expr1 = ((GMLEdge) e).getNode1();
+//			Expression expr2 = ((GMLEdge) e).getNode2();
+//
+//			GMLNode expr1_value = null;
+//			if(expr1 instanceof Variable){
+//				expr1_value = (GMLNode)getEvalResult(expr1);
+//			}
+//			Object expr1_eval = getStructureResult(expr1);
+//			Object expr2_eval = getStructureResult(expr2);
+//			if(expr1_eval instanceof GMLNode && expr2_eval instanceof GMLNode){
+//
+//			}
+//			GMLEdge_copy e_copy = new GMLEdge_copy();
 		}
 		else if(e instanceof GMLNode){
 
@@ -95,11 +102,11 @@ public class ExpressionProcessor {
 			Expression theta = ((GMLPoint) e).theta;
 
 			Number<Double> x_d = null;
-			if(x != null && x instanceof Variable) x_d = (Number<Double>)getEvalResult(x);
+			if(x instanceof Variable) x_d = new Number<Double>(new Double(getEvalResult(x).toString()));
 			else if (x != null) x_d = (Number<Double>)x;
 
 			Number<Double> y_d = null;
-			if(y != null && y instanceof Variable) y_d = (Number<Double>)getEvalResult(y);
+			if(y instanceof Variable) y_d = new Number<Double>((Double) getEvalResult(y));
 			else if (y != null) y_d = (Number<Double>)y;
 
 			Number<Double> z_d = null;
@@ -107,29 +114,29 @@ public class ExpressionProcessor {
 			else if (z != null) z_d = (Number<Double>)z;
 
 			Number<Double> time_d = null;
-			if(time != null && time instanceof Variable) time_d = (Number<Double>)getEvalResult(time);
+			if(time instanceof Variable) time_d = (Number<Double>)getEvalResult(time);
 			else if (time != null) time_d = (Number<Double>)time;
 
 			Number<Double> phi_d = null;
-			if(phi != null && phi instanceof Variable) phi_d = (Number<Double>)getEvalResult(phi);
+			if(phi instanceof Variable) phi_d = (Number<Double>)getEvalResult(phi);
 			else if (phi != null) phi_d = (Number<Double>)phi;
 
 			Number<Double> psi_d = null;
-			if(psi != null && psi instanceof Variable) psi_d = (Number<Double>)getEvalResult(psi);
+			if(psi instanceof Variable) psi_d = (Number<Double>)getEvalResult(psi);
 			else if (psi != null) psi_d = (Number<Double>)psi;
 
 			Number<Double> theta_d = null;
-			if(theta != null && theta instanceof Variable) theta_d = (Number<Double>)getEvalResult(theta);
+			if(theta instanceof Variable) theta_d = (Number<Double>)getEvalResult(theta);
 			else if (theta != null) theta_d = (Number<Double>)theta;
 
 			if(x_d != null && y_d != null && z_d != null && time_d != null && phi_d != null && psi_d != null && theta_d != null){
-				return new GMLPoint(x_d, y_d, z_d, time_d, phi_d, psi_d, theta_d);
+				return new GMLPoint_copy(x_d.num, y_d.num, z_d.num, time_d.num, phi_d.num, psi_d.num, theta_d.num);
 			}
 			else if(x_d != null && y_d != null && z_d != null && time_d != null){
-				return new GMLPoint(x_d, y_d, z_d, time_d);
+				return new GMLPoint_copy(x_d.num, y_d.num, z_d.num, time_d.num);
 			}
 			else if(x_d != null && y_d != null && z_d != null) {
-				return new GMLPoint(x_d, y_d, z_d);
+				return new GMLPoint_copy(x_d.num, y_d.num, z_d.num);
 			}
 			else System.err.println("Errorek");
 		}
@@ -148,38 +155,38 @@ public class ExpressionProcessor {
 			Variable var = (Variable) e;
 			result = values.get(var.id);
 		}
-		else if(e instanceof NumericOperation) {
-			/*
-			 * Not working because it was originally pasted from tutorial
-			 *
-			 * The idea is to have more than one (int) numeric types and try to
-			 * somehow navigate between them
-			 */
-
-
-			Addition add = (Addition) e;
-			Object left = getEvalResult(add.left);
-			Object right = getEvalResult(add.right);
-			result = left + right;
-		}
-		else if(e instanceof Subtraction) {
-			Subtraction sub = (Subtraction) e;
-			Object left = getEvalResult(sub.left);
-			Object right = getEvalResult(sub.right);
-			result = left - right;
-		}
-		else if(e instanceof Multiplication) {
-			Multiplication mul = (Multiplication) e;
-			Object left = getEvalResult(mul.left);
-			Object right = getEvalResult(mul.right);
-			result = left * right;
-		}
-		else {	// e instanceof Division
-			Division div = (Division) e;
-			Object left = getEvalResult(div.left);
-			Object right = getEvalResult(div.right);
-			result = left / right;
-		}
+//		else if(e instanceof NumericOperation) {
+//			/*
+//			 * Not working because it was originally pasted from tutorial
+//			 *
+//			 * The idea is to have more than one (int) numeric types and try to
+//			 * somehow navigate between them
+//			 */
+//
+//
+//			Addition add = (Addition) e;
+//			Object left = getEvalResult(add.left);
+//			Object right = getEvalResult(add.right);
+//			result = left + right;
+//		}
+//		else if(e instanceof Subtraction) {
+//			Subtraction sub = (Subtraction) e;
+//			Object left = getEvalResult(sub.left);
+//			Object right = getEvalResult(sub.right);
+//			result = left - right;
+//		}
+//		else if(e instanceof Multiplication) {
+//			Multiplication mul = (Multiplication) e;
+//			Object left = getEvalResult(mul.left);
+//			Object right = getEvalResult(mul.right);
+//			result = left * right;
+//		}
+//		else {	// e instanceof Division
+//			Division div = (Division) e;
+//			Object left = getEvalResult(div.left);
+//			Object right = getEvalResult(div.right);
+//			result = left / right;
+//		}
 
 		return result;
 	}

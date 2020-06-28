@@ -91,6 +91,18 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 				
 			case "GRAPH":
 				break;
+			case "POINT":
+				GMLPoint point_temp = null;
+				if(!ctx.expr().isEmpty()) {
+					value = ctx.expr();
+					System.out.println(value);
+					point_temp = (GMLPoint)this.visit((GraphElementContext)value);
+				}
+
+				System.out.println(ctx.expr().getText());
+
+
+				return new VariableDeclaration<GMLPoint>(id, type, point_temp);
 //			case ExprParser.RULE_graph:
 				
 			default:
