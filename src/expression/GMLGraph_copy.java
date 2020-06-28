@@ -2,22 +2,20 @@ package expression;
 
 //import com.google.gson.Gson;
 //import com.google.gson.reflect.TypeToken;
-import org.ietf.jgss.GSSContext;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 
-public class GMLGraph extends Expression {
+public class GMLGraph_copy {
 
-    private HashMap<String, Expression> nodes;
-    private HashMap<String, Expression> edges;
+    private HashMap<String, GMLNode> nodes;
+    private HashMap<String, GMLEdge> edges;
 
-    public GMLGraph(){
-        this.nodes = new HashMap<String, Expression>();
-        this.edges = new HashMap<String, Expression>();
+    public GMLGraph_copy(){
+        this.nodes = new HashMap<String, GMLNode>();
+        this.edges = new HashMap<String, GMLEdge>();
     }
 
-    public GMLGraph(HashMap<String, Expression> nodes, HashMap<String, Expression> edges){
+    public GMLGraph_copy(HashMap<String, GMLNode> nodes, HashMap<String, GMLEdge> edges){
         this.nodes = nodes;
         this.edges = edges;
     }
@@ -34,33 +32,33 @@ public class GMLGraph extends Expression {
 //        this.edges = gson.fromJson(jsonString, type);
 //    }
 
-    public void addNode(String key, Expression node){
+    public void addNode(String key, GMLNode node){
         this.nodes.put(key, node);
     }
 
-    public void addEdge(String key, Expression edge){
+    public void addEdge(String key, GMLEdge edge){
         this.edges.put(key, edge);
     }
 
-    public void updateNode(String key, Expression newNode){
+    public void updateNode(String key, GMLNode newNode){
         this.nodes.replace(key, newNode);
     }
 
-    public void updateEdge(String key, Expression newEdge){
+    public void updateEdge(String key, GMLEdge newEdge){
         this.edges.replace(key, newEdge);
     }
 
-    public Expression getNode(String key){
+    public GMLNode getNode(String key){
         return this.nodes.get(key);
     }
 
-    public Expression getEdge(String key){
+    public GMLEdge getEdge(String key){
         return this.edges.get(key);
     }
 
     public void delete() {
-        this.nodes = new HashMap<String, Expression>();
-        this.edges = new  HashMap<String, Expression>();
+        this.nodes = new HashMap<String, GMLNode>();
+        this.edges = new  HashMap<String, GMLEdge>();
     }
 
     public void deleteNode(String key) {
@@ -71,7 +69,7 @@ public class GMLGraph extends Expression {
         this.edges.remove(key);
     }
 
-    public void mergeGraph(GMLGraph otherGraph){
+    public void mergeGraph(GMLGraph_copy otherGraph){
         // NI MOM POJENCIA CO ROBIE
     }
 
@@ -79,19 +77,19 @@ public class GMLGraph extends Expression {
         // NIE MAM POJECIA CO TU POWINNO BYC KURLA RAZ DWA TRZY chyba nic bo nie ma wymiaru czasu
     }
 
-    public HashMap<String, Expression> getNodes() {
+    public HashMap<String, GMLNode> getNodes() {
         return nodes;
     }
 
-    public void setNodes(HashMap<String, Expression> nodes) {
+    public void setNodes(HashMap<String, GMLNode> nodes) {
         this.nodes = nodes;
     }
 
-    public HashMap<String, Expression> getEdges() {
+    public HashMap<String, GMLEdge> getEdges() {
         return edges;
     }
 
-    public void setEdges(HashMap<String, Expression> edges) {
+    public void setEdges(HashMap<String, GMLEdge> edges) {
         this.edges = edges;
     }
 }

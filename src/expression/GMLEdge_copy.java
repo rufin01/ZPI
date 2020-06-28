@@ -1,17 +1,17 @@
 package expression;
 
-public class GMLEdge extends Expression {
+public class GMLEdge_copy {
 
-    private Expression node1;
-    private Expression node2;
+    private GMLNode node1;
+    private GMLNode node2;
 
 
-    public GMLEdge(Expression node1, Expression node2){
+    public GMLEdge_copy(GMLNode node1, GMLNode node2){
         this.node1 = node1;
         this.node2 = node2;
     }
 
-    public Expression getNode1() {
+    public GMLNode getNode1() {
         return node1;
     }
 
@@ -19,7 +19,7 @@ public class GMLEdge extends Expression {
         this.node1 = node1;
     }
 
-    public Expression getNode2() {
+    public GMLNode getNode2() {
         return node2;
     }
 

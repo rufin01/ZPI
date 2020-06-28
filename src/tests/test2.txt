@@ -8,19 +8,19 @@ tempNode: NODE[];
 
 -- deklaracja funkcji
 
-fun: VOID (graph: GRAPH) {
+--fun: VOID (graph: GRAPH) {
 	-- co moze robic graf
-	i = i - 1;
+	--i = i - 1;
 	if (True) then {
 		-- przykladowy kod
-		k = -.43;
+		k == -.43;
 	} else {
 		mojString: STRING = "W bloku else";
 	}
 	return;
-}
+--}
 
-   fun(mojGraph); --wywolanie
+   --fun(mojGraph); --wywolanie
 
 if i == -4.2 then i = i + 1;
 

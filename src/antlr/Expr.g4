@@ -17,7 +17,6 @@ prog: ( variableDecl | expr )+ EOF		# Program		// # - label -> gonna create visi
 variableDecl: ID ':' TYPE ('=' expr)? END					# VariableDeclaration		// ()? - everything in parens is optional
 	;
 	
-//// FUNCTION SECTOR------------------------------------
 //functionDecl: ID ':' TYPE '(' formalParameters? ')' block	# FunctionDeclaration		// fun: VOID (x: INT, y: FLOAT) {...}
 //	;
 //	
@@ -26,7 +25,6 @@ variableDecl: ID ':' TYPE ('=' expr)? END					# VariableDeclaration		// ()? - ev
 //	
 //formalParameter: ID ':' TYPE
 //	;
-//// ---------------------------------------------------	
 	
 	
 /* ANTLR resolves ambiguities in favor of the alternative given first.  */
@@ -45,7 +43,8 @@ expr: //ID '(' exprList? ')'			# FunctionExpression
 	| '(' expr ')'					# Parens
 	;
 	
-	
+/* Statements won't be implemented for now */
+
 //exprList: expr (',' expr)*;			// used mostly as function arguments list
 
 //// stat - statement, implementation should look like a switch
@@ -65,7 +64,14 @@ expr: //ID '(' exprList? ')'			# FunctionExpression
 //		
 //whilestat: 	 'while' expr 'do' stat
 //	;
-	
+
+
+/* a map is needed as a structure in order to place elements in graph
+ * properly, a map is basically a list of tuples and tuples consists
+ * of (key: STRING, value: expr)
+ * 
+ * Map could be a list if tuple was an expression
+ */	
 map: BEGM tuples? ENDM;				// [("nazwaNode'a", nodeVariable), ...]
 
 tuples: tuple ( SEP tuple )*;
