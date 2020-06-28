@@ -1,6 +1,10 @@
 
 node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0), point(.0, .0, .0));
 
+node2: NODE = node(x, y, z);
+
+edge1: EDGE[] = [("edge1", edge(node1, node2)), ("edge2", edge(x, y)), ("edge3", edge)];
+
 
 
 
