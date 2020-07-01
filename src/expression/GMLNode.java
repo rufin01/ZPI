@@ -1,9 +1,9 @@
 package expression;
 
 public class GMLNode extends Expression {
-    private Expression point;
-    private Expression vpoint;
-    private Expression apoint;
+    public Expression point;
+    public Expression vpoint;
+    public Expression apoint;
 
     public GMLNode(Expression point, Expression vpoint, Expression apoint){
         this.point = point;

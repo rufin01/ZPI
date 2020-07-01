@@ -2,9 +2,8 @@ package expression;
 
 public class GMLEdge extends Expression {
 
-    private Expression node1;
-    private Expression node2;
-
+    public Expression node1;
+    public Expression node2;
 
     public GMLEdge(Expression node1, Expression node2){
         this.node1 = node1;

@@ -163,9 +163,31 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
                 if(progVisitor.semanticErrors.isEmpty()) {
                     ExpressionProcessor ep = new ExpressionProcessor(prog.expressions);
-                    for(Object evaluation: ep.getEvaluationResults().subList(1, 2)) {
+
+//                    int i = 0;
+//                    String node1Name = "";
+//                    String node2Name = "";
+//                    String edge11Name = "";
+
+                    for(Object evaluation: ep.getEvaluationResults().subList(2,3)) {
+
+//                        if (i == 0) {
+//                            GMLNode_copy node1 = (GMLNode_copy) evaluation;
+//                            node1Name = "node" + String.valueOf(Math.random() * 100);
+//                            model3D.addNode(node1, node1Name);
+//                        }
+//                        else if (i == 1) {
+//                            GMLNode_copy node2 = (GMLNode_copy) evaluation;
+//                            node2Name = "node" + String.valueOf(Math.random() * 100);
+//                            model3D.addNode(node2, node2Name);
+//                        }
+//
+//                        i++;
+
 //                        GMLPoint_copy point_copy = (GMLPoint_copy) evaluation;
 //                        System.out.println("Point(" + point_copy.x + ", " + point_copy.y + ", " + point_copy.z + ")");
+
+//                        GMLNode_copy node = (GMLNode_copy) evaluation;
 //                        String randomName = "node" + String.valueOf(Math.random() * 100);
 //                        model3D.addNode(node, randomName);
                     }
