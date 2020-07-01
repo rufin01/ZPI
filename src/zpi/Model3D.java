@@ -167,7 +167,7 @@ public class Model3D {
             nodeXForm.setTy(y);
             nodeXForm.setTz(z);
             nodeXForm.setRotate(theta, phi, psi);
-            nodeXForm.getOrigin().setPoint(new GMLPoint(x, y, z, theta, phi, psi, 0));
+            nodeXForm.getOrigin().setPoint(new GMLPoint(x, y, z, theta, phi, psi));
         }
         for(EdgeXForm edge : nodeXForm.getEdges()){
             updateEdge(edge);

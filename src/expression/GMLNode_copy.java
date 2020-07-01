@@ -18,22 +18,22 @@ public class GMLNode_copy extends Expression {
         this.point = point;
     }
 
-    public GMLNode_copy(double x, double y, double z, double theta, double phi, double psi, double time){
-        this.point = new GMLPoint(x, y, z, theta, phi, psi, time);
-        this.vpoint = new GMLPoint(0, 0, 0, 0, 0, 0, 0);
-        this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0, 0);
+    public GMLNode_copy(double x, double y, double z, float theta, float phi, float psi){
+        this.point = new GMLPoint(x, y, z, theta, phi, psi);
+        this.vpoint = new GMLPoint(0, 0, 0, 0, 0, 0);
+        this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0);
     }
 
     public GMLNode_copy(double x, double y, double z, double time){
         this.point = new GMLPoint(x, y, z, time);
-        this.vpoint = new GMLPoint(0, 0, 0, 0, 0, 0, 0);
-        this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0, 0);
+        this.vpoint = new GMLPoint(0, 0, 0, 0, 0, 0);
+        this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0);
     }
 
     public GMLNode_copy(double x, double y, double z){
         this.point = new GMLPoint(x, y, z);
-        this.vpoint = new GMLPoint(0, 0, 0, 0, 0, 0, 0);
-        this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0, 0);
+        this.vpoint = new GMLPoint(0, 0, 0, 0, 0, 0);
+        this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0);
     }
 
     public GMLPoint getPoint() {
