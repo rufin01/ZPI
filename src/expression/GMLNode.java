@@ -1,15 +1,16 @@
 package expression;
 
 public class GMLNode extends Expression {
-    private GMLPoint point;
-    private GMLPoint vpoint;
-    private GMLPoint apoint;
+    private Expression point;
+    private Expression vpoint;
+    private Expression apoint;
 
-    public GMLNode(GMLPoint GMLPoint, GMLPoint vpoint, GMLPoint apoint){
-        this.point = GMLPoint;
+    public GMLNode(Expression point, Expression vpoint, Expression apoint){
+        this.point = point;
         this.vpoint = vpoint;
         this.apoint = apoint;
     }
+<<<<<<< HEAD
     public GMLNode(){
         this.point = new GMLPoint(0,0,0);
         this.vpoint = new GMLPoint(0,0,0);
@@ -37,8 +38,10 @@ public class GMLNode extends Expression {
         this.vpoint = new GMLPoint(0, 0, 0, 0, 0, 0, 0);
         this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0, 0);
     }
+=======
+>>>>>>> 61002803e3cfa43fb1174f93c612a6b0d08e582a
 
-    public GMLPoint getPoint() {
+    public Expression getPoint() {
         return point;
     }
 
@@ -46,7 +49,7 @@ public class GMLNode extends Expression {
         this.point = point;
     }
 
-    public GMLPoint getVpoint() {
+    public Expression getVpoint() {
         return vpoint;
     }
 
@@ -54,7 +57,7 @@ public class GMLNode extends Expression {
         this.vpoint = vpoint;
     }
 
-    public GMLPoint getApoint() {
+    public Expression getApoint() {
         return apoint;
     }
 
