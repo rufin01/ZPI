@@ -10,6 +10,8 @@ import operators.Division;
 import operators.Multiplication;
 import operators.NumericOperation;
 import operators.Subtraction;
+import org.w3c.dom.Node;
+import zpi.Model3D;
 
 public class ExpressionProcessor {
 	List<Expression> list;
@@ -55,6 +57,11 @@ public class ExpressionProcessor {
 				GMLPoint_copy result = (GMLPoint_copy)getStructureResult(e);
 				System.out.println("Point(" + result.x + ", " + result.y + ", " + result.z + ")");
 				evaluations.add(result);
+			}
+			else if (e instanceof NodeAddition) {
+				GMLNode_copy result = (GMLNode_copy)getStructureResult(((NodeAddition)e).node);
+
+				Model3D.addNode(result, result.id);
 			}
 			else {	// 	e instanceof Node Point
 				String input = e.toString();
