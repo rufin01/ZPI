@@ -36,9 +36,9 @@ public class ExpressionProcessor {
 				values.put(decl.id,  (Object) decl.value);
 				evaluations.add((Object) decl.value);
 			}
-			else if(e instanceof OperationDeclaration) {
-				Operation result = ((OperationDeclaration) e).operation;
-			}
+//			else if(e instanceof OperationDeclaration) {
+//				Operation result = ((OperationDeclaration) e).operation;
+//			}
 			else if (e instanceof Number || e instanceof Variable || e instanceof Addition || e instanceof Multiplication){	// e instanceof Number, Variable, Addition, Multiplication
 				String input = e.toString();
 //				Object result = getEvalResult(e);

@@ -197,7 +197,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         codeArea.prefWidthProperty().bind(codeAreaAnchorPane.widthProperty());
         codeArea.prefHeightProperty().bind(codeAreaAnchorPane.heightProperty());
 
-        codeArea.appendText("node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0), point(.0, .0, .0));");
+        codeArea.appendText("node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
+                "\n" +
+                "ADDNODE(node1);");
     }
 
     public static void main(String[] args) {
