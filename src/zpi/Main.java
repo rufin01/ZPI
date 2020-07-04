@@ -231,10 +231,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 if(progVisitor.semanticErrors.isEmpty()) {
                     ExpressionProcessor ep = new ExpressionProcessor(prog.expressions);
                     for(Object evaluation: ep.getEvaluationResults()) {
-                        GMLNode_copy node = (GMLNode_copy) evaluation;
 
-                        String randomName = "node" + String.valueOf(Math.random() * 100);
-                        model3D.addNode(node, randomName);
                     }
                 }
                 else {

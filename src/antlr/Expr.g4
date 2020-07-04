@@ -100,7 +100,7 @@ gml:  graph
 addNode: 'ADDNODE(' expr ')'                                            # NodeAddition
     ;
 
-addEdge: 'ADDEDGE(' expr ')'                                            # EdgeAddition
+addEdge: 'ADDEDGE(' expr ',' expr ')'                                   # EdgeAddition
     ;
 
 modifyNode: 'MODIFYNODE(' expr ',' expr ',' expr ',' expr ')'           # EdgeModificatio
