@@ -1,7 +1,7 @@
 package zpi;
 
-import expression.GMLNode;
 import expression.GMLNode_copy;
+import expression.GMLPoint_copy;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class NodeXForm extends XForm {
         if(triple.getNewAPoint() != null){                                           //acceleration changed
             origin.setApoint(triple.getNewAPoint());
             if(triple.getNewPoint()==null){                                         //update static placement to actual
-                origin.setPoint(new GMLPoint(this.getTx(),
+                origin.setPoint(new GMLPoint_copy(this.getTx(),
                                             this.getTy(),
                                             this.getTz(),
                                             this.getRx(),
@@ -23,7 +23,7 @@ public class NodeXForm extends XForm {
             }
             if(triple.getNewVPoint()==null){                                       //update velocity to actual
                 long timeSpan = triple.getTime() - origin.getApoint().time;
-                GMLPoint point = new GMLPoint(timeSpan*origin.getApoint().x + origin.getVpoint().x,
+                GMLPoint_copy point = new GMLPoint_copy(timeSpan*origin.getApoint().x + origin.getVpoint().x,
                                                 timeSpan*origin.getApoint().y + origin.getVpoint().y,
                                                 timeSpan*origin.getApoint().z + origin.getVpoint().z,
                                                 timeSpan*origin.getApoint().theta + origin.getVpoint().theta,
@@ -36,7 +36,7 @@ public class NodeXForm extends XForm {
         if(triple.getNewVPoint() != null){                               //velocity changed
             origin.setVpoint(triple.getNewVPoint());
             if(triple.getNewPoint()==null){                              //update placement to actual
-                origin.setPoint(new GMLPoint(this.getTx(),
+                origin.setPoint(new GMLPoint_copy(this.getTx(),
                         this.getTy(),
                         this.getTz(),
                         this.getRx(),

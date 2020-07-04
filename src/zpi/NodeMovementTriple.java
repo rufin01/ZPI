@@ -1,6 +1,6 @@
 package zpi;
 
-import expression.GMLPoint;
+import expression.GMLPoint_copy;
 
 public class NodeMovementTriple {
     final static int POINT_TYPE_POINT = 1;
@@ -8,25 +8,25 @@ public class NodeMovementTriple {
     final static int POINT_TYPE_APOINT = 3;
 
     private String nodeName;
-    private GMLPoint newPoint = null;
-    private GMLPoint newVPoint = null;
-    private GMLPoint newAPoint = null;
+    private GMLPoint_copy newPoint = null;
+    private GMLPoint_copy newVPoint = null;
+    private GMLPoint_copy newAPoint = null;
     private long time;
 
-    public NodeMovementTriple(String nodeName, GMLPoint newPoint, long time) {
+    public NodeMovementTriple(String nodeName, GMLPoint_copy newPoint, long time) {
         this.nodeName = nodeName;
         this.newPoint = newPoint;
         this.time = time;
     }
 
-    public NodeMovementTriple(String nodeName, GMLPoint newPoint, GMLPoint newVPoint, long time) {
+    public NodeMovementTriple(String nodeName, GMLPoint_copy newPoint, GMLPoint_copy newVPoint, long time) {
         this.nodeName = nodeName;
         this.newPoint = newPoint;
         this.newVPoint = newVPoint;
         this.time = time;
     }
 
-    public NodeMovementTriple(String nodeName, GMLPoint newPoint, GMLPoint newVPoint, GMLPoint newAPoint, long time) {
+    public NodeMovementTriple(String nodeName, GMLPoint_copy newPoint, GMLPoint_copy newVPoint, GMLPoint_copy newAPoint, long time) {
         this.nodeName = nodeName;
         this.newPoint = newPoint;
         this.newVPoint = newVPoint;
@@ -34,7 +34,7 @@ public class NodeMovementTriple {
         this.time = time;
     }
 
-    public NodeMovementTriple(String nodeName, GMLPoint newPoint, long time, int pointType) {
+    public NodeMovementTriple(String nodeName, GMLPoint_copy newPoint, long time, int pointType) {
         this.nodeName = nodeName;
         switch (pointType){
             case POINT_TYPE_POINT:
@@ -58,27 +58,27 @@ public class NodeMovementTriple {
         this.nodeName = nodeName;
     }
 
-    public GMLPoint getNewPoint() {
+    public GMLPoint_copy getNewPoint() {
         return newPoint;
     }
 
-    public void setNewPoint(GMLPoint newPoint) {
+    public void setNewPoint(GMLPoint_copy newPoint) {
         this.newPoint = newPoint;
     }
 
-    public GMLPoint getNewVPoint() {
+    public GMLPoint_copy getNewVPoint() {
         return newVPoint;
     }
 
-    public void setNewVPoint(GMLPoint newVPoint) {
+    public void setNewVPoint(GMLPoint_copy newVPoint) {
         this.newVPoint = newVPoint;
     }
 
-    public GMLPoint getNewAPoint() {
+    public GMLPoint_copy getNewAPoint() {
         return newAPoint;
     }
 
-    public void setNewAPoint(GMLPoint newAPoint) {
+    public void setNewAPoint(GMLPoint_copy newAPoint) {
         this.newAPoint = newAPoint;
     }
 
