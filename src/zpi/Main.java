@@ -114,8 +114,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             model3D.getModel().setScaleZ(model3D.getModel().getScaleZ() * zoomFactor);
             event.consume();
         });
-
-//        animationTimer.start();
     }
 
     private void addCodeArea(Scene scene) {

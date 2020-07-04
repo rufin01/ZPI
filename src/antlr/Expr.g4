@@ -97,6 +97,15 @@ gml:  graph
 	| point
 	;
 
+addNode: 'ADDNODE(' expr ')'                                            # NodeAddition
+    ;
+    
+addEdge: 'ADDEDGE(' expr ')'                                            # EdgeAddition
+    ;
+
+modifyNode: 'MODIFYNODE(' expr ',' expr ',' expr ',' expr ')'           # EdgeModificatio
+    ;
+
 BEGM: '[';
 ENDM: ']';
 SEP: ',';

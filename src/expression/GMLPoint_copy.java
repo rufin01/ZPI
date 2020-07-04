@@ -20,6 +20,15 @@ public class GMLPoint_copy extends Expression {
         this.time = time;
     }
 
+    public GMLPoint_copy(double x, double y, double z, double theta, double phi, double psi){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.theta = theta;
+        this.phi = phi;
+        this.psi = psi;
+    }
+
     public GMLPoint_copy(double x, double y, double z, double time){
         this.x = x;
         this.y = y;

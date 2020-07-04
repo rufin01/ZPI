@@ -265,4 +265,40 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitGml(ExprParser.GmlContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code NodeAddition}
+	 * labeled alternative in {@link ExprParser#addNode}.
+	 * @param ctx the parse tree
+	 */
+	void enterNodeAddition(ExprParser.NodeAdditionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code NodeAddition}
+	 * labeled alternative in {@link ExprParser#addNode}.
+	 * @param ctx the parse tree
+	 */
+	void exitNodeAddition(ExprParser.NodeAdditionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code EdgeAddition}
+	 * labeled alternative in {@link ExprParser#addEdge}.
+	 * @param ctx the parse tree
+	 */
+	void enterEdgeAddition(ExprParser.EdgeAdditionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code EdgeAddition}
+	 * labeled alternative in {@link ExprParser#addEdge}.
+	 * @param ctx the parse tree
+	 */
+	void exitEdgeAddition(ExprParser.EdgeAdditionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code EdgeModificatio}
+	 * labeled alternative in {@link ExprParser#modifyNode}.
+	 * @param ctx the parse tree
+	 */
+	void enterEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code EdgeModificatio}
+	 * labeled alternative in {@link ExprParser#modifyNode}.
+	 * @param ctx the parse tree
+	 */
+	void exitEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
 }

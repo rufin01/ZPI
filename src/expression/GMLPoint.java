@@ -2,15 +2,15 @@ package expression;
 
 public class GMLPoint extends Expression {
 
-    public Expression x;
-    public Expression y;
-    public Expression z;
-    public Expression theta;   //manipulation in X axis
-    public Expression phi;     //manipulation in Y axis
-    public Expression psi;     //manipulation in Z axis
-    public Expression time;
+    public double x = 0;
+    public double y = 0;
+    public double z = 0;
+    public double theta = 0;   //manipulation in X axis
+    public double phi = 0;     //manipulation in Y axis
+    public double psi = 0;     //manipulation in Z axis
+    public long time = 0;
 
-    public GMLPoint(Expression x, Expression y, Expression z, Expression theta, Expression phi, Expression psi, Expression time){
+    public GMLPoint(double x, double y, double z, double theta, double phi, double psi, long time){
         this.x = x;
         this.y = y;
         this.z = z;
@@ -20,17 +20,25 @@ public class GMLPoint extends Expression {
         this.time = time;
     }
 
-    public GMLPoint(Expression x, Expression y, Expression z, Expression time){
+    public GMLPoint(double x, double y, double z, float theta, float phi, float psi){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.theta = theta;
+        this.phi = phi;
+        this.psi = psi;
+    }
+
+    public GMLPoint(double x, double y, double z, long time){
         this.x = x;
         this.y = y;
         this.z = z;
         this.time = time;
     }
 
-    public GMLPoint(Expression x, Expression y, Expression z){
+    public GMLPoint(double x, double y, double z){
         this.x = x;
         this.y = y;
         this.z = z;
     }
-
 }

@@ -5,18 +5,25 @@ import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
-import javafx.scene.shape.Sphere;
+import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 
 public class Model3D {
-    final PhongMaterial RED_MATERIAL = new PhongMaterial();
-    final PhongMaterial WHITE_MATERIAL = new PhongMaterial();
-    final PhongMaterial GREY_MATERIAL = new PhongMaterial();
-    private XForm model;
-    private PhongMaterial nodeColour = RED_MATERIAL;
-    private PhongMaterial edgeColour = GREY_MATERIAL;
+    final static PhongMaterial RED_MATERIAL = new PhongMaterial();
+    final static PhongMaterial WHITE_MATERIAL = new PhongMaterial();
+    final static PhongMaterial GREY_MATERIAL = new PhongMaterial();
+    public static int SPEED_ADJUSTMENT_RATIO = 5;
+    private static XForm model;
+    private static ArrayList<NodeMovementTriple> movementHistory;
+    private static PhongMaterial nodeColour = RED_MATERIAL;
+    private static PhongMaterial edgeColour = GREY_MATERIAL;
+    public static int nodeSize = 2;
+    public static double edgeWidth = 0.2;
+    public static long timer = 0;
+    public static double actTime = 0;
 
     public Model3D(){
         RED_MATERIAL.setDiffuseColor(Color.DARKRED);
@@ -26,6 +33,7 @@ public class Model3D {
         GREY_MATERIAL.setDiffuseColor(Color.DARKGREY);
         GREY_MATERIAL.setSpecularColor(Color.GREY);
         model = new XForm();
+        movementHistory = new ArrayList<>();
         Cylinder Xaxis = new Cylinder(0.1, 100);
         Cylinder Yaxis = new Cylinder(0.1, 100);
         Cylinder Zaxis = new Cylinder(0.1, 100);
@@ -48,7 +56,7 @@ public class Model3D {
         if(nameExists(nodeName))return false;
         NodeXForm nodeGroup = new NodeXForm();
         nodeGroup.setId(nodeName);
-        Sphere nodeModel = new Sphere(2);
+        Shape3D nodeModel = new Box(nodeSize, nodeSize, nodeSize);
         nodeModel.setMaterial(nodeColour);
         nodeGroup.setTx(node.point.x);
         nodeGroup.setTy(node.point.y);
@@ -60,7 +68,7 @@ public class Model3D {
         return true;
     }
 
-    public boolean connectNodes(String node1name, String node2name, String edgeName){
+    public static boolean connectNodes(String node1name, String node2name, String edgeName){
         NodeXForm node1XForm = null;
         NodeXForm node2XForm = null;
         for(Node n : model.getChildren()){
@@ -95,7 +103,7 @@ public class Model3D {
             double angle = Math.acos(diff.normalize().dotProduct(yAxis));
             Rotate rotateAroundCenter = new Rotate(-Math.toDegrees(angle), axisOfRotation);
 
-            Cylinder edge = new Cylinder(0.2, height);
+            Cylinder edge = new Cylinder(edgeWidth, height);
             edge.setMaterial(edgeColour);
             edge.getTransforms().addAll(moveToMidpoint, rotateAroundCenter);
 
@@ -112,13 +120,8 @@ public class Model3D {
         }
     }
 
-    public void moveNode(String nodeName, double x, double y, double z, float theta, float phi, float psi){
-        NodeXForm nodeXForm = null;
-        for(Node n : model.getChildren()) {
-            if (n.getId() == nodeName) {               //find 1st node
-                nodeXForm = (NodeXForm) n;
-            }
-        }
+    public static void moveNode(String nodeName, double x, double y, double z, float theta, float phi, float psi){
+        NodeXForm nodeXForm = getNodeByName(nodeName);
         if(nodeXForm==null){
             return;
         }else {
@@ -126,13 +129,33 @@ public class Model3D {
             nodeXForm.setTy(y);
             nodeXForm.setTz(z);
             nodeXForm.setRotate(theta, phi, psi);
+            nodeXForm.getOrigin().setPoint(new GMLPoint(x, y, z, theta, phi, psi));
         }
         for(EdgeXForm edge : nodeXForm.getEdges()){
             updateEdge(edge);
         }
     }
 
-    public void updateEdge(EdgeXForm edge){
+    public static void addSpeedToNode(String nodeName, double Vx, double Vy, double Vz, float Vtheta, float Vphi, float Vpsi){
+        NodeXForm nodeXForm = getNodeByName(nodeName);
+        if(nodeXForm==null){
+            return;
+        }else {
+            System.out.println("Changing speed of node: " + nodeXForm.getId());
+            nodeXForm.getOrigin().setVpoint(new GMLPoint(Vx, Vy, Vz, Vtheta, Vphi, Vpsi));
+        }
+    }
+
+    public static void addAccelerationToNode(String nodeName, double Ax, double Ay, double Az, float Atheta, float Aphi, float Apsi){
+        NodeXForm nodeXForm = getNodeByName(nodeName);
+        if(nodeXForm==null){
+            return;
+        }else {
+            nodeXForm.getOrigin().setApoint(new GMLPoint(Ax, Ay, Az, Atheta, Aphi, Apsi));
+        }
+    }
+
+    public static void updateEdge(EdgeXForm edge){
         Point3D origin = new Point3D(edge.getOriginNode().getTx(),
                 edge.getOriginNode().getTy(),
                 edge.getOriginNode().getTz());
@@ -158,13 +181,13 @@ public class Model3D {
         edge.getChildren().add(edgeModel);
     }
 
-    public void updateNode(NodeXForm node){
+    public static void updateNode(NodeXForm node){
         node.setTx(node.getOrigin().getPoint().x);
         node.setTy(node.getOrigin().getPoint().y);
         node.setTz(node.getOrigin().getPoint().z);
     }
 
-    public boolean nameExists(String name){
+    public static boolean nameExists(String name){
         for(Node n : model.getChildren()){
             if(n.getId()==name){
                 return true;
@@ -173,7 +196,17 @@ public class Model3D {
         return false;
     }
 
-    public XForm getModel() {
+    public static NodeXForm getNodeByName(String nodeName){
+        NodeXForm nodeXForm = null;
+        for(Node n : model.getChildren()) {
+            if (n.getId() == nodeName) {               //find 1st node
+                nodeXForm = (NodeXForm) n;
+            }
+        }
+        return nodeXForm;
+    }
+
+    public static XForm getModel() {
         return model;
     }
 //

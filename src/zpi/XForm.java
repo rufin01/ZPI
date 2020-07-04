@@ -77,6 +77,7 @@ public class XForm extends Group {
     public void setRotateX(double x) { rx.setAngle(x); }
     public void setRotateY(double y) { ry.setAngle(y); }
     public void setRotateZ(double z) { rz.setAngle(z); }
+    public void setRx(double x) { rx.setAngle(x); }
     public void setRy(double y) { ry.setAngle(y); }
     public void setRz(double z) { rz.setAngle(z); }
 
@@ -140,6 +141,10 @@ public class XForm extends Group {
     public double getTx(){return t.getX();}
     public double getTy(){return t.getY();}
     public double getTz(){return t.getZ();}
+
+    public float getRx(){return (float)rx.getAngle();}
+    public float getRy(){return (float)ry.getAngle();}
+    public float getRz(){return (float)rz.getAngle();}
 
     public void debug() {
         System.out.println("t = (" +

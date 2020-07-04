@@ -180,9 +180,9 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 			dlist.add(this.visit(ex));
 		}
 		
-		if(dlist.size() == 3) return new GMLPoint(dlist.get(0), dlist.get(1), dlist.get(2));
-		if(dlist.size() == 4) return new GMLPoint(dlist.get(0), dlist.get(1), dlist.get(2), dlist.get(3));
-		if(dlist.size() > 0) return new GMLPoint(dlist.get(0), dlist.get(1), dlist.get(2), dlist.get(3), dlist.get(4), dlist.get(5), dlist.get(6));
+//		if(dlist.size() == 3) return new GMLPoint(dlist.get(0), dlist.get(1), dlist.get(2));
+//		if(dlist.size() == 4) return new GMLPoint(dlist.get(0), dlist.get(1), dlist.get(2), dlist.get(3));
+//		if(dlist.size() > 0) return new GMLPoint(dlist.get(0), dlist.get(1), dlist.get(2), dlist.get(3), dlist.get(4), dlist.get(5), dlist.get(6));
 		return null;
 	}
 
