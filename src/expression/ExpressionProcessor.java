@@ -59,6 +59,7 @@ public class ExpressionProcessor {
 				evaluations.add(result);
 			}
 			else if (e instanceof NodeAddition) {
+
 				GMLNode_copy result = (GMLNode_copy)getStructureResult(((NodeAddition)e).node);
 
 				Model3D.addNode(result, result.id);

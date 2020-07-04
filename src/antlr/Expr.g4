@@ -148,6 +148,10 @@ BOOL: 'True'
 
 TYPE: BASIC_TYPE '[]'?	
 	;
+
+OPER_NAME: 'ADDNODE'
+    | 'ADDEDGE'
+    |
 	
 BASIC_TYPE
 	  :	'INT'

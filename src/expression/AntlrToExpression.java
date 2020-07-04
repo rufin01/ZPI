@@ -187,9 +187,23 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 		return null;
 	}
 
+	public Expression visitOperationDeclaration(ExprParser.OperationDeclarationContext ctx){
+		Operation operation = (Operation)visit(ctx.operation());
+
+		return new OperationDeclaration(operation);
+	}
+
+	public Expression visitOperation(ExprParser.OperationContext ctx) {
+		if (ctx)
+	}
+
 	@Override
 	public Expression visitNodeAddition(NodeAdditionContext ctx) {
 		Expression node = this.visit(ctx.expr());
+
+		System.out.println("test");
+		System.out.println(node.toString());
+
 		return new NodeAddition(node);
 	}
 }
