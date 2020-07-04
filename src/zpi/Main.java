@@ -2,11 +2,7 @@ package zpi;
 
 import antlr.ExprLexer;
 import antlr.ExprParser;
-import expression.AntlrToProgram;
-import expression.ExpressionProcessor;
-import expression.Program;
-import expression.SyntaxErrorListener;
-import javafx.animation.AnimationTimer;
+import expression.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,7 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
-import expression.GMLNode;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -59,25 +54,25 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         addCodeArea(scene);
 
-        GMLNode head = new GMLNode();
+        GMLNode_copy head = new GMLNode_copy();
         head.getPoint().y=22;
 
-        GMLNode chest = new GMLNode();
+        GMLNode_copy chest = new GMLNode_copy();
         chest.getPoint().y = 15;
 
-        GMLNode lhand = new GMLNode();
+        GMLNode_copy lhand = new GMLNode_copy();
         lhand.getPoint().x = -6;
         lhand.getPoint().y = 10;
-        GMLNode rhand = new GMLNode();
+        GMLNode_copy rhand = new GMLNode_copy();
         rhand.getPoint().x = 6;
         rhand.getPoint().y = 10;
 
-        GMLNode ass = new GMLNode();
+        GMLNode_copy ass = new GMLNode_copy();
         ass.getPoint().y = 10;
 
-        GMLNode lfeet = new GMLNode();
+        GMLNode_copy lfeet = new GMLNode_copy();
         lfeet.getPoint().x = -4;
-        GMLNode rfeet = new GMLNode();
+        GMLNode_copy rfeet = new GMLNode_copy();
         rfeet.getPoint().x = 4;
 
         model3D = new Model3D();
@@ -96,10 +91,38 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         model3D.connectNodes("ass", "rfeet", "rleg");
         model3D.connectNodes("ass", "lfeet", "lleg");
 
-        model3D.addSpeedToNode("lhand",0,0,-2,0,0,0);
-        model3D.addSpeedToNode("rhand",0,0,2,0,0,0);
-        model3D.addSpeedToNode("lfeet",0,0,2,0,0,0);
-        model3D.addSpeedToNode("rfeet",0,0,-2,0,0,0);
+
+
+        for(int i = 0; i< 10; i++){
+            if(i%2==0){
+                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint(0,0,-2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint(0,0,2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint(0,0,2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint(0,0,-2,0,0,0, i*10), i*10, 2);
+                Model3D.addToMovementHistory(moveLHand);
+                Model3D.addToMovementHistory(moveRHand);
+                Model3D.addToMovementHistory(moveLFeet);
+                Model3D.addToMovementHistory(moverFeet);
+            }else {
+                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint(0,0,2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint(0,0,-2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint(0,0,-2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint(0,0,2,0,0,0, i*10), i*10, 2);
+                Model3D.addToMovementHistory(moveLHand);
+                Model3D.addToMovementHistory(moveRHand);
+                Model3D.addToMovementHistory(moveLFeet);
+                Model3D.addToMovementHistory(moverFeet);
+            }
+        }
+        NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint(0,0,0,0,0,0, 110), 110, 2);
+        NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint(0,0,0,0,0,0, 110), 110, 2);
+        NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint(0,0,0,0,0,0, 110), 110, 2);
+        NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint(0,0,0,0,0,0, 110), 110, 2);
+        Model3D.addToMovementHistory(moveLHand);
+        Model3D.addToMovementHistory(moveRHand);
+        Model3D.addToMovementHistory(moveLFeet);
+        Model3D.addToMovementHistory(moverFeet);
+
 
         model3D.startMovement();
 
@@ -208,7 +231,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 if(progVisitor.semanticErrors.isEmpty()) {
                     ExpressionProcessor ep = new ExpressionProcessor(prog.expressions);
                     for(Object evaluation: ep.getEvaluationResults()) {
-                        GMLNode node = (GMLNode) evaluation;
+                        GMLNode_copy node = (GMLNode_copy) evaluation;
 
                         String randomName = "node" + String.valueOf(Math.random() * 100);
                         model3D.addNode(node, randomName);

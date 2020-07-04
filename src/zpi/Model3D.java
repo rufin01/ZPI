@@ -1,25 +1,34 @@
 package zpi;
 
+import expression.GMLNode_copy;
 import expression.GMLPoint;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
+import javafx.scene.shape.Shape3D;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
-import expression.GMLNode;
+
+import java.util.ArrayList;
 
 public class Model3D {
-    final PhongMaterial RED_MATERIAL = new PhongMaterial();
-    final PhongMaterial WHITE_MATERIAL = new PhongMaterial();
-    final PhongMaterial GREY_MATERIAL = new PhongMaterial();
-    private XForm model;
-    private PhongMaterial nodeColour = RED_MATERIAL;
-    private PhongMaterial edgeColour = GREY_MATERIAL;
-    public static long actTime = 0;
+    final static PhongMaterial RED_MATERIAL = new PhongMaterial();
+    final static PhongMaterial WHITE_MATERIAL = new PhongMaterial();
+    final static PhongMaterial GREY_MATERIAL = new PhongMaterial();
+    public static int SPEED_ADJUSTMENT_RATIO = 10;
+    private static XForm model;
+    private static ArrayList<NodeMovementTriple> movementHistory;
+    private static PhongMaterial nodeColour = RED_MATERIAL;
+    private static PhongMaterial edgeColour = GREY_MATERIAL;
+    private static int nodeSize = 1;
+    private static double edgeWidth = 0.2;
+    public static long timer = 0;
+    public static double actTime = 0;
 
     public Model3D(){
         RED_MATERIAL.setDiffuseColor(Color.DARKRED);
@@ -29,6 +38,7 @@ public class Model3D {
         GREY_MATERIAL.setDiffuseColor(Color.DARKGREY);
         GREY_MATERIAL.setSpecularColor(Color.GREY);
         model = new XForm();
+        movementHistory = new ArrayList<>();
         Cylinder Xaxis = new Cylinder(0.1, 100);
         Cylinder Yaxis = new Cylinder(0.1, 100);
         Cylinder Zaxis = new Cylinder(0.1, 100);
@@ -47,14 +57,20 @@ public class Model3D {
         model.getChildren().addAll(Xaxis, Yaxis, Zaxis);
     }
 
-    public void startMovement(){
+    public static void startMovement(){
         AnimationTimer animationTimer = new AnimationTimer() {
             boolean right = true;
             @Override
             public void handle(long l) {
-                if(right){
-                    actTime++;
-                }else actTime--;
+                timer++;
+                actTime= timer/SPEED_ADJUSTMENT_RATIO;
+                for(NodeMovementTriple historyDataSet: movementHistory){
+                    if(historyDataSet.getTime() == actTime){
+                        NodeXForm nodeXForm = getNodeByName(historyDataSet.getNodeName());
+                        nodeXForm.updateNode(historyDataSet);
+                        movementHistory.remove(historyDataSet);
+                    }
+                }
                 for(Node n: model.getChildren()){
                     if(n.getClass().equals(NodeXForm.class)){
                         System.out.println("Moving node: " + n.getId());
@@ -62,19 +78,12 @@ public class Model3D {
                         GMLPoint point = node.getOrigin().getPoint();
                         GMLPoint vPoint = node.getOrigin().getVpoint();
                         GMLPoint aPoint = node.getOrigin().getApoint();
-                        if(actTime%10==0 && actTime!= 0){
-                            right = !right;
-                            addSpeedToNode("lhand",0,0,-2,0,0,0);
-                            addSpeedToNode("rhand",0,0,2,0,0,0);
-                            addSpeedToNode("lfeet",0,0,2,0,0,0);
-                            addSpeedToNode("rfeet",0,0,-2,0,0,0);
-                        }
-                        node.setTx(point.x + vPoint.x*actTime + aPoint.x*actTime*actTime);
-                        node.setTy(point.y + vPoint.x*actTime + aPoint.x*actTime*actTime);
-                        node.setTz(point.z + vPoint.z*actTime + aPoint.z*actTime*actTime);
-                        node.setRx(point.theta + vPoint.theta*actTime + aPoint.theta*actTime*actTime);
-                        node.setRy(point.phi + vPoint.phi*actTime + aPoint.phi*actTime*actTime);
-                        node.setRz(point.psi + vPoint.psi*actTime + aPoint.phi*actTime*actTime);
+                        node.setTx((point.x + vPoint.x*(actTime-vPoint.time) + aPoint.x*(actTime-aPoint.time)*(actTime-aPoint.time)));
+                        node.setTy((point.y + vPoint.x*(actTime-vPoint.time) + aPoint.x*(actTime-aPoint.time)*(actTime-aPoint.time)));
+                        node.setTz((point.z + vPoint.z*(actTime-vPoint.time) + aPoint.z*(actTime-aPoint.time)*(actTime-aPoint.time)));
+                        node.setRx((point.theta + vPoint.theta*(actTime-vPoint.time) + aPoint.theta*(actTime-aPoint.time)*(actTime-aPoint.time)));
+                        node.setRy((point.phi + vPoint.phi*(actTime-vPoint.time) + aPoint.phi*(actTime-aPoint.time)*(actTime-aPoint.time)));
+                        node.setRz((point.psi + vPoint.psi*(actTime-vPoint.time) + aPoint.phi*(actTime-aPoint.time)*(actTime-aPoint.time)));
                         for(EdgeXForm edge : node.getEdges()){
                             updateEdge(edge);
                         }
@@ -85,11 +94,11 @@ public class Model3D {
         animationTimer.start();
     }
 
-    public boolean addNode(GMLNode node, String nodeName){
+    public static boolean addNode(GMLNode_copy node, String nodeName){
         if(nameExists(nodeName))return false;
         NodeXForm nodeGroup = new NodeXForm();
         nodeGroup.setId(nodeName);
-        Sphere nodeModel = new Sphere(2);
+        Shape3D nodeModel = new Box(nodeSize, nodeSize, nodeSize);
         nodeModel.setMaterial(nodeColour);
         nodeGroup.setTx(node.getPoint().x);
         nodeGroup.setTy(node.getPoint().y);
@@ -101,7 +110,7 @@ public class Model3D {
         return true;
     }
 
-    public boolean connectNodes(String node1name, String node2name, String edgeName){
+    public static boolean connectNodes(String node1name, String node2name, String edgeName){
         NodeXForm node1XForm = null;
         NodeXForm node2XForm = null;
         for(Node n : model.getChildren()){
@@ -136,7 +145,7 @@ public class Model3D {
             double angle = Math.acos(diff.normalize().dotProduct(yAxis));
             Rotate rotateAroundCenter = new Rotate(-Math.toDegrees(angle), axisOfRotation);
 
-            Cylinder edge = new Cylinder(0.2, height);
+            Cylinder edge = new Cylinder(edgeWidth, height);
             edge.setMaterial(edgeColour);
             edge.getTransforms().addAll(moveToMidpoint, rotateAroundCenter);
 
@@ -153,13 +162,8 @@ public class Model3D {
         }
     }
 
-    public void moveNode(String nodeName, double x, double y, double z, float theta, float phi, float psi){
-        NodeXForm nodeXForm = null;
-        for(Node n : model.getChildren()) {
-            if (n.getId() == nodeName) {               //find 1st node
-                nodeXForm = (NodeXForm) n;
-            }
-        }
+    public static void moveNode(String nodeName, double x, double y, double z, float theta, float phi, float psi){
+        NodeXForm nodeXForm = getNodeByName(nodeName);
         if(nodeXForm==null){
             return;
         }else {
@@ -174,13 +178,8 @@ public class Model3D {
         }
     }
 
-    public void addSpeedToNode(String nodeName, double Vx, double Vy, double Vz, float Vtheta, float Vphi, float Vpsi){
-        NodeXForm nodeXForm = null;
-        for(Node n : model.getChildren()) {
-            if (n.getId() == nodeName) {               //find 1st node
-                nodeXForm = (NodeXForm) n;
-            }
-        }
+    public static void addSpeedToNode(String nodeName, double Vx, double Vy, double Vz, float Vtheta, float Vphi, float Vpsi){
+        NodeXForm nodeXForm = getNodeByName(nodeName);
         if(nodeXForm==null){
             return;
         }else {
@@ -189,13 +188,8 @@ public class Model3D {
         }
     }
 
-    public void addAccelerationToNode(String nodeName, double Ax, double Ay, double Az, float Atheta, float Aphi, float Apsi){
-        NodeXForm nodeXForm = null;
-        for(Node n : model.getChildren()) {
-            if (n.getId() == nodeName) {               //find 1st node
-                nodeXForm = (NodeXForm) n;
-            }
-        }
+    public static void addAccelerationToNode(String nodeName, double Ax, double Ay, double Az, float Atheta, float Aphi, float Apsi){
+        NodeXForm nodeXForm = getNodeByName(nodeName);
         if(nodeXForm==null){
             return;
         }else {
@@ -203,7 +197,7 @@ public class Model3D {
         }
     }
 
-    public void updateEdge(EdgeXForm edge){
+    public static void updateEdge(EdgeXForm edge){
         Point3D origin = new Point3D(edge.getOriginNode().getTx(),
                 edge.getOriginNode().getTy(),
                 edge.getOriginNode().getTz());
@@ -229,13 +223,13 @@ public class Model3D {
         edge.getChildren().add(edgeModel);
     }
 
-    public void updateNode(NodeXForm node){
+    public static void updateNode(NodeXForm node){
         node.setTx(node.getOrigin().getPoint().x);
         node.setTy(node.getOrigin().getPoint().y);
         node.setTz(node.getOrigin().getPoint().z);
     }
 
-    public boolean nameExists(String name){
+    public static boolean nameExists(String name){
         for(Node n : model.getChildren()){
             if(n.getId()==name){
                 return true;
@@ -244,27 +238,41 @@ public class Model3D {
         return false;
     }
 
-    public XForm getModel() {
+    public static NodeXForm getNodeByName(String nodeName){
+        NodeXForm nodeXForm = null;
+        for(Node n : model.getChildren()) {
+            if (n.getId() == nodeName) {               //find 1st node
+                nodeXForm = (NodeXForm) n;
+            }
+        }
+        return nodeXForm;
+    }
+
+    public static XForm getModel() {
         return model;
     }
 
-    public void setModel(XForm model) {
-        this.model = model;
+    public static void setModel(XForm model) {
+        Model3D.model = model;
     }
 
-    public PhongMaterial getNodeColour() {
+    public static PhongMaterial getNodeColour() {
         return nodeColour;
     }
 
-    public void setNodeColour(PhongMaterial nodeColour) {
-        this.nodeColour = nodeColour;
+    public static void setNodeColour(PhongMaterial nodeColour) {
+        Model3D.nodeColour = nodeColour;
     }
 
-    public PhongMaterial getEdgeColour() {
+    public static PhongMaterial getEdgeColour() {
         return edgeColour;
     }
 
-    public void setEdgeColour(PhongMaterial edgeColour) {
-        this.edgeColour = edgeColour;
+    public static void setEdgeColour(PhongMaterial edgeColour) {
+        Model3D.edgeColour = edgeColour;
+    }
+
+    public static void addToMovementHistory(NodeMovementTriple nodeMovementTriple){
+        movementHistory.add(nodeMovementTriple);
     }
 }
