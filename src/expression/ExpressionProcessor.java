@@ -107,7 +107,10 @@ public class ExpressionProcessor {
 			return getEvalResultNode(e);
 		}
 		else if(e instanceof GMLPoint){
+<<<<<<< Updated upstream
 			System.out.println("test 4");
+=======
+>>>>>>> Stashed changes
 			return getEvalResultPoint(e);
 		}
 
@@ -203,11 +206,11 @@ public class ExpressionProcessor {
 		else if (x != null) x_d = (Number<Double>)x;
 
 		Number<Double> y_d = null;
-		if(y instanceof Variable) y_d = new Number<Double>((Double) getEvalResult(y));
+		if(y instanceof Variable) y_d = new Number<Double>(new Double(getEvalResult(y).toString()));
 		else if (y != null) y_d = (Number<Double>)y;
 
 		Number<Double> z_d = null;
-		if(z != null && y instanceof Variable) z_d = new Number<Double>(new Double(getEvalResult(z).toString()));
+		if(z instanceof Variable) z_d = new Number<Double>(new Double(getEvalResult(z).toString()));
 		else if (z != null) z_d = (Number<Double>)z;
 
 		Number<Long> time_d = null;

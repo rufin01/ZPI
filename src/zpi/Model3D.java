@@ -77,7 +77,7 @@ public class Model3D {
                         GMLPoint_copy vPoint = node.getOrigin().getVpoint();
                         GMLPoint_copy aPoint = node.getOrigin().getApoint();
                         node.setTx((point.x + vPoint.x*(actTime-vPoint.time) + aPoint.x*(actTime-aPoint.time)*(actTime-aPoint.time)));
-                        node.setTy((point.y + vPoint.x*(actTime-vPoint.time) + aPoint.x*(actTime-aPoint.time)*(actTime-aPoint.time)));
+                        node.setTy((point.y + vPoint.y*(actTime-vPoint.time) + aPoint.y*(actTime-aPoint.time)*(actTime-aPoint.time)));
                         node.setTz((point.z + vPoint.z*(actTime-vPoint.time) + aPoint.z*(actTime-aPoint.time)*(actTime-aPoint.time)));
                         node.setRx((point.theta + vPoint.theta*(actTime-vPoint.time) + aPoint.theta*(actTime-aPoint.time)*(actTime-aPoint.time)));
                         node.setRy((point.phi + vPoint.phi*(actTime-vPoint.time) + aPoint.phi*(actTime-aPoint.time)*(actTime-aPoint.time)));
