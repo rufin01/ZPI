@@ -10,7 +10,6 @@ import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.Shape3D;
-import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 
@@ -20,13 +19,13 @@ public class Model3D {
     final static PhongMaterial RED_MATERIAL = new PhongMaterial();
     final static PhongMaterial WHITE_MATERIAL = new PhongMaterial();
     final static PhongMaterial GREY_MATERIAL = new PhongMaterial();
-    public static int SPEED_ADJUSTMENT_RATIO = 2;
+    public static int SPEED_ADJUSTMENT_RATIO = 5;
     private static XForm model;
     private static ArrayList<NodeMovementTriple> movementHistory;
     private static PhongMaterial nodeColour = RED_MATERIAL;
     private static PhongMaterial edgeColour = GREY_MATERIAL;
-    private static int nodeSize = 1;
-    private static double edgeWidth = 0.2;
+    public static int nodeSize = 2;
+    public static double edgeWidth = 0.2;
     public static long timer = 0;
     public static double actTime = 0;
 

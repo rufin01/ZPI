@@ -95,19 +95,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         for(int i = 0; i< 10; i++){
             if(i%2==0){
-                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint(0,0,-2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint(0,0,-2,5,0,0, i*10), i*10, 2);
                 NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint(0,0,2,0,0,0, i*10), i*10, 2);
-                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint(0,0,2,0,0,0, i*10), i*10, 2);
-                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint(0,0,-2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint(0,0,2,0,0,10, i*10), i*10, 2);
+                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint(0,0,-2,0,10,0, i*10), i*10, 2);
                 Model3D.addToMovementHistory(moveLHand);
                 Model3D.addToMovementHistory(moveRHand);
                 Model3D.addToMovementHistory(moveLFeet);
                 Model3D.addToMovementHistory(moverFeet);
             }else {
-                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint(0,0,2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint(0,0,2,0,5,0, i*10), i*10, 2);
                 NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint(0,0,-2,0,0,0, i*10), i*10, 2);
-                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint(0,0,-2,0,0,0, i*10), i*10, 2);
-                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint(0,0,2,0,0,0, i*10), i*10, 2);
+                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint(0,0,-2,0,10,0, i*10), i*10, 2);
+                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint(0,0,2,10,10,10, i*10), i*10, 2);
                 Model3D.addToMovementHistory(moveLHand);
                 Model3D.addToMovementHistory(moveRHand);
                 Model3D.addToMovementHistory(moveLFeet);
