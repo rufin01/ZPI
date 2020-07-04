@@ -19,7 +19,7 @@ public class Model3D {
     final static PhongMaterial RED_MATERIAL = new PhongMaterial();
     final static PhongMaterial WHITE_MATERIAL = new PhongMaterial();
     final static PhongMaterial GREY_MATERIAL = new PhongMaterial();
-    public static int SPEED_ADJUSTMENT_RATIO = 10;
+    public static int SPEED_ADJUSTMENT_RATIO = 5;
     private static XForm model;
     private static ArrayList<NodeMovementTriple> movementHistory;
     private static PhongMaterial nodeColour = RED_MATERIAL;
@@ -74,6 +74,7 @@ public class Model3D {
                         GMLPoint_copy point = node.getOrigin().getPoint();
                         GMLPoint_copy vPoint = node.getOrigin().getVpoint();
                         GMLPoint_copy aPoint = node.getOrigin().getApoint();
+                        System.out.println("node: " +node.getTy() + " ' "+ vPoint.y + ", " + vPoint.time);
                         node.setTx((point.x + vPoint.x*(actTime-vPoint.time) + aPoint.x*(actTime-aPoint.time)*(actTime-aPoint.time)));
                         node.setTy((point.y + vPoint.y*(actTime-vPoint.time) + aPoint.y*(actTime-aPoint.time)*(actTime-aPoint.time)));
                         node.setTz((point.z + vPoint.z*(actTime-vPoint.time) + aPoint.z*(actTime-aPoint.time)*(actTime-aPoint.time)));

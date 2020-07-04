@@ -123,9 +123,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 //        Model3D.addToMovementHistory(moveLFeet);
 //        Model3D.addToMovementHistory(moverFeet);
 
-
-        model3D.startMovement();
-
         PerspectiveCamera camera = new PerspectiveCamera(true);
         camera.getTransforms().addAll(rotateX, rotateY, new Translate(0, 0, -35));
 
@@ -250,6 +247,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
             Group root3D = new Group(camera, model3D.getModel());
             subScene.setRoot(root3D);
+
+            model3D.startMovement();
         }
     }
 
