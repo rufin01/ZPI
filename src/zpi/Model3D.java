@@ -1,22 +1,26 @@
 package zpi;
 
 import expression.GMLNode_copy;
+import expression.GMLPoint_copy;
 import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
+import javafx.scene.shape.Shape3D;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 
 public class Model3D {
-    final PhongMaterial RED_MATERIAL = new PhongMaterial();
-    final PhongMaterial WHITE_MATERIAL = new PhongMaterial();
-    final PhongMaterial GREY_MATERIAL = new PhongMaterial();
-    private XForm model;
-    private PhongMaterial nodeColour = RED_MATERIAL;
-    private PhongMaterial edgeColour = GREY_MATERIAL;
+    final static PhongMaterial RED_MATERIAL = new PhongMaterial();
+    final static PhongMaterial WHITE_MATERIAL = new PhongMaterial();
+    final static PhongMaterial GREY_MATERIAL = new PhongMaterial();
+    final static int NODE_SIZE = 2;
+    private static XForm model;
+    private static PhongMaterial nodeColour = RED_MATERIAL;
+    private static PhongMaterial edgeColour = GREY_MATERIAL;
 
     public Model3D(){
         RED_MATERIAL.setDiffuseColor(Color.DARKRED);
@@ -44,11 +48,11 @@ public class Model3D {
         model.getChildren().addAll(Xaxis, Yaxis, Zaxis);
     }
 
-    public boolean addNode(GMLNode_copy node, String nodeName){
+    public static boolean addNode(GMLNode_copy node, String nodeName){
         if(nameExists(nodeName))return false;
         NodeXForm nodeGroup = new NodeXForm();
         nodeGroup.setId(nodeName);
-        Sphere nodeModel = new Sphere(2);
+        Shape3D nodeModel = new Box(NODE_SIZE, NODE_SIZE, NODE_SIZE);
         nodeModel.setMaterial(nodeColour);
         nodeGroup.setTx(node.point.x);
         nodeGroup.setTy(node.point.y);
@@ -60,7 +64,7 @@ public class Model3D {
         return true;
     }
 
-    public boolean connectNodes(String node1name, String node2name, String edgeName){
+    public static boolean connectNodes(String node1name, String node2name, String edgeName){
         NodeXForm node1XForm = null;
         NodeXForm node2XForm = null;
         for(Node n : model.getChildren()){
@@ -112,7 +116,7 @@ public class Model3D {
         }
     }
 
-    public void moveNode(String nodeName, double x, double y, double z, float theta, float phi, float psi){
+    public static void moveNode(String nodeName, double x, double y, double z, float theta, float phi, float psi){
         NodeXForm nodeXForm = null;
         for(Node n : model.getChildren()) {
             if (n.getId() == nodeName) {               //find 1st node
@@ -132,7 +136,27 @@ public class Model3D {
         }
     }
 
-    public void updateEdge(EdgeXForm edge){
+    public static void moveNode(String nodeName, GMLPoint_copy point){
+        NodeXForm nodeXForm = null;
+        for(Node n : model.getChildren()) {
+            if (n.getId() == nodeName) {               //find 1st node
+                nodeXForm = (NodeXForm) n;
+            }
+        }
+        if(nodeXForm==null){
+            return;
+        }else {
+            nodeXForm.setTx(point.x);
+            nodeXForm.setTy(point.y);
+            nodeXForm.setTz(point.z);
+            nodeXForm.setRotate(point.theta, point.phi, point.psi);
+        }
+        for(EdgeXForm edge : nodeXForm.getEdges()){
+            updateEdge(edge);
+        }
+    }
+
+    public static void updateEdge(EdgeXForm edge){
         Point3D origin = new Point3D(edge.getOriginNode().getTx(),
                 edge.getOriginNode().getTy(),
                 edge.getOriginNode().getTz());
@@ -158,13 +182,13 @@ public class Model3D {
         edge.getChildren().add(edgeModel);
     }
 
-    public void updateNode(NodeXForm node){
+    public static void updateNode(NodeXForm node){
         node.setTx(node.getOrigin().getPoint().x);
         node.setTy(node.getOrigin().getPoint().y);
         node.setTz(node.getOrigin().getPoint().z);
     }
 
-    public boolean nameExists(String name){
+    public static boolean nameExists(String name){
         for(Node n : model.getChildren()){
             if(n.getId()==name){
                 return true;
@@ -173,27 +197,27 @@ public class Model3D {
         return false;
     }
 
-    public XForm getModel() {
+    public static XForm getModel() {
         return model;
     }
-//
-//    public void setModel(XForm model) {
-//        this.model = model;
-//    }
-//
-//    public PhongMaterial getNodeColour() {
-//        return nodeColour;
-//    }
-//
-//    public void setNodeColour(PhongMaterial nodeColour) {
-//        this.nodeColour = nodeColour;
-//    }
-//
-//    public PhongMaterial getEdgeColour() {
-//        return edgeColour;
-//    }
-//
-//    public void setEdgeColour(PhongMaterial edgeColour) {
-//        this.edgeColour = edgeColour;
-//    }
+
+    public static void setModel(XForm model) {
+        Model3D.model = model;
+    }
+
+    public static PhongMaterial getNodeColour() {
+        return nodeColour;
+    }
+
+    public static void setNodeColour(PhongMaterial nodeColour) {
+        Model3D.nodeColour = nodeColour;
+    }
+
+    public static PhongMaterial getEdgeColour() {
+        return edgeColour;
+    }
+
+    public static void setEdgeColour(PhongMaterial edgeColour) {
+        Model3D.edgeColour = edgeColour;
+    }
 }
