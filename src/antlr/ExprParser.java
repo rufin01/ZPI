@@ -27,11 +27,11 @@ public class ExprParser extends Parser {
 	public static final int
 		RULE_prog = 0, RULE_variableDecl = 1, RULE_expr = 2, RULE_map = 3, RULE_tuples = 4, 
 		RULE_tuple = 5, RULE_graph = 6, RULE_node = 7, RULE_edge = 8, RULE_point = 9, 
-		RULE_gml = 10, RULE_addNode = 11, RULE_addEdge = 12, RULE_modifyNode = 13;
+		RULE_addNode = 10, RULE_addEdge = 11, RULE_modifyNode = 12, RULE_gml = 13;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"prog", "variableDecl", "expr", "map", "tuples", "tuple", "graph", "node", 
-			"edge", "point", "gml", "addNode", "addEdge", "modifyNode"
+			"edge", "point", "addNode", "addEdge", "modifyNode", "gml"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -178,7 +178,7 @@ public class ExprParser extends Parser {
 				setState(32); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__5) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << BEGM) | (1L << ID) | (1L << NUM) | (1L << STRING) | (1L << BOOL) | (1L << SUB))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__5) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << BEGM) | (1L << ID) | (1L << NUM) | (1L << STRING) | (1L << BOOL) | (1L << SUB))) != 0) );
 			setState(34);
 			match(EOF);
 			}
@@ -603,6 +603,9 @@ public class ExprParser extends Parser {
 			case T__6:
 			case T__7:
 			case T__8:
+			case T__9:
+			case T__10:
+			case T__11:
 				{
 				_localctx = new GraphElementContext(_localctx);
 				_ctx = _localctx;
@@ -1219,88 +1222,6 @@ public class ExprParser extends Parser {
 		return _localctx;
 	}
 
-	public static class GmlContext extends ParserRuleContext {
-		public GraphContext graph() {
-			return getRuleContext(GraphContext.class,0);
-		}
-		public NodeContext node() {
-			return getRuleContext(NodeContext.class,0);
-		}
-		public EdgeContext edge() {
-			return getRuleContext(EdgeContext.class,0);
-		}
-		public PointContext point() {
-			return getRuleContext(PointContext.class,0);
-		}
-		public GmlContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_gml; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterGml(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitGml(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ExprVisitor ) return ((ExprVisitor<? extends T>)visitor).visitGml(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final GmlContext gml() throws RecognitionException {
-		GmlContext _localctx = new GmlContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_gml);
-		try {
-			setState(141);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__5:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(137);
-				graph();
-				}
-				break;
-			case T__6:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(138);
-				node();
-				}
-				break;
-			case T__7:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(139);
-				edge();
-				}
-				break;
-			case T__8:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(140);
-				point();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	public static class AddNodeContext extends ParserRuleContext {
 		public AddNodeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1334,16 +1255,16 @@ public class ExprParser extends Parser {
 
 	public final AddNodeContext addNode() throws RecognitionException {
 		AddNodeContext _localctx = new AddNodeContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_addNode);
+		enterRule(_localctx, 20, RULE_addNode);
 		try {
 			_localctx = new NodeAdditionContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(143);
+			setState(137);
 			match(T__9);
-			setState(144);
+			setState(138);
 			expr(0);
-			setState(145);
+			setState(139);
 			match(T__4);
 			}
 		}
@@ -1391,16 +1312,16 @@ public class ExprParser extends Parser {
 
 	public final AddEdgeContext addEdge() throws RecognitionException {
 		AddEdgeContext _localctx = new AddEdgeContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_addEdge);
+		enterRule(_localctx, 22, RULE_addEdge);
 		try {
 			_localctx = new EdgeAdditionContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(147);
+			setState(141);
 			match(T__10);
-			setState(148);
+			setState(142);
 			expr(0);
-			setState(149);
+			setState(143);
 			match(T__4);
 			}
 		}
@@ -1455,29 +1376,141 @@ public class ExprParser extends Parser {
 
 	public final ModifyNodeContext modifyNode() throws RecognitionException {
 		ModifyNodeContext _localctx = new ModifyNodeContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_modifyNode);
+		enterRule(_localctx, 24, RULE_modifyNode);
 		try {
 			_localctx = new EdgeModificatioContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(151);
+			setState(145);
 			match(T__11);
+			setState(146);
+			expr(0);
+			setState(147);
+			match(SEP);
+			setState(148);
+			expr(0);
+			setState(149);
+			match(SEP);
+			setState(150);
+			expr(0);
+			setState(151);
+			match(SEP);
 			setState(152);
 			expr(0);
 			setState(153);
-			match(SEP);
-			setState(154);
-			expr(0);
-			setState(155);
-			match(SEP);
-			setState(156);
-			expr(0);
-			setState(157);
-			match(SEP);
-			setState(158);
-			expr(0);
-			setState(159);
 			match(T__4);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class GmlContext extends ParserRuleContext {
+		public GraphContext graph() {
+			return getRuleContext(GraphContext.class,0);
+		}
+		public NodeContext node() {
+			return getRuleContext(NodeContext.class,0);
+		}
+		public EdgeContext edge() {
+			return getRuleContext(EdgeContext.class,0);
+		}
+		public PointContext point() {
+			return getRuleContext(PointContext.class,0);
+		}
+		public AddNodeContext addNode() {
+			return getRuleContext(AddNodeContext.class,0);
+		}
+		public AddEdgeContext addEdge() {
+			return getRuleContext(AddEdgeContext.class,0);
+		}
+		public ModifyNodeContext modifyNode() {
+			return getRuleContext(ModifyNodeContext.class,0);
+		}
+		public GmlContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_gml; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterGml(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitGml(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExprVisitor ) return ((ExprVisitor<? extends T>)visitor).visitGml(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final GmlContext gml() throws RecognitionException {
+		GmlContext _localctx = new GmlContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_gml);
+		try {
+			setState(162);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__5:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(155);
+				graph();
+				}
+				break;
+			case T__6:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(156);
+				node();
+				}
+				break;
+			case T__7:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(157);
+				edge();
+				}
+				break;
+			case T__8:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(158);
+				point();
+				}
+				break;
+			case T__9:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(159);
+				addNode();
+				}
+				break;
+			case T__10:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(160);
+				addEdge();
+				}
+				break;
+			case T__11:
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(161);
+				modifyNode();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1511,7 +1544,7 @@ public class ExprParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#\u00a4\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#\u00a7\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\3\2\3\2\6\2!\n\2\r\2\16\2\"\3"+
 		"\2\3\2\3\3\3\3\3\3\3\3\3\3\5\3,\n\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3"+
@@ -1520,42 +1553,44 @@ public class ExprParser extends Parser {
 		"\6\7\6X\n\6\f\6\16\6[\13\6\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b"+
 		"\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\n\3\n\3\n\3\n\3\13\3\13"+
 		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13"+
-		"\u0086\n\13\5\13\u0088\n\13\3\13\3\13\3\f\3\f\3\f\3\f\5\f\u0090\n\f\3"+
-		"\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
-		"\3\17\3\17\3\17\3\17\2\3\6\20\2\4\6\b\n\f\16\20\22\24\26\30\32\34\2\5"+
-		"\3\2!#\3\2\35\36\3\2\37 \2\u00aa\2 \3\2\2\2\4&\3\2\2\2\6>\3\2\2\2\bN\3"+
-		"\2\2\2\nT\3\2\2\2\f\\\3\2\2\2\16b\3\2\2\2\20h\3\2\2\2\22p\3\2\2\2\24v"+
-		"\3\2\2\2\26\u008f\3\2\2\2\30\u0091\3\2\2\2\32\u0095\3\2\2\2\34\u0099\3"+
-		"\2\2\2\36!\5\4\3\2\37!\5\6\4\2 \36\3\2\2\2 \37\3\2\2\2!\"\3\2\2\2\" \3"+
-		"\2\2\2\"#\3\2\2\2#$\3\2\2\2$%\7\2\2\3%\3\3\2\2\2&\'\7\22\2\2\'(\7\3\2"+
-		"\2(+\7\30\2\2)*\7\4\2\2*,\5\6\4\2+)\3\2\2\2+,\3\2\2\2,-\3\2\2\2-.\7\34"+
-		"\2\2.\5\3\2\2\2/\60\b\4\1\2\60\61\7 \2\2\61?\5\6\4\16\62\63\7\5\2\2\63"+
-		"?\5\6\4\f\64?\7\22\2\2\65?\7\23\2\2\66?\7\27\2\2\67?\7\26\2\28?\5\26\f"+
-		"\29?\5\b\5\2:;\7\6\2\2;<\5\6\4\2<=\7\7\2\2=?\3\2\2\2>/\3\2\2\2>\62\3\2"+
-		"\2\2>\64\3\2\2\2>\65\3\2\2\2>\66\3\2\2\2>\67\3\2\2\2>8\3\2\2\2>9\3\2\2"+
-		"\2>:\3\2\2\2?K\3\2\2\2@A\f\r\2\2AB\t\2\2\2BJ\5\6\4\16CD\f\13\2\2DE\t\3"+
-		"\2\2EJ\5\6\4\fFG\f\n\2\2GH\t\4\2\2HJ\5\6\4\13I@\3\2\2\2IC\3\2\2\2IF\3"+
-		"\2\2\2JM\3\2\2\2KI\3\2\2\2KL\3\2\2\2L\7\3\2\2\2MK\3\2\2\2NP\7\17\2\2O"+
-		"Q\5\n\6\2PO\3\2\2\2PQ\3\2\2\2QR\3\2\2\2RS\7\20\2\2S\t\3\2\2\2TY\5\f\7"+
-		"\2UV\7\21\2\2VX\5\f\7\2WU\3\2\2\2X[\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z\13\3"+
-		"\2\2\2[Y\3\2\2\2\\]\7\6\2\2]^\7\26\2\2^_\7\21\2\2_`\5\6\4\2`a\7\7\2\2"+
-		"a\r\3\2\2\2bc\7\b\2\2cd\5\6\4\2de\7\21\2\2ef\5\6\4\2fg\7\7\2\2g\17\3\2"+
-		"\2\2hi\7\t\2\2ij\5\6\4\2jk\7\21\2\2kl\5\6\4\2lm\7\21\2\2mn\5\6\4\2no\7"+
-		"\7\2\2o\21\3\2\2\2pq\7\n\2\2qr\5\6\4\2rs\7\21\2\2st\5\6\4\2tu\7\7\2\2"+
-		"u\23\3\2\2\2vw\7\13\2\2wx\5\6\4\2xy\7\21\2\2yz\5\6\4\2z{\7\21\2\2{\u0087"+
-		"\5\6\4\2|}\7\21\2\2}\u0085\5\6\4\2~\177\7\21\2\2\177\u0080\5\6\4\2\u0080"+
-		"\u0081\7\21\2\2\u0081\u0082\5\6\4\2\u0082\u0083\7\21\2\2\u0083\u0084\5"+
-		"\6\4\2\u0084\u0086\3\2\2\2\u0085~\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u0088"+
-		"\3\2\2\2\u0087|\3\2\2\2\u0087\u0088\3\2\2\2\u0088\u0089\3\2\2\2\u0089"+
-		"\u008a\7\7\2\2\u008a\25\3\2\2\2\u008b\u0090\5\16\b\2\u008c\u0090\5\20"+
-		"\t\2\u008d\u0090\5\22\n\2\u008e\u0090\5\24\13\2\u008f\u008b\3\2\2\2\u008f"+
-		"\u008c\3\2\2\2\u008f\u008d\3\2\2\2\u008f\u008e\3\2\2\2\u0090\27\3\2\2"+
-		"\2\u0091\u0092\7\f\2\2\u0092\u0093\5\6\4\2\u0093\u0094\7\7\2\2\u0094\31"+
-		"\3\2\2\2\u0095\u0096\7\r\2\2\u0096\u0097\5\6\4\2\u0097\u0098\7\7\2\2\u0098"+
-		"\33\3\2\2\2\u0099\u009a\7\16\2\2\u009a\u009b\5\6\4\2\u009b\u009c\7\21"+
-		"\2\2\u009c\u009d\5\6\4\2\u009d\u009e\7\21\2\2\u009e\u009f\5\6\4\2\u009f"+
-		"\u00a0\7\21\2\2\u00a0\u00a1\5\6\4\2\u00a1\u00a2\7\7\2\2\u00a2\35\3\2\2"+
-		"\2\r \"+>IKPY\u0085\u0087\u008f";
+		"\u0086\n\13\5\13\u0088\n\13\3\13\3\13\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r"+
+		"\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3\17"+
+		"\3\17\3\17\3\17\5\17\u00a5\n\17\3\17\2\3\6\20\2\4\6\b\n\f\16\20\22\24"+
+		"\26\30\32\34\2\5\3\2!#\3\2\35\36\3\2\37 \2\u00b0\2 \3\2\2\2\4&\3\2\2\2"+
+		"\6>\3\2\2\2\bN\3\2\2\2\nT\3\2\2\2\f\\\3\2\2\2\16b\3\2\2\2\20h\3\2\2\2"+
+		"\22p\3\2\2\2\24v\3\2\2\2\26\u008b\3\2\2\2\30\u008f\3\2\2\2\32\u0093\3"+
+		"\2\2\2\34\u00a4\3\2\2\2\36!\5\4\3\2\37!\5\6\4\2 \36\3\2\2\2 \37\3\2\2"+
+		"\2!\"\3\2\2\2\" \3\2\2\2\"#\3\2\2\2#$\3\2\2\2$%\7\2\2\3%\3\3\2\2\2&\'"+
+		"\7\22\2\2\'(\7\3\2\2(+\7\30\2\2)*\7\4\2\2*,\5\6\4\2+)\3\2\2\2+,\3\2\2"+
+		"\2,-\3\2\2\2-.\7\34\2\2.\5\3\2\2\2/\60\b\4\1\2\60\61\7 \2\2\61?\5\6\4"+
+		"\16\62\63\7\5\2\2\63?\5\6\4\f\64?\7\22\2\2\65?\7\23\2\2\66?\7\27\2\2\67"+
+		"?\7\26\2\28?\5\34\17\29?\5\b\5\2:;\7\6\2\2;<\5\6\4\2<=\7\7\2\2=?\3\2\2"+
+		"\2>/\3\2\2\2>\62\3\2\2\2>\64\3\2\2\2>\65\3\2\2\2>\66\3\2\2\2>\67\3\2\2"+
+		"\2>8\3\2\2\2>9\3\2\2\2>:\3\2\2\2?K\3\2\2\2@A\f\r\2\2AB\t\2\2\2BJ\5\6\4"+
+		"\16CD\f\13\2\2DE\t\3\2\2EJ\5\6\4\fFG\f\n\2\2GH\t\4\2\2HJ\5\6\4\13I@\3"+
+		"\2\2\2IC\3\2\2\2IF\3\2\2\2JM\3\2\2\2KI\3\2\2\2KL\3\2\2\2L\7\3\2\2\2MK"+
+		"\3\2\2\2NP\7\17\2\2OQ\5\n\6\2PO\3\2\2\2PQ\3\2\2\2QR\3\2\2\2RS\7\20\2\2"+
+		"S\t\3\2\2\2TY\5\f\7\2UV\7\21\2\2VX\5\f\7\2WU\3\2\2\2X[\3\2\2\2YW\3\2\2"+
+		"\2YZ\3\2\2\2Z\13\3\2\2\2[Y\3\2\2\2\\]\7\6\2\2]^\7\26\2\2^_\7\21\2\2_`"+
+		"\5\6\4\2`a\7\7\2\2a\r\3\2\2\2bc\7\b\2\2cd\5\6\4\2de\7\21\2\2ef\5\6\4\2"+
+		"fg\7\7\2\2g\17\3\2\2\2hi\7\t\2\2ij\5\6\4\2jk\7\21\2\2kl\5\6\4\2lm\7\21"+
+		"\2\2mn\5\6\4\2no\7\7\2\2o\21\3\2\2\2pq\7\n\2\2qr\5\6\4\2rs\7\21\2\2st"+
+		"\5\6\4\2tu\7\7\2\2u\23\3\2\2\2vw\7\13\2\2wx\5\6\4\2xy\7\21\2\2yz\5\6\4"+
+		"\2z{\7\21\2\2{\u0087\5\6\4\2|}\7\21\2\2}\u0085\5\6\4\2~\177\7\21\2\2\177"+
+		"\u0080\5\6\4\2\u0080\u0081\7\21\2\2\u0081\u0082\5\6\4\2\u0082\u0083\7"+
+		"\21\2\2\u0083\u0084\5\6\4\2\u0084\u0086\3\2\2\2\u0085~\3\2\2\2\u0085\u0086"+
+		"\3\2\2\2\u0086\u0088\3\2\2\2\u0087|\3\2\2\2\u0087\u0088\3\2\2\2\u0088"+
+		"\u0089\3\2\2\2\u0089\u008a\7\7\2\2\u008a\25\3\2\2\2\u008b\u008c\7\f\2"+
+		"\2\u008c\u008d\5\6\4\2\u008d\u008e\7\7\2\2\u008e\27\3\2\2\2\u008f\u0090"+
+		"\7\r\2\2\u0090\u0091\5\6\4\2\u0091\u0092\7\7\2\2\u0092\31\3\2\2\2\u0093"+
+		"\u0094\7\16\2\2\u0094\u0095\5\6\4\2\u0095\u0096\7\21\2\2\u0096\u0097\5"+
+		"\6\4\2\u0097\u0098\7\21\2\2\u0098\u0099\5\6\4\2\u0099\u009a\7\21\2\2\u009a"+
+		"\u009b\5\6\4\2\u009b\u009c\7\7\2\2\u009c\33\3\2\2\2\u009d\u00a5\5\16\b"+
+		"\2\u009e\u00a5\5\20\t\2\u009f\u00a5\5\22\n\2\u00a0\u00a5\5\24\13\2\u00a1"+
+		"\u00a5\5\26\f\2\u00a2\u00a5\5\30\r\2\u00a3\u00a5\5\32\16\2\u00a4\u009d"+
+		"\3\2\2\2\u00a4\u009e\3\2\2\2\u00a4\u009f\3\2\2\2\u00a4\u00a0\3\2\2\2\u00a4"+
+		"\u00a1\3\2\2\2\u00a4\u00a2\3\2\2\2\u00a4\u00a3\3\2\2\2\u00a5\35\3\2\2"+
+		"\2\r \"+>IKPY\u0085\u0087\u00a4";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

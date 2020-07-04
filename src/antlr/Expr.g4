@@ -91,12 +91,6 @@ edge: 'edge(' expr SEP expr ')'						# EdgeDeclaration
 point: 'point(' expr SEP expr SEP expr (SEP expr (SEP expr SEP expr SEP expr)?)? ')'		# PointDeclaration
 	;
 
-gml:  graph
-	| node
-	| edge
-	| point
-	;
-
 addNode: 'ADDNODE(' expr ')'                                            # NodeAddition
     ;
 
@@ -106,6 +100,15 @@ addEdge: 'ADDEDGE(' expr ')'                                            # EdgeAd
 modifyNode: 'MODIFYNODE(' expr ',' expr ',' expr ',' expr ')'           # EdgeModificatio
     ;
 
+gml:  graph
+	| node
+	| edge
+	| point
+	| addNode
+	| addEdge
+	| modifyNode
+	;
+	
 BEGM: '[';
 ENDM: ']';
 SEP: ',';

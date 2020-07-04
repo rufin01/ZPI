@@ -256,16 +256,6 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitPointDeclaration(ExprParser.PointDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExprParser#gml}.
-	 * @param ctx the parse tree
-	 */
-	void enterGml(ExprParser.GmlContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExprParser#gml}.
-	 * @param ctx the parse tree
-	 */
-	void exitGml(ExprParser.GmlContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code NodeAddition}
 	 * labeled alternative in {@link ExprParser#addNode}.
 	 * @param ctx the parse tree
@@ -301,4 +291,14 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExprParser#gml}.
+	 * @param ctx the parse tree
+	 */
+	void enterGml(ExprParser.GmlContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#gml}.
+	 * @param ctx the parse tree
+	 */
+	void exitGml(ExprParser.GmlContext ctx);
 }

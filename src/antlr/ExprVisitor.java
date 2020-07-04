@@ -157,12 +157,6 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPointDeclaration(ExprParser.PointDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExprParser#gml}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitGml(ExprParser.GmlContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code NodeAddition}
 	 * labeled alternative in {@link ExprParser#addNode}.
 	 * @param ctx the parse tree
@@ -183,4 +177,10 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExprParser#gml}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGml(ExprParser.GmlContext ctx);
 }
