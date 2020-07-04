@@ -7,7 +7,7 @@ grammar Expr;
 }
 
 // Start Symbol
-prog: ( variableDecl | expr )+ EOF		# Program		// # - label -> gonna create visitors	//change expr to statement in later versions
+prog: ( variableDecl | expr | operationDecl )+ EOF		# Program		// # - label -> gonna create visitors	//change expr to statement in later versions
 	;
 	
 //decl: variableDecl	
@@ -16,6 +16,9 @@ prog: ( variableDecl | expr )+ EOF		# Program		// # - label -> gonna create visi
 	
 variableDecl: ID ':' TYPE ('=' expr)? END					# VariableDeclaration		// ()? - everything in parens is optional
 	;
+
+operationDecl: operation END                         # OperationDeclaration
+    ;
 	
 //functionDecl: ID ':' TYPE '(' formalParameters? ')' block	# FunctionDeclaration		// fun: VOID (x: INT, y: FLOAT) {...}
 //	;
@@ -39,7 +42,6 @@ expr: //ID '(' exprList? ')'			# FunctionExpression
 	| BOOL							# TrueFalse
 	| STRING						# String
 	| gml							# GraphElement
-	| gmlOperations END             # GraphOperations
 	| map							# MapStructure
 	| '(' expr ')'					# Parens
 	;
@@ -80,6 +82,12 @@ tuples: tuple ( SEP tuple )*;
 tuple: '(' STRING ',' expr ')';
 
 
+gml:  graph
+	| node
+	| edge
+	| point
+	;
+
 graph: 'graph(' expr SEP expr ')'					# GraphDeclaration
 	;	
 
@@ -92,6 +100,12 @@ edge: 'edge(' expr SEP expr ')'						# EdgeDeclaration
 point: 'point(' expr SEP expr SEP expr (SEP expr (SEP expr SEP expr SEP expr)?)? ')'		# PointDeclaration
 	;
 
+
+operation: addNode
+    | addEdge
+    | modifyNode
+    ;
+
 addNode: 'ADDNODE(' expr ')'                                            # NodeAddition
     ;
 
@@ -101,16 +115,6 @@ addEdge: 'ADDEDGE(' expr ',' expr ')'                                   # EdgeAd
 modifyNode: 'MODIFYNODE(' expr ',' expr ',' expr ',' expr ')'           # EdgeModificatio
     ;
 
-gml:  graph
-	| node
-	| edge
-	| point
-	;
-
-gmlOperations: addNode
-    | addEdge
-    | modifyNode
-    ;
 
 BEGM: '[';
 ENDM: ']';

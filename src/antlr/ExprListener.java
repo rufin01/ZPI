@@ -34,6 +34,18 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitVariableDeclaration(ExprParser.VariableDeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code OperationDeclaration}
+	 * labeled alternative in {@link ExprParser#operationDecl}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperationDeclaration(ExprParser.OperationDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code OperationDeclaration}
+	 * labeled alternative in {@link ExprParser#operationDecl}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperationDeclaration(ExprParser.OperationDeclarationContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code TrueFalse}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
@@ -46,6 +58,18 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitTrueFalse(ExprParser.TrueFalseContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code MapStructure}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMapStructure(ExprParser.MapStructureContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MapStructure}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMapStructure(ExprParser.MapStructureContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
@@ -57,6 +81,18 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVariable(ExprParser.VariableContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Number}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumber(ExprParser.NumberContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Number}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumber(ExprParser.NumberContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code BooleanBinary}
 	 * labeled alternative in {@link ExprParser#expr}.
@@ -106,66 +142,6 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitParens(ExprParser.ParensContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code UnaryMinus}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterUnaryMinus(ExprParser.UnaryMinusContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code UnaryMinus}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitUnaryMinus(ExprParser.UnaryMinusContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code String}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterString(ExprParser.StringContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code String}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitString(ExprParser.StringContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code GraphOperations}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterGraphOperations(ExprParser.GraphOperationsContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code GraphOperations}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitGraphOperations(ExprParser.GraphOperationsContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code MapStructure}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterMapStructure(ExprParser.MapStructureContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code MapStructure}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitMapStructure(ExprParser.MapStructureContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Number}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterNumber(ExprParser.NumberContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Number}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitNumber(ExprParser.NumberContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code GraphElement}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
@@ -178,6 +154,18 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitGraphElement(ExprParser.GraphElementContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code UnaryMinus}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryMinus(ExprParser.UnaryMinusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code UnaryMinus}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryMinus(ExprParser.UnaryMinusContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code BoolNot}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
@@ -189,6 +177,18 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBoolNot(ExprParser.BoolNotContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code String}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterString(ExprParser.StringContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code String}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitString(ExprParser.StringContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExprParser#map}.
 	 * @param ctx the parse tree
@@ -219,6 +219,16 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTuple(ExprParser.TupleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExprParser#gml}.
+	 * @param ctx the parse tree
+	 */
+	void enterGml(ExprParser.GmlContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#gml}.
+	 * @param ctx the parse tree
+	 */
+	void exitGml(ExprParser.GmlContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code GraphDeclaration}
 	 * labeled alternative in {@link ExprParser#graph}.
@@ -268,6 +278,16 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitPointDeclaration(ExprParser.PointDeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExprParser#operation}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperation(ExprParser.OperationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#operation}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperation(ExprParser.OperationContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code NodeAddition}
 	 * labeled alternative in {@link ExprParser#addNode}.
 	 * @param ctx the parse tree
@@ -303,24 +323,4 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ExprParser#gml}.
-	 * @param ctx the parse tree
-	 */
-	void enterGml(ExprParser.GmlContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExprParser#gml}.
-	 * @param ctx the parse tree
-	 */
-	void exitGml(ExprParser.GmlContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ExprParser#gmlOperations}.
-	 * @param ctx the parse tree
-	 */
-	void enterGmlOperations(ExprParser.GmlOperationsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExprParser#gmlOperations}.
-	 * @param ctx the parse tree
-	 */
-	void exitGmlOperations(ExprParser.GmlOperationsContext ctx);
 }
