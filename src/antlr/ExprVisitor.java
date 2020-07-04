@@ -162,4 +162,25 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitGml(ExprParser.GmlContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NodeAddition}
+	 * labeled alternative in {@link ExprParser#addNode}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNodeAddition(ExprParser.NodeAdditionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code EdgeAddition}
+	 * labeled alternative in {@link ExprParser#addEdge}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEdgeAddition(ExprParser.EdgeAdditionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code EdgeModificatio}
+	 * labeled alternative in {@link ExprParser#modifyNode}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
 }
