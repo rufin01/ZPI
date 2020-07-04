@@ -39,6 +39,7 @@ expr: //ID '(' exprList? ')'			# FunctionExpression
 	| BOOL							# TrueFalse
 	| STRING						# String
 	| gml							# GraphElement
+	| gmlOperations END             # GraphOperations
 	| map							# MapStructure
 	| '(' expr ')'					# Parens
 	;
@@ -104,11 +105,13 @@ gml:  graph
 	| node
 	| edge
 	| point
-	| addNode
-	| addEdge
-	| modifyNode
 	;
-	
+
+gmlOperations: addNode
+    | addEdge
+    | modifyNode
+    ;
+
 BEGM: '[';
 ENDM: ']';
 SEP: ',';

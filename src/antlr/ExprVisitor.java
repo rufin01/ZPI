@@ -34,26 +34,12 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTrueFalse(ExprParser.TrueFalseContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code MapStructure}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMapStructure(ExprParser.MapStructureContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitVariable(ExprParser.VariableContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Number}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNumber(ExprParser.NumberContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code BooleanBinary}
 	 * labeled alternative in {@link ExprParser#expr}.
@@ -83,13 +69,6 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParens(ExprParser.ParensContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code GraphElement}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitGraphElement(ExprParser.GraphElementContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code UnaryMinus}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
@@ -97,19 +76,47 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnaryMinus(ExprParser.UnaryMinusContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code BoolNot}
-	 * labeled alternative in {@link ExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBoolNot(ExprParser.BoolNotContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code String}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitString(ExprParser.StringContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code GraphOperations}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGraphOperations(ExprParser.GraphOperationsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code MapStructure}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMapStructure(ExprParser.MapStructureContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Number}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumber(ExprParser.NumberContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code GraphElement}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGraphElement(ExprParser.GraphElementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BoolNot}
+	 * labeled alternative in {@link ExprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolNot(ExprParser.BoolNotContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExprParser#map}.
 	 * @param ctx the parse tree
@@ -183,4 +190,10 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitGml(ExprParser.GmlContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExprParser#gmlOperations}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGmlOperations(ExprParser.GmlOperationsContext ctx);
 }
