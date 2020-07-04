@@ -54,74 +54,74 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         addCodeArea(scene);
 
-        GMLNode_copy head = new GMLNode_copy();
-        head.getPoint().y=22;
-
-        GMLNode_copy chest = new GMLNode_copy();
-        chest.getPoint().y = 15;
-
-        GMLNode_copy lhand = new GMLNode_copy();
-        lhand.getPoint().x = -6;
-        lhand.getPoint().y = 10;
-        GMLNode_copy rhand = new GMLNode_copy();
-        rhand.getPoint().x = 6;
-        rhand.getPoint().y = 10;
-
-        GMLNode_copy ass = new GMLNode_copy();
-        ass.getPoint().y = 10;
-
-        GMLNode_copy lfeet = new GMLNode_copy();
-        lfeet.getPoint().x = -4;
-        GMLNode_copy rfeet = new GMLNode_copy();
-        rfeet.getPoint().x = 4;
+//        GMLNode_copy head = new GMLNode_copy();
+//        head.getPoint().y=22;
+//
+//        GMLNode_copy chest = new GMLNode_copy();
+//        chest.getPoint().y = 15;
+//
+//        GMLNode_copy lhand = new GMLNode_copy();
+//        lhand.getPoint().x = -6;
+//        lhand.getPoint().y = 10;
+//        GMLNode_copy rhand = new GMLNode_copy();
+//        rhand.getPoint().x = 6;
+//        rhand.getPoint().y = 10;
+//
+//        GMLNode_copy ass = new GMLNode_copy();
+//        ass.getPoint().y = 10;
+//
+//        GMLNode_copy lfeet = new GMLNode_copy();
+//        lfeet.getPoint().x = -4;
+//        GMLNode_copy rfeet = new GMLNode_copy();
+//        rfeet.getPoint().x = 4;
 
         model3D = new Model3D();
-        model3D.addNode(head, "head");
-        model3D.addNode(chest, "chest");
-        model3D.addNode(ass,"ass");
-        model3D.addNode(rhand, "rhand");
-        model3D.addNode(lhand, "lhand");
-        model3D.addNode(lfeet, "lfeet");
-        model3D.addNode(rfeet, "rfeet");
+//        model3D.addNode(head, "head");
+//        model3D.addNode(chest, "chest");
+//        model3D.addNode(ass,"ass");
+//        model3D.addNode(rhand, "rhand");
+//        model3D.addNode(lhand, "lhand");
+//        model3D.addNode(lfeet, "lfeet");
+//        model3D.addNode(rfeet, "rfeet");
+//
+//        model3D.connectNodes("head", "chest", "neck");
+//        model3D.connectNodes("chest", "ass","stomach");
+//        model3D.connectNodes("chest", "rhand", "rarm");
+//        model3D.connectNodes("chest", "lhand", "larm");
+//        model3D.connectNodes("ass", "rfeet", "rleg");
+//        model3D.connectNodes("ass", "lfeet", "lleg");
 
-        model3D.connectNodes("head", "chest", "neck");
-        model3D.connectNodes("chest", "ass","stomach");
-        model3D.connectNodes("chest", "rhand", "rarm");
-        model3D.connectNodes("chest", "lhand", "larm");
-        model3D.connectNodes("ass", "rfeet", "rleg");
-        model3D.connectNodes("ass", "lfeet", "lleg");
 
 
-
-        for(int i = 0; i< 10; i++){
-            if(i%2==0){
-                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint_copy(0,0,-2,5,0,0, i*10), i*10, 2);
-                NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint_copy(0,0,2,0,0,0, i*10), i*10, 2);
-                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint_copy(0,0,2,0,0,10, i*10), i*10, 2);
-                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint_copy(0,0,-2,0,10,0, i*10), i*10, 2);
-                Model3D.addToMovementHistory(moveLHand);
-                Model3D.addToMovementHistory(moveRHand);
-                Model3D.addToMovementHistory(moveLFeet);
-                Model3D.addToMovementHistory(moverFeet);
-            }else {
-                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint_copy(0,0,2,0,5,0, i*10), i*10, 2);
-                NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint_copy(0,0,-2,0,0,0, i*10), i*10, 2);
-                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint_copy(0,0,-2,0,10,0, i*10), i*10, 2);
-                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint_copy(0,0,2,10,10,10, i*10), i*10, 2);
-                Model3D.addToMovementHistory(moveLHand);
-                Model3D.addToMovementHistory(moveRHand);
-                Model3D.addToMovementHistory(moveLFeet);
-                Model3D.addToMovementHistory(moverFeet);
-            }
-        }
-        NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint_copy(0,0,0,0,0,0, 100), 100, 2);
-        NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint_copy(0,0,0,0,0,0, 100), 100, 2);
-        NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint_copy(0,0,0,0,0,0, 100), 100, 2);
-        NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint_copy(0,0,0,0,0,0, 100), 100, 2);
-        Model3D.addToMovementHistory(moveLHand);
-        Model3D.addToMovementHistory(moveRHand);
-        Model3D.addToMovementHistory(moveLFeet);
-        Model3D.addToMovementHistory(moverFeet);
+//        for(int i = 0; i< 10; i++){
+//            if(i%2==0){
+//                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint_copy(0,0,-2,5,0,0, i*10), i*10, 2);
+//                NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint_copy(0,0,2,0,0,0, i*10), i*10, 2);
+//                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint_copy(0,0,2,0,0,10, i*10), i*10, 2);
+//                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint_copy(0,0,-2,0,10,0, i*10), i*10, 2);
+//                Model3D.addToMovementHistory(moveLHand);
+//                Model3D.addToMovementHistory(moveRHand);
+//                Model3D.addToMovementHistory(moveLFeet);
+//                Model3D.addToMovementHistory(moverFeet);
+//            }else {
+//                NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint_copy(0,0,2,0,5,0, i*10), i*10, 2);
+//                NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint_copy(0,0,-2,0,0,0, i*10), i*10, 2);
+//                NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint_copy(0,0,-2,0,10,0, i*10), i*10, 2);
+//                NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint_copy(0,0,2,10,10,10, i*10), i*10, 2);
+//                Model3D.addToMovementHistory(moveLHand);
+//                Model3D.addToMovementHistory(moveRHand);
+//                Model3D.addToMovementHistory(moveLFeet);
+//                Model3D.addToMovementHistory(moverFeet);
+//            }
+//        }
+//        NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint_copy(0,0,0,0,0,0, 100), 100, 2);
+//        NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint_copy(0,0,0,0,0,0, 100), 100, 2);
+//        NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint_copy(0,0,0,0,0,0, 100), 100, 2);
+//        NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint_copy(0,0,0,0,0,0, 100), 100, 2);
+//        Model3D.addToMovementHistory(moveLHand);
+//        Model3D.addToMovementHistory(moveRHand);
+//        Model3D.addToMovementHistory(moveLFeet);
+//        Model3D.addToMovementHistory(moverFeet);
 
 
         model3D.startMovement();
@@ -197,7 +197,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         codeArea.prefWidthProperty().bind(codeAreaAnchorPane.widthProperty());
         codeArea.prefHeightProperty().bind(codeAreaAnchorPane.heightProperty());
 
-        codeArea.appendText("node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0), point(.0, .0, .0));");
+        codeArea.appendText("node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
+                "\n" +
+                "ADDNODE(node1);");
     }
 
     public static void main(String[] args) {

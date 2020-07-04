@@ -34,18 +34,6 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitVariableDeclaration(ExprParser.VariableDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code OperationDeclaration}
-	 * labeled alternative in {@link ExprParser#operationDecl}.
-	 * @param ctx the parse tree
-	 */
-	void enterOperationDeclaration(ExprParser.OperationDeclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code OperationDeclaration}
-	 * labeled alternative in {@link ExprParser#operationDecl}.
-	 * @param ctx the parse tree
-	 */
-	void exitOperationDeclaration(ExprParser.OperationDeclarationContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code TrueFalse}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
@@ -278,48 +266,38 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitPointDeclaration(ExprParser.PointDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExprParser#operation}.
-	 * @param ctx the parse tree
-	 */
-	void enterOperation(ExprParser.OperationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExprParser#operation}.
-	 * @param ctx the parse tree
-	 */
-	void exitOperation(ExprParser.OperationContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code NodeAddition}
-	 * labeled alternative in {@link ExprParser#addNode}.
+	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 */
 	void enterNodeAddition(ExprParser.NodeAdditionContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code NodeAddition}
-	 * labeled alternative in {@link ExprParser#addNode}.
+	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 */
 	void exitNodeAddition(ExprParser.NodeAdditionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code EdgeAddition}
-	 * labeled alternative in {@link ExprParser#addEdge}.
+	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 */
 	void enterEdgeAddition(ExprParser.EdgeAdditionContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code EdgeAddition}
-	 * labeled alternative in {@link ExprParser#addEdge}.
+	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 */
 	void exitEdgeAddition(ExprParser.EdgeAdditionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code EdgeModificatio}
-	 * labeled alternative in {@link ExprParser#modifyNode}.
+	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 */
 	void enterEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code EdgeModificatio}
-	 * labeled alternative in {@link ExprParser#modifyNode}.
+	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 */
 	void exitEdgeModificatio(ExprParser.EdgeModificatioContext ctx);

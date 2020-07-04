@@ -187,25 +187,48 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 		return null;
 	}
 
-	public Expression visitOperationDeclaration(ExprParser.OperationDeclarationContext ctx){
-		Operation operation = (Operation)visit(ctx.operation());
+//	public Expression visitOperationDeclaration(ExprParser.OperationDeclarationContext ctx){
+//		Operation operation = (Operation)visit(ctx.operation());
+//
+//		return new OperationDeclaration(operation);
+//	}
 
-		return new OperationDeclaration(operation);
-	}
+//	public Expression visit(ExprParser.OperationContext ctx) {
+//		Expression result = null;
+//
+//		if() result = visit(ctx.addNode());
+//		else if(ctx.addEdge() != null) result = visit(ctx.addEdge());
+//		else if(ctx.modifyNode() != null) result = visit(ctx.modifyNode());
+//
+//		return result;
+//	}
 
-	public Expression visitOperation(ExprParser.OperationContext ctx) {
-		if(ctx.addNode() != null) visit(ctx.addNode());
-		else if(ctx.addEdge() != null) visit(ctx.addEdge());
-		else if(ctx.modifyNode() != null) visit(ctx.modifyNode());
-	}
-
-	@Override
 	public Expression visitNodeAddition(NodeAdditionContext ctx) {
-		Expression node = this.visit(ctx.expr());
+		Expression result = null;
+//
+//		if(ctx.getChild(0).getText() == "ADDNODE"){
 
-		System.out.println("test");
-		System.out.println(node.toString());
+			System.out.println(ctx.getChild(2).getText());
 
-		return new NodeAddition(node);
+			Expression node = this.visit(ctx.getChild(2));
+
+			System.out.println("test");
+
+			result = new NodeAddition(node);
+
+			return result;
+//		}
+//		else if(ctx.getChild(0).getText() == "ADDEDGE") {
+//			result = null;
+//		}
+//		else if(ctx.getChild(0).getText() == "MODIFYNODE") {
+//			result = null;
+//		}
+//
+//		return result;
+	}
+
+	public Expression visitEdgeAddition(ExprParser.EdgeAdditionContext ctx) {
+		return null;
 	}
 }
