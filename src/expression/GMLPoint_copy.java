@@ -8,9 +8,9 @@ public class GMLPoint_copy extends Expression {
     public double theta;   //manipulation in X axis
     public double phi;     //manipulation in Y axis
     public double psi;     //manipulation in Z axis
-    public double time;
+    public long time;
 
-    public GMLPoint_copy(double x, double y, double z, double theta, double phi, double psi, double time){
+    public GMLPoint_copy(double x, double y, double z, double theta, double phi, double psi, long time){
         this.x = x;
         this.y = y;
         this.z = z;
@@ -29,7 +29,7 @@ public class GMLPoint_copy extends Expression {
         this.psi = psi;
     }
 
-    public GMLPoint_copy(double x, double y, double z, double time){
+    public GMLPoint_copy(double x, double y, double z, long time){
         this.x = x;
         this.y = y;
         this.z = z;

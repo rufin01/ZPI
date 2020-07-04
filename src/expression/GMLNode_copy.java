@@ -21,13 +21,13 @@ public class GMLNode_copy extends Expression {
         this.apoint = node.apoint;
     }
 
-    public GMLNode_copy(double x, double y, double z, double theta, double phi, double psi, double time){
+    public GMLNode_copy(double x, double y, double z, double theta, double phi, double psi, long time){
         this.point = new GMLPoint_copy(x, y, z, theta, phi, psi, time);
         this.vpoint = new GMLPoint_copy(0, 0, 0, 0, 0, 0, 0);
         this.apoint = new GMLPoint_copy(0, 0, 0, 0, 0, 0, 0);
     }
 
-    public GMLNode_copy(double x, double y, double z, double time){
+    public GMLNode_copy(double x, double y, double z, long time){
         this.point = new GMLPoint_copy(x, y, z, time);
         this.vpoint = new GMLPoint_copy(0, 0, 0, 0, 0, 0, 0);
         this.apoint = new GMLPoint_copy(0, 0, 0, 0, 0, 0, 0);

@@ -39,27 +39,27 @@ public class GMLNode extends Expression {
         this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0);
     }
 
-    public GMLPoint getPoint() {
+    public Expression getPoint() {
         return point;
     }
 
-    public void setPoint(GMLPoint point) {
+    public void setPoint(Expression point) {
         this.point = point;
     }
 
-    public GMLPoint getVpoint() {
+    public Expression getVpoint() {
         return vpoint;
     }
 
-    public void setVpoint(GMLPoint vpoint) {
+    public void setVpoint(Expression vpoint) {
         this.vpoint = vpoint;
     }
 
-    public GMLPoint getApoint() {
+    public Expression getApoint() {
         return apoint;
     }
 
-    public void setApoint(GMLPoint apoint) {
+    public void setApoint(Expression apoint) {
         this.apoint = apoint;
     }
 }
