@@ -89,7 +89,7 @@ public class Model3D {
                 }
             }
         };
-        animationTimer.start();
+        //animationTimer.start();
     }
 
     public static boolean addNode(GMLNode_copy node, String nodeName){

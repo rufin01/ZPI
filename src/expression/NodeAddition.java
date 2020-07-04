@@ -1,6 +1,6 @@
 package expression;
 
-public class NodeAddition extends Expression {
+public class NodeAddition extends Operation {
 
     public Expression node;
 

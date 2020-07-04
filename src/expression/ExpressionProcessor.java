@@ -25,6 +25,7 @@ public class ExpressionProcessor {
 	public List<Object> getEvaluationResults() {
 		List<Object> evaluations = new ArrayList<>();
 
+		System.out.println("testgetEvaluationResult");
 		for (Expression e: list) {
 
 			System.out.println(e.getClass());
@@ -34,6 +35,9 @@ public class ExpressionProcessor {
 
 				values.put(decl.id,  (Object) decl.value);
 				evaluations.add((Object) decl.value);
+			}
+			else if(e instanceof OperationDeclaration) {
+				Operation result = ((OperationDeclaration) e).operation;
 			}
 			else if (e instanceof Number || e instanceof Variable || e instanceof Addition || e instanceof Multiplication){	// e instanceof Number, Variable, Addition, Multiplication
 				String input = e.toString();
@@ -58,8 +62,11 @@ public class ExpressionProcessor {
 				System.out.println("Point(" + result.x + ", " + result.y + ", " + result.z + ")");
 				evaluations.add(result);
 			}
+//			else if (e instanceof Operation){
+//				System.out.println("testOperation");
+//			}
 			else if (e instanceof NodeAddition) {
-
+				System.out.println("test2");
 				GMLNode_copy result = (GMLNode_copy)getStructureResult(((NodeAddition)e).node);
 
 				Model3D.addNode(result, result.id);

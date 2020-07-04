@@ -7,7 +7,7 @@ grammar Expr;
 }
 
 // Start Symbol
-prog: ( variableDecl | expr | operationDecl )+ EOF		# Program		// # - label -> gonna create visitors	//change expr to statement in later versions
+prog: ( variableDecl | expr | operation )+ EOF		# Program		// # - label -> gonna create visitors	//change expr to statement in later versions
 	;
 	
 //decl: variableDecl	
@@ -16,9 +16,6 @@ prog: ( variableDecl | expr | operationDecl )+ EOF		# Program		// # - label -> g
 	
 variableDecl: ID ':' TYPE ('=' expr)? END					# VariableDeclaration		// ()? - everything in parens is optional
 	;
-
-operationDecl: operation END                         # OperationDeclaration
-    ;
 	
 //functionDecl: ID ':' TYPE '(' formalParameters? ')' block	# FunctionDeclaration		// fun: VOID (x: INT, y: FLOAT) {...}
 //	;
@@ -101,19 +98,11 @@ point: 'point(' expr SEP expr SEP expr (SEP expr (SEP expr SEP expr SEP expr)?)?
 	;
 
 
-operation: addNode
-    | addEdge
-    | modifyNode
+operation: ADD_NODE '(' expr ')'                                 # NodeAddition
+    | ADD_EDGE '(' expr ',' expr ')'                             # EdgeAddition
+    | MOD_NODE '(' expr ',' expr ',' expr ',' expr ')'           # EdgeModificatio
     ;
 
-addNode: ADD_NODE '(' expr ')'                                         # NodeAddition
-    ;
-
-addEdge: ADD_EDGE '(' expr ',' expr ')'                                   # EdgeAddition
-    ;
-
-modifyNode: MOD_NODE '(' expr ',' expr ',' expr ',' expr ')'           # EdgeModificatio
-    ;
 
 
 BEGM: '[';

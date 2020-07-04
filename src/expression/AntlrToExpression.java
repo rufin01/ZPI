@@ -194,9 +194,13 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 	}
 
 	public Expression visitOperation(ExprParser.OperationContext ctx) {
-		if(ctx.addNode() != null) visit(ctx.addNode());
-		else if(ctx.addEdge() != null) visit(ctx.addEdge());
-		else if(ctx.modifyNode() != null) visit(ctx.modifyNode());
+		Expression result = null;
+
+		if(ctx.addNode() != null) result = visit(ctx.addNode());
+		else if(ctx.addEdge() != null) result = visit(ctx.addEdge());
+		else if(ctx.modifyNode() != null) result = visit(ctx.modifyNode());
+
+		return result;
 	}
 
 	@Override
@@ -204,7 +208,6 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 		Expression node = this.visit(ctx.expr());
 
 		System.out.println("test");
-		System.out.println(node.toString());
 
 		return new NodeAddition(node);
 	}
