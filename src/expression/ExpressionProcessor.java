@@ -189,9 +189,9 @@ public class ExpressionProcessor {
 		if(z != null && y instanceof Variable) z_d = new Number<Double>(new Double(getEvalResult(z).toString()));
 		else if (z != null) z_d = (Number<Double>)z;
 
-		Number<Double> time_d = null;
-		if(time instanceof Variable) time_d = new Number<Double>(new Double(getEvalResult(time).toString()));
-		else if (time != null) time_d = (Number<Double>)time;
+		Number<Long> time_d = null;
+		if(time instanceof Variable) time_d = new Number<Long>(new Long(getEvalResult(time).toString()));
+		else if (time != null) time_d = (Number<Long>)time;
 
 		Number<Double> phi_d = null;
 		if(phi instanceof Variable) phi_d = new Number<Double>(new Double(getEvalResult(phi).toString()));
@@ -206,7 +206,7 @@ public class ExpressionProcessor {
 		else if (theta != null) theta_d = (Number<Double>)theta;
 
 		if(x_d != null && y_d != null && z_d != null && time_d != null && phi_d != null && psi_d != null && theta_d != null){
-			return new GMLPoint_copy(x_d.num, y_d.num, z_d.num, time_d.num, phi_d.num, psi_d.num, theta_d.num);
+			return new GMLPoint_copy(x_d.num, y_d.num, z_d.num, theta_d.num, phi_d.num, psi_d.num, time_d.num);
 		}
 		else if(x_d != null && y_d != null && z_d != null && time_d != null){
 			return new GMLPoint_copy(x_d.num, y_d.num, z_d.num, time_d.num);

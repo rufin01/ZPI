@@ -11,9 +11,11 @@ public class GMLNode_copy extends Expression {
         this.apoint = apoint;
     }
 
-//    public GMLNode_copy(){
-//        this.point = new GMLPoint(0,0,0);
-//    }
+    public GMLNode_copy(){
+        this.point = new GMLPoint_copy(0,0,0);
+        this.vpoint = new GMLPoint_copy(0,0,0);
+        this.apoint = new GMLPoint_copy(0,0,0);
+    }
 
     public GMLNode_copy(GMLNode_copy node){
         this.point = node.point;
