@@ -5,10 +5,13 @@ public class GMLNode extends Expression {
     public Expression vpoint;
     public Expression apoint;
 
-    public GMLNode(Expression GMLPoint, Expression vpoint, Expression apoint){
+    public String name;
+
+    public GMLNode(String name, Expression GMLPoint, Expression vpoint, Expression apoint){
         this.point = GMLPoint;
         this.vpoint = vpoint;
         this.apoint = apoint;
+        this.name = name;
     }
 
     public GMLNode(Expression point){
