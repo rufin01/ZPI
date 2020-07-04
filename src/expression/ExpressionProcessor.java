@@ -66,8 +66,11 @@ public class ExpressionProcessor {
 //				System.out.println("testOperation");
 //			}
 			else if (e instanceof NodeAddition) {
-				System.out.println("test2");
-				GMLNode_copy result = (GMLNode_copy)getStructureResult(((NodeAddition)e).node);
+				System.out.println("test 2");
+				GMLNode_copy result = (GMLNode_copy)getStructureResult((GMLNode)getEvalResult(((NodeAddition)e).node));
+
+				System.out.println(result);
+				System.out.println(result.id);
 
 				Model3D.addNode(result, result.id);
 			}

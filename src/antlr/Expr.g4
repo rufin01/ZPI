@@ -100,7 +100,7 @@ point: 'point(' expr SEP expr SEP expr (SEP expr (SEP expr SEP expr SEP expr)?)?
 
 operation: ADD_NODE '(' expr ')' END                             # NodeAddition
     | ADD_EDGE '(' expr ',' expr ')' END                             # EdgeAddition
-    | MOD_NODE '(' expr ',' expr ',' expr ',' expr ')' END          # EdgeModificatio
+    | MOD_NODE '(' expr ',' expr ',' expr ',' expr ')' END          # NodeModification
     ;
 
 
