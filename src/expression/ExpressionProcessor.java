@@ -25,10 +25,7 @@ public class ExpressionProcessor {
     public List<Object> getEvaluationResults() {
         List<Object> evaluations = new ArrayList<>();
 
-        System.out.println("testgetEvaluationResult");
         for (Expression e: list) {
-
-            System.out.println(e.getClass());
 
             if(e instanceof VariableDeclaration) {
                 VariableDeclaration decl = (VariableDeclaration) e;
@@ -59,20 +56,22 @@ public class ExpressionProcessor {
             }
             else if (e instanceof GMLPoint){	// e instanceof Number, Variable, Addition, Multiplication
                 GMLPoint_copy result = (GMLPoint_copy)getStructureResult(e);
-                System.out.println("Point(" + result.x + ", " + result.y + ", " + result.z + ")");
                 evaluations.add(result);
             }
-//			else if (e instanceof Operation){
-//				System.out.println("testOperation");
-//			}
             else if (e instanceof NodeAddition) {
-                System.out.println("test 2");
                 GMLNode_copy result = (GMLNode_copy)getStructureResult((GMLNode)getEvalResult(((NodeAddition)e).node));
 
-//				System.out.println(result);
-//				System.out.println(result.id);
+                Model3D.addNode(result, result.name);
+            }
+            else if (e instanceof EdgeAddition) {
+                GMLNode_copy node1 = (GMLNode_copy)getStructureResult((GMLNode)getEvalResult(((EdgeAddition)e).node1));
+                GMLNode_copy node2 = (GMLNode_copy)getStructureResult((GMLNode)getEvalResult(((EdgeAddition)e).node2));
 
-                Model3D.addNode(result, result.id);
+                String edgeName = node1.name + node2.name;
+
+                Model3D.connectNodes(node1.name, node2.name, edgeName);
+
+
             }
             else {	// 	e instanceof Node Point
                 String input = e.toString();
@@ -161,19 +160,14 @@ public class ExpressionProcessor {
     }
 
     private Object getEvalResultNode(Expression e) {
+        String name = ((GMLNode) e).name;
         Expression point = ((GMLNode) e).point;
         Expression vpoint = ((GMLNode) e).vpoint;
         Expression apoint = ((GMLNode) e).apoint;
 
-        System.out.println(point);
-
         GMLPoint_copy point_alt = null;
         if(point instanceof Variable) point_alt = new GMLPoint_copy((GMLPoint_copy)getEvalResultPoint((Expression)getEvalResult(point)));
         else if (point != null) point_alt = (GMLPoint_copy)getStructureResult(point);
-
-        System.out.println(point_alt.x);
-        System.out.println(point_alt.y);
-        System.out.println(point_alt.z);
 
         GMLPoint_copy vpoint_alt = null;
         if(vpoint instanceof Variable) vpoint_alt = new GMLPoint_copy((GMLPoint_copy)getEvalResultPoint((Expression)getEvalResult(vpoint)));
@@ -183,7 +177,7 @@ public class ExpressionProcessor {
         if(apoint instanceof Variable) apoint_alt = new GMLPoint_copy((GMLPoint_copy)getEvalResultPoint((Expression)getEvalResult(apoint)));
         else if (apoint != null) apoint_alt = (GMLPoint_copy)getStructureResult(apoint);
 
-        return new GMLNode_copy(point_alt, vpoint_alt, apoint_alt);
+        return new GMLNode_copy(name, point_alt, vpoint_alt, apoint_alt);
     }
 
     private Object getEvalResultPoint(Expression e) {
@@ -194,8 +188,6 @@ public class ExpressionProcessor {
         Expression phi = ((GMLPoint) e).phi;
         Expression psi = ((GMLPoint) e).psi;
         Expression theta = ((GMLPoint) e).theta;
-
-        System.out.println("test 3");
 
         Number<Double> x_d = null;
         if(x instanceof Variable) x_d = new Number<Double>(new Double(getEvalResult(x).toString()));
@@ -224,8 +216,6 @@ public class ExpressionProcessor {
         Number<Double> theta_d = null;
         if(theta instanceof Variable) theta_d = new Number<Double>(new Double(getEvalResult(theta).toString()));
         else if (theta != null) theta_d = (Number<Double>)theta;
-
-        System.out.println(x_d + " " + y_d + " " + z_d + " " + time_d + " " + phi_d + " " + psi_d + " " + theta_d);
 
         if(x_d != null && y_d != null && z_d != null && time_d != null && phi_d != null && psi_d != null && theta_d != null){
             return new GMLPoint_copy(x_d.num, y_d.num, z_d.num, theta_d.num, phi_d.num, psi_d.num, time_d.num);

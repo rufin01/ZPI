@@ -71,7 +71,6 @@ public class Model3D {
                 }
                 for(Node n: model.getChildren()){
                     if(n.getClass().equals(NodeXForm.class)){
-                        System.out.println("Moving node: " + n.getId());
                         NodeXForm node = (NodeXForm)n;
                         GMLPoint_copy point = node.getOrigin().getPoint();
                         GMLPoint_copy vPoint = node.getOrigin().getVpoint();
@@ -111,6 +110,7 @@ public class Model3D {
     public static boolean connectNodes(String node1name, String node2name, String edgeName){
         NodeXForm node1XForm = null;
         NodeXForm node2XForm = null;
+
         for(Node n : model.getChildren()){
             if(n.getId()==node1name){               //find 1st node
                 node1XForm = (NodeXForm)n;
@@ -181,7 +181,6 @@ public class Model3D {
         if(nodeXForm==null){
             return;
         }else {
-            System.out.println("Changing speed of node: " + nodeXForm.getId());
             nodeXForm.getOrigin().setVpoint(new GMLPoint_copy(Vx, Vy, Vz, Vtheta, Vphi, Vpsi));
         }
     }

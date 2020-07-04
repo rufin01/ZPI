@@ -82,12 +82,8 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 				GMLNode temp = null;
 				if(!ctx.expr().isEmpty()) {
 					value = ctx.expr();
-					System.out.println(value);
 					temp = (GMLNode)this.visit((GraphElementContext)value);
 				}
-				
-				System.out.println(ctx.expr().getText());
-				
 				
 				return new VariableDeclaration<GMLNode>(id, type, temp);
 				
@@ -97,12 +93,8 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 				GMLPoint point_temp = null;
 				if(!ctx.expr().isEmpty()) {
 					value = ctx.expr();
-					System.out.println(value);
 					point_temp = (GMLPoint)this.visit((GraphElementContext)value);
 				}
-
-				System.out.println(ctx.expr().getText());
-
 
 				return new VariableDeclaration<GMLPoint>(id, type, point_temp);
 //			case ExprParser.RULE_graph:
@@ -168,11 +160,12 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 
 	public Expression visitNodeDeclaration(NodeDeclarationContext ctx) {
 
+		String name = ctx.getChild(0).getText();
 		Expression p1 = this.visit(ctx.expr(0));
 		Expression p2 = this.visit(ctx.expr(1));
 		Expression p3 = this.visit(ctx.expr(2));
 
-		return new GMLNode(p1, p2, p3);
+		return new GMLNode(name, p1, p2, p3);
 	}
 	
 	public Expression visitPointDeclaration(PointDeclarationContext ctx) {
@@ -208,11 +201,7 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 //
 //		if(ctx.getChild(0).getText() == "ADDNODE"){
 
-			System.out.println(ctx.getChild(2).getText());
-
 			Expression node = this.visit(ctx.getChild(2));
-
-			System.out.println("test");
 
 			result = new NodeAddition(node);
 
@@ -229,6 +218,14 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 	}
 
 	public Expression visitEdgeAddition(ExprParser.EdgeAdditionContext ctx) {
-		return null;
+
+		Expression result = null;
+
+		Expression node1 = this.visit(ctx.getChild(2));
+		Expression node2 = this.visit(ctx.getChild(4));
+
+		result = new EdgeAddition(node1, node2);
+
+		return result;
 	}
 }

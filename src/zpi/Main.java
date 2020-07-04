@@ -198,8 +198,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         codeArea.prefHeightProperty().bind(codeAreaAnchorPane.heightProperty());
 
         codeArea.appendText("node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
+                "node2: NODE = node(point(5.0, 2.0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
                 "\n" +
-                "ADDNODE(node1);");
+                "ADDNODE(node1);\n" +
+                "ADDNODE(node2);\n" +
+                "\n" +
+                "ADDEDGE(node1, node2);");
     }
 
     public static void main(String[] args) {
