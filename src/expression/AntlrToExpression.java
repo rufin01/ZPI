@@ -14,6 +14,7 @@ import antlr.ExprParser.ExprContext;
 import antlr.ExprParser.GraphElementContext;
 import antlr.ExprParser.MulDivContext;
 import antlr.ExprParser.NodeContext;
+import antlr.ExprParser.EdgeDeclarationContext;
 import antlr.ExprParser.NodeDeclarationContext;
 import antlr.ExprParser.NumberContext;
 import antlr.ExprParser.PointDeclarationContext;
@@ -91,6 +92,18 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 				
 			case "GRAPH":
 				break;
+			case "POINT":
+				GMLPoint point_temp = null;
+				if(!ctx.expr().isEmpty()) {
+					value = ctx.expr();
+					System.out.println(value);
+					point_temp = (GMLPoint)this.visit((GraphElementContext)value);
+				}
+
+				System.out.println(ctx.expr().getText());
+
+
+				return new VariableDeclaration<GMLPoint>(id, type, point_temp);
 //			case ExprParser.RULE_graph:
 				
 			default:
@@ -144,14 +157,21 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 	public Expression visitGraphElementExpression(GraphElementContext ctx) {
 		return this.visit(ctx.getChild(0));
 	}
-	
+
+	public Expression visitEdgeDeclaration(EdgeDeclarationContext ctx) {
+		Expression e1 = this.visit(ctx.expr(0));
+		Expression e2 = this.visit(ctx.expr(1));
+
+		return new GMLEdge(e1, e2);
+	}
+
 	public Expression visitNodeDeclaration(NodeDeclarationContext ctx) {
-		
-		GMLPoint p1 = (GMLPoint)this.visit(ctx.expr(0));
-		GMLPoint p2 = (GMLPoint)this.visit(ctx.expr(1));
-		GMLPoint p3 = (GMLPoint)this.visit(ctx.expr(2));
-		
-		return new GMLNode(p1, p2, p3);	
+
+		Expression p1 = this.visit(ctx.expr(0));
+		Expression p2 = this.visit(ctx.expr(1));
+		Expression p3 = this.visit(ctx.expr(2));
+
+		return new GMLNode(p1, p2, p3);
 	}
 	
 	public Expression visitPointDeclaration(PointDeclarationContext ctx) {

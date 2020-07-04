@@ -42,4 +42,14 @@ public class GMLPoint_copy extends Expression {
         this.z = z;
     }
 
+    public GMLPoint_copy(GMLPoint_copy point){
+        this.x = point.x;
+        this.y = point.y;
+        this.z = point.z;
+        this.theta = point.theta;
+        this.phi = point.phi;
+        this.psi = point.psi;
+        this.time = point.time;
+    }
+
 }
