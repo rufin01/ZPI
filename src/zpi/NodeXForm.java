@@ -1,7 +1,7 @@
 package zpi;
 
+import expression.GMLNode;
 import expression.GMLNode_copy;
-import expression.GMLPoint;
 
 import java.util.ArrayList;
 
