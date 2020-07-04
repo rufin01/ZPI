@@ -69,8 +69,8 @@ public class ExpressionProcessor {
 				System.out.println("test 2");
 				GMLNode_copy result = (GMLNode_copy)getStructureResult((GMLNode)getEvalResult(((NodeAddition)e).node));
 
-				System.out.println(result);
-				System.out.println(result.id);
+//				System.out.println(result);
+//				System.out.println(result.id);
 
 				Model3D.addNode(result, result.id);
 			}
@@ -104,10 +104,11 @@ public class ExpressionProcessor {
 			return new GMLEdge_copy(node1_alt, node2_alt);
 		}
 		else if(e instanceof GMLNode){
-			getEvalResultNode(e);
+			return getEvalResultNode(e);
 		}
 		else if(e instanceof GMLPoint){
-			getEvalResultPoint(e);
+			System.out.println("test 4");
+			return getEvalResultPoint(e);
 		}
 
 		return result;
@@ -195,6 +196,8 @@ public class ExpressionProcessor {
 		Expression psi = ((GMLPoint) e).psi;
 		Expression theta = ((GMLPoint) e).theta;
 
+		System.out.println("test 3");
+
 		Number<Double> x_d = null;
 		if(x instanceof Variable) x_d = new Number<Double>(new Double(getEvalResult(x).toString()));
 		else if (x != null) x_d = (Number<Double>)x;
@@ -222,6 +225,8 @@ public class ExpressionProcessor {
 		Number<Double> theta_d = null;
 		if(theta instanceof Variable) theta_d = new Number<Double>(new Double(getEvalResult(theta).toString()));
 		else if (theta != null) theta_d = (Number<Double>)theta;
+
+		System.out.println(x_d + " " + y_d + " " + z_d + " " + time_d + " " + phi_d + " " + psi_d + " " + theta_d);
 
 		if(x_d != null && y_d != null && z_d != null && time_d != null && phi_d != null && psi_d != null && theta_d != null){
 			return new GMLPoint_copy(x_d.num, y_d.num, z_d.num, theta_d.num, phi_d.num, psi_d.num, time_d.num);
