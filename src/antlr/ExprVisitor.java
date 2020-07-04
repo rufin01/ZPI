@@ -27,13 +27,6 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariableDeclaration(ExprParser.VariableDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code OperationDeclaration}
-	 * labeled alternative in {@link ExprParser#operationDecl}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOperationDeclaration(ExprParser.OperationDeclarationContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code TrueFalse}
 	 * labeled alternative in {@link ExprParser#expr}.
 	 * @param ctx the parse tree
@@ -170,28 +163,22 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPointDeclaration(ExprParser.PointDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExprParser#operation}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOperation(ExprParser.OperationContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code NodeAddition}
-	 * labeled alternative in {@link ExprParser#addNode}.
+	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitNodeAddition(ExprParser.NodeAdditionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code EdgeAddition}
-	 * labeled alternative in {@link ExprParser#addEdge}.
+	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitEdgeAddition(ExprParser.EdgeAdditionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code EdgeModificatio}
-	 * labeled alternative in {@link ExprParser#modifyNode}.
+	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
