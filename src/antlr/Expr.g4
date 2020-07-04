@@ -99,7 +99,7 @@ gml:  graph
 
 addNode: 'ADDNODE(' expr ')'                                            # NodeAddition
     ;
-    
+
 addEdge: 'ADDEDGE(' expr ')'                                            # EdgeAddition
     ;
 
