@@ -194,9 +194,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         codeArea.prefWidthProperty().bind(codeAreaAnchorPane.widthProperty());
         codeArea.prefHeightProperty().bind(codeAreaAnchorPane.heightProperty());
         
-        codeArea.appendText("node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
+        codeArea.appendText("node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0, .0, 1.0, .0, 0), point(.0, .0, .0));\n" +
                 "node2: NODE = node(point(5.0, 2.0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
-                "node3: NODE = node(point(-5.0, -2.0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
+                "node3: NODE = node(point(-5.0, -2.0, .0), point(.0, .05, .0), point(.0, .0, .0));\n" +
                 "\n" +
                 "ADDNODE(node1);\n" +
                 "ADDNODE(node2);\n" +
@@ -213,7 +213,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         if (event.getSource() == runButton) {
-
             model3D = new Model3D();
 
             // ---------

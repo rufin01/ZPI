@@ -201,9 +201,9 @@ public class ExpressionProcessor {
         if(z instanceof Variable) z_d = new Number<Double>(new Double(getEvalResult(z).toString()));
         else if (z != null) z_d = (Number<Double>)z;
 
-        Number<Long> time_d = null;
-        if(time instanceof Variable) time_d = new Number<Long>(new Long(getEvalResult(time).toString()));
-        else if (time != null) time_d = (Number<Long>)time;
+        Number<Integer> time_d = null;
+        if(time instanceof Variable) time_d = new Number<Integer>(new Integer(getEvalResult(time).toString()));
+        else if (time != null) time_d = (Number<Integer>)time;
 
         Number<Double> phi_d = null;
         if(phi instanceof Variable) phi_d = new Number<Double>(new Double(getEvalResult(phi).toString()));

@@ -28,6 +28,7 @@ public class Model3D {
     public static double edgeWidth = 0.2;
     public static long timer = 0;
     public static double actTime = 0;
+    private static AnimationTimer animationTimer;
 
     public Model3D(){
         RED_MATERIAL.setDiffuseColor(Color.DARKRED);
@@ -37,6 +38,8 @@ public class Model3D {
         GREY_MATERIAL.setDiffuseColor(Color.DARKGREY);
         GREY_MATERIAL.setSpecularColor(Color.GREY);
         model = new XForm();
+        actTime = 0 ;
+        timer = 0 ;
         movementHistory = new ArrayList<>();
         Cylinder Xaxis = new Cylinder(0.1, 100);
         Cylinder Yaxis = new Cylinder(0.1, 100);
@@ -57,7 +60,7 @@ public class Model3D {
     }
 
     public static void startMovement(){
-        AnimationTimer animationTimer = new AnimationTimer() {
+        animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 timer++;
@@ -74,7 +77,6 @@ public class Model3D {
                         GMLPoint_copy point = node.getOrigin().getPoint();
                         GMLPoint_copy vPoint = node.getOrigin().getVpoint();
                         GMLPoint_copy aPoint = node.getOrigin().getApoint();
-                        System.out.println("node: " +node.getTy() + " ' "+ vPoint.y + ", " + vPoint.time);
                         node.setTx((point.x + vPoint.x*(actTime-vPoint.time) + aPoint.x*(actTime-aPoint.time)*(actTime-aPoint.time)));
                         node.setTy((point.y + vPoint.y*(actTime-vPoint.time) + aPoint.y*(actTime-aPoint.time)*(actTime-aPoint.time)));
                         node.setTz((point.z + vPoint.z*(actTime-vPoint.time) + aPoint.z*(actTime-aPoint.time)*(actTime-aPoint.time)));
@@ -271,5 +273,12 @@ public class Model3D {
 
     public static void addToMovementHistory(NodeMovementTriple nodeMovementTriple){
         movementHistory.add(nodeMovementTriple);
+    }
+
+    public static void resetModel(){
+        model.getChildren().clear();
+        animationTimer.stop();
+        timer = 0;
+        actTime = 0;
     }
 }
