@@ -106,13 +106,13 @@ operation: addNode
     | modifyNode
     ;
 
-addNode: 'ADDNODE(' expr ')'                                            # NodeAddition
+addNode: ADD_NODE '(' expr ')'                                         # NodeAddition
     ;
 
-addEdge: 'ADDEDGE(' expr ',' expr ')'                                   # EdgeAddition
+addEdge: ADD_EDGE '(' expr ',' expr ')'                                   # EdgeAddition
     ;
 
-modifyNode: 'MODIFYNODE(' expr ',' expr ',' expr ',' expr ')'           # EdgeModificatio
+modifyNode: MOD_NODE '(' expr ',' expr ',' expr ',' expr ')'           # EdgeModificatio
     ;
 
 
@@ -149,9 +149,15 @@ BOOL: 'True'
 TYPE: BASIC_TYPE '[]'?	
 	;
 
-OPER_NAME: 'ADDNODE'
-    | 'ADDEDGE'
-    |
+ADD_NODE: 'ADDNODE'
+    ;
+
+ADD_EDGE: 'ADDEDGE'
+    ;
+
+MOD_NODE: 'MODIFYNODE'
+    ;
+
 	
 BASIC_TYPE
 	  :	'INT'

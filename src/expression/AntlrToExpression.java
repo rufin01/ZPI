@@ -194,7 +194,9 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 	}
 
 	public Expression visitOperation(ExprParser.OperationContext ctx) {
-		if (ctx)
+		if(ctx.addNode() != null) visit(ctx.addNode());
+		else if(ctx.addEdge() != null) visit(ctx.addEdge());
+		else if(ctx.modifyNode() != null) visit(ctx.modifyNode());
 	}
 
 	@Override
