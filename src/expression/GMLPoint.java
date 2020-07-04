@@ -8,9 +8,9 @@ public class GMLPoint extends Expression {
     public double theta = 0;   //manipulation in X axis
     public double phi = 0;     //manipulation in Y axis
     public double psi = 0;     //manipulation in Z axis
-    public double time = 0;
+    public long time = 0;
 
-    public GMLPoint(double x, double y, double z, double theta, double phi, double psi, double time){
+    public GMLPoint(double x, double y, double z, double theta, double phi, double psi, long time){
         this.x = x;
         this.y = y;
         this.z = z;
@@ -29,7 +29,7 @@ public class GMLPoint extends Expression {
         this.psi = psi;
     }
 
-    public GMLPoint(double x, double y, double z, double time){
+    public GMLPoint(double x, double y, double z, long time){
         this.x = x;
         this.y = y;
         this.z = z;

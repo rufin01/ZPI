@@ -114,10 +114,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 Model3D.addToMovementHistory(moverFeet);
             }
         }
-        NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint(0,0,0,0,0,0, 110), 110, 2);
-        NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint(0,0,0,0,0,0, 110), 110, 2);
-        NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint(0,0,0,0,0,0, 110), 110, 2);
-        NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint(0,0,0,0,0,0, 110), 110, 2);
+        NodeMovementTriple moveLHand = new NodeMovementTriple("lhand", new GMLPoint(0,0,0,0,0,0, 100), 100, 2);
+        NodeMovementTriple moveRHand = new NodeMovementTriple("rhand", new GMLPoint(0,0,0,0,0,0, 100), 100, 2);
+        NodeMovementTriple moveLFeet = new NodeMovementTriple("lfeet", new GMLPoint(0,0,0,0,0,0, 100), 100, 2);
+        NodeMovementTriple moverFeet = new NodeMovementTriple("rfeet", new GMLPoint(0,0,0,0,0,0, 100), 100, 2);
         Model3D.addToMovementHistory(moveLHand);
         Model3D.addToMovementHistory(moveRHand);
         Model3D.addToMovementHistory(moveLFeet);

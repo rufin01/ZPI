@@ -11,22 +11,22 @@ public class NodeMovementTriple {
     private GMLPoint newPoint = null;
     private GMLPoint newVPoint = null;
     private GMLPoint newAPoint = null;
-    private int time;
+    private long time;
 
-    public NodeMovementTriple(String nodeName, GMLPoint newPoint, int time) {
+    public NodeMovementTriple(String nodeName, GMLPoint newPoint, long time) {
         this.nodeName = nodeName;
         this.newPoint = newPoint;
         this.time = time;
     }
 
-    public NodeMovementTriple(String nodeName, GMLPoint newPoint, GMLPoint newVPoint, int time) {
+    public NodeMovementTriple(String nodeName, GMLPoint newPoint, GMLPoint newVPoint, long time) {
         this.nodeName = nodeName;
         this.newPoint = newPoint;
         this.newVPoint = newVPoint;
         this.time = time;
     }
 
-    public NodeMovementTriple(String nodeName, GMLPoint newPoint, GMLPoint newVPoint, GMLPoint newAPoint, int time) {
+    public NodeMovementTriple(String nodeName, GMLPoint newPoint, GMLPoint newVPoint, GMLPoint newAPoint, long time) {
         this.nodeName = nodeName;
         this.newPoint = newPoint;
         this.newVPoint = newVPoint;
@@ -34,7 +34,7 @@ public class NodeMovementTriple {
         this.time = time;
     }
 
-    public NodeMovementTriple(String nodeName, GMLPoint newPoint, int time, int pointType) {
+    public NodeMovementTriple(String nodeName, GMLPoint newPoint, long time, int pointType) {
         this.nodeName = nodeName;
         switch (pointType){
             case POINT_TYPE_POINT:
@@ -82,11 +82,11 @@ public class NodeMovementTriple {
         this.newAPoint = newAPoint;
     }
 
-    public int getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(long time) {
         this.time = time;
     }
 }

@@ -27,7 +27,7 @@ public class GMLNode extends Expression {
         this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0);
     }
 
-    public GMLNode(double x, double y, double z, double time){
+    public GMLNode(double x, double y, double z, long time){
         this.point = new GMLPoint(x, y, z, time);
         this.vpoint = new GMLPoint(0, 0, 0, 0, 0, 0);
         this.apoint = new GMLPoint(0, 0, 0, 0, 0, 0);

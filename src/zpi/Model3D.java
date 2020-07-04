@@ -20,7 +20,7 @@ public class Model3D {
     final static PhongMaterial RED_MATERIAL = new PhongMaterial();
     final static PhongMaterial WHITE_MATERIAL = new PhongMaterial();
     final static PhongMaterial GREY_MATERIAL = new PhongMaterial();
-    public static int SPEED_ADJUSTMENT_RATIO = 10;
+    public static int SPEED_ADJUSTMENT_RATIO = 2;
     private static XForm model;
     private static ArrayList<NodeMovementTriple> movementHistory;
     private static PhongMaterial nodeColour = RED_MATERIAL;
@@ -68,7 +68,6 @@ public class Model3D {
                     if(historyDataSet.getTime() == actTime){
                         NodeXForm nodeXForm = getNodeByName(historyDataSet.getNodeName());
                         nodeXForm.updateNode(historyDataSet);
-                        movementHistory.remove(historyDataSet);
                     }
                 }
                 for(Node n: model.getChildren()){
