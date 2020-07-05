@@ -177,10 +177,10 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEdgeAddition(ExprParser.EdgeAdditionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code EdgeModificatio}
+	 * Visit a parse tree produced by the {@code NodeModification}
 	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
+	T visitNodeModification(ExprParser.NodeModificationContext ctx);
 }

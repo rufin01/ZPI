@@ -1324,34 +1324,6 @@ public class ExprParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class EdgeModificatioContext extends OperationContext {
-		public TerminalNode MOD_NODE() { return getToken(ExprParser.MOD_NODE, 0); }
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public List<TerminalNode> SEP() { return getTokens(ExprParser.SEP); }
-		public TerminalNode SEP(int i) {
-			return getToken(ExprParser.SEP, i);
-		}
-		public TerminalNode END() { return getToken(ExprParser.END, 0); }
-		public EdgeModificatioContext(OperationContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterEdgeModificatio(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitEdgeModificatio(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ExprVisitor ) return ((ExprVisitor<? extends T>)visitor).visitEdgeModificatio(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class EdgeAdditionContext extends OperationContext {
 		public TerminalNode ADD_EDGE() { return getToken(ExprParser.ADD_EDGE, 0); }
 		public List<ExprContext> expr() {
@@ -1374,6 +1346,34 @@ public class ExprParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof ExprVisitor ) return ((ExprVisitor<? extends T>)visitor).visitEdgeAddition(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class NodeModificationContext extends OperationContext {
+		public TerminalNode MOD_NODE() { return getToken(ExprParser.MOD_NODE, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public List<TerminalNode> SEP() { return getTokens(ExprParser.SEP); }
+		public TerminalNode SEP(int i) {
+			return getToken(ExprParser.SEP, i);
+		}
+		public TerminalNode END() { return getToken(ExprParser.END, 0); }
+		public NodeModificationContext(OperationContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterNodeModification(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitNodeModification(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExprVisitor ) return ((ExprVisitor<? extends T>)visitor).visitNodeModification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1443,7 +1443,7 @@ public class ExprParser extends Parser {
 				}
 				break;
 			case MOD_NODE:
-				_localctx = new EdgeModificatioContext(_localctx);
+				_localctx = new NodeModificationContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(154);

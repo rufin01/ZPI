@@ -290,15 +290,15 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitEdgeAddition(ExprParser.EdgeAdditionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code EdgeModificatio}
+	 * Enter a parse tree produced by the {@code NodeModification}
 	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 */
-	void enterEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
+	void enterNodeModification(ExprParser.NodeModificationContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code EdgeModificatio}
+	 * Exit a parse tree produced by the {@code NodeModification}
 	 * labeled alternative in {@link ExprParser#operation}.
 	 * @param ctx the parse tree
 	 */
-	void exitEdgeModificatio(ExprParser.EdgeModificatioContext ctx);
+	void exitNodeModification(ExprParser.NodeModificationContext ctx);
 }

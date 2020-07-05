@@ -306,13 +306,13 @@ public class ExprBaseListener implements ExprListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEdgeModificatio(ExprParser.EdgeModificatioContext ctx) { }
+	@Override public void enterNodeModification(ExprParser.NodeModificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEdgeModificatio(ExprParser.EdgeModificatioContext ctx) { }
+	@Override public void exitNodeModification(ExprParser.NodeModificationContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

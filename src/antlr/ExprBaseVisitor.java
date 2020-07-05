@@ -187,5 +187,5 @@ public class ExprBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements E
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEdgeModificatio(ExprParser.EdgeModificatioContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNodeModification(ExprParser.NodeModificationContext ctx) { return visitChildren(ctx); }
 }
