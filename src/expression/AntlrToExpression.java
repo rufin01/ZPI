@@ -228,4 +228,20 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 
 		return result;
 	}
+
+	public Expression visitNodeModification(ExprParser.NodeModificationContext ctx) {
+
+		Expression result = null;
+
+		Expression node = this.visit(ctx.expr(0));
+		Expression pointID = this.visit(ctx.expr(1));
+		Expression newPoint = this.visit(ctx.expr(2));
+		Expression time = this.visit(ctx.expr(3));
+
+		result = new NodeModification(node, pointID, newPoint, time);
+
+		return result;
+	}
+
+
 }

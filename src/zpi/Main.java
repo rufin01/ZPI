@@ -203,7 +203,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 "ADDNODE(node3);\n" +
                 "\n" +
                 "ADDEDGE(node1, node2);\n" +
-                "ADDEDGE(node1, node3);");
+                "ADDEDGE(node1, node3);\n" +
+                "\n" +
+                "MODIFYNODE(node3, 2, point(.0, .0, .0), 10);");
     }
 
     public static void main(String[] args) {

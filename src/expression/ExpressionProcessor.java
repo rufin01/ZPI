@@ -12,6 +12,7 @@ import operators.NumericOperation;
 import operators.Subtraction;
 import org.w3c.dom.Node;
 import zpi.Model3D;
+import zpi.NodeMovementTriple;
 
 public class ExpressionProcessor {
     List<Expression> list;
@@ -71,6 +72,16 @@ public class ExpressionProcessor {
 
                 Model3D.connectNodes(node1.name, node2.name, edgeName);
 
+            }
+            else if (e instanceof NodeModification) {
+                GMLNode_copy node = (GMLNode_copy)getStructureResult((GMLNode)getEvalResult(((NodeModification)e).node));
+                Number<Integer> pointID = new Number<Integer>((Integer)getEvalResult(((NodeModification)e).pointID));
+                GMLPoint_copy newPoint = (GMLPoint_copy)getStructureResult(((NodeModification)e).newPoint);
+                Number<Integer> time = new Number<Integer>((Integer)getEvalResult(((NodeModification)e).time));
+
+                NodeMovementTriple quadruple = new NodeMovementTriple(node.name, newPoint, time.num, pointID.num);
+
+                Model3D.addToMovementHistory(quadruple);
 
             }
             else {	// 	e instanceof Node Point
