@@ -34,28 +34,24 @@ public class ExpressionProcessor {
                 values.put(decl.id,  (Object) decl.value);
                 evaluations.add((Object) decl.value);
             }
-//			else if(e instanceof OperationDeclaration) {
-//				Operation result = ((OperationDeclaration) e).operation;
-//			}
             else if (e instanceof Number || e instanceof Variable || e instanceof Addition || e instanceof Multiplication){	// e instanceof Number, Variable, Addition, Multiplication
                 String input = e.toString();
-//				Object result = getEvalResult(e);
                 Object result = null;
                 evaluations.add(input + " is " + result);
             }
-            else if (e instanceof GMLGraph){	// e instanceof Number, Variable, Addition, Multiplication
+            else if (e instanceof GMLGraph){
                 GMLGraph result = (GMLGraph)getStructureResult(e);
                 evaluations.add(result);
             }
-            else if (e instanceof GMLEdge){	// e instanceof Number, Variable, Addition, Multiplication
+            else if (e instanceof GMLEdge){
                 GMLEdge_copy result = (GMLEdge_copy)getStructureResult(e);
                 evaluations.add(result);
             }
-            else if (e instanceof GMLNode){	// e instanceof Number, Variable, Addition, Multiplication
+            else if (e instanceof GMLNode){
                 GMLNode_copy result = (GMLNode_copy)getStructureResult(e);
                 evaluations.add(result);
             }
-            else if (e instanceof GMLPoint){	// e instanceof Number, Variable, Addition, Multiplication
+            else if (e instanceof GMLPoint){
                 GMLPoint_copy result = (GMLPoint_copy)getStructureResult(e);
                 evaluations.add(result);
             }
@@ -134,15 +130,12 @@ public class ExpressionProcessor {
             Variable var = (Variable) e;
             result = values.get(var.id);
         }
-//		else if(e instanceof NumericOperation) {
-//			/*
 //			 * Not working because it was originally pasted from tutorial
 //			 *
 //			 * The idea is to have more than one (int) numeric types and try to
 //			 * somehow navigate between them
 //			 */
-//
-//
+//        else if(e instanceof Addition)
 //			Addition add = (Addition) e;
 //			Object left = getEvalResult(add.left);
 //			Object right = getEvalResult(add.right);
