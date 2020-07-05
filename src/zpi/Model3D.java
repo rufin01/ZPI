@@ -38,9 +38,11 @@ public class Model3D {
         GREY_MATERIAL.setDiffuseColor(Color.DARKGREY);
         GREY_MATERIAL.setSpecularColor(Color.GREY);
         model = new XForm();
+        movementHistory = new ArrayList<>();
+        model.getChildren().clear();
+        movementHistory.clear();
         actTime = 0 ;
         timer = 0 ;
-        movementHistory = new ArrayList<>();
         Cylinder Xaxis = new Cylinder(0.1, 100);
         Cylinder Yaxis = new Cylinder(0.1, 100);
         Cylinder Zaxis = new Cylinder(0.1, 100);
@@ -276,8 +278,9 @@ public class Model3D {
     }
 
     public static void resetModel(){
-        model.getChildren().clear();
-        animationTimer.stop();
+        if(animationTimer!=null){
+            animationTimer.stop();
+        }
         timer = 0;
         actTime = 0;
     }

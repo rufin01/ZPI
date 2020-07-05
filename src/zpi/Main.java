@@ -214,6 +214,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         if (event.getSource() == runButton) {
             model3D = new Model3D();
+            Model3D.resetModel();
 
             // ---------
 
