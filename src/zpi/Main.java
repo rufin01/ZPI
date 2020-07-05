@@ -194,18 +194,55 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         codeArea.prefWidthProperty().bind(codeAreaAnchorPane.widthProperty());
         codeArea.prefHeightProperty().bind(codeAreaAnchorPane.heightProperty());
         
-        codeArea.appendText("node1: NODE = node(point(.0, .0, .0), point(.0, .0, .0, .0, 1.0, .0, 0), point(.0, .0, .0));\n" +
-                "node2: NODE = node(point(5.0, 2.0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
-                "node3: NODE = node(point(-5.0, -2.0, .0), point(.0, .05, .0), point(.0, .0, .0));\n" +
+        codeArea.appendText("head: NODE = node(point(.0, 19.0, .0), point(.0, .0, .0, .0, 1.0, .0, 0), point(.0, .0, .0));\n" +
+                "chest: NODE = node(point(.0, 15.0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
+                "bottom: NODE = node(point(.0, 9.0, .0), point(.0, .0, .0), point(.0, .0, .0));\n" +
                 "\n" +
-                "ADDNODE(node1);\n" +
-                "ADDNODE(node2);\n" +
-                "ADDNODE(node3);\n" +
+                "lhand: NODE = node(point(-6.0, 8.0, .0), point(.0, .0, .05), point(.0, .0, .0));\n" +
+                "rhand: NODE = node(point(6.0, 8.0, .0), point(.0, .0, -.05), point(.0, .0, .0));\n" +
                 "\n" +
-                "ADDEDGE(node1, node2);\n" +
-                "ADDEDGE(node1, node3);\n" +
+                "lfeet: NODE = node(point(-4.0, .0, .0), point(.0, .0, -.05), point(.0, .0, .0));\n" +
+                "rfeet: NODE = node(point(4.0, .0, .0), point(.0, .0, .05), point(.0, .0, .0));\n" +
                 "\n" +
-                "MODIFYNODE(node3, 2, point(.0, .0, .0), 10);");
+                "ADDNODE(head);\n" +
+                "ADDNODE(chest);\n" +
+                "ADDNODE(bottom);\n" +
+                "\n" +
+                "ADDNODE(rhand);\n" +
+                "ADDNODE(lhand);\n" +
+                "ADDNODE(rfeet);\n" +
+                "ADDNODE(lfeet);\n" +
+                "\n" +
+                "ADDEDGE(head, chest);\n" +
+                "ADDEDGE(chest, bottom);\n" +
+                "\n" +
+                "ADDEDGE(chest, lhand);\n" +
+                "ADDEDGE(chest, rhand);\n" +
+                "\n" +
+                "ADDEDGE(rfeet, bottom);\n" +
+                "ADDEDGE(lfeet, bottom);\n" +
+                "\n" +
+                "MODIFYNODE(lhand, 2, point(.0, .0, -.05), 100);\n" +
+                "MODIFYNODE(rhand, 2, point(.0, .0, .05), 100);\n" +
+                "MODIFYNODE(lfeet, 2, point(.0, .0, .05), 100);\n" +
+                "MODIFYNODE(rfeet, 2, point(.0, .0, -.05), 100);\n" +
+                "\n" +
+                "MODIFYNODE(lhand, 2, point(.0, .0, .05), 300);\n" +
+                "MODIFYNODE(rhand, 2, point(.0, .0, -.05), 300);\n" +
+                "MODIFYNODE(lfeet, 2, point(.0, .0, -.05), 300);\n" +
+                "MODIFYNODE(rfeet, 2, point(.0, .0, .05), 300);\n" +
+                "\n" +
+                "MODIFYNODE(lhand, 2, point(.0, .0, -.05), 500);\n" +
+                "MODIFYNODE(rhand, 2, point(.0, .0, .05), 500);\n" +
+                "MODIFYNODE(lfeet, 2, point(.0, .0, .05), 500);\n" +
+                "MODIFYNODE(rfeet, 2, point(.0, .0, -.05), 500);\n" +
+                "\n" +
+                "MODIFYNODE(lhand, 2, point(.0, .0, .00), 600);\n" +
+                "MODIFYNODE(rhand, 2, point(.0, .0, -.0), 600);\n" +
+                "MODIFYNODE(lfeet, 2, point(.0, .0, -.0), 600);\n" +
+                "MODIFYNODE(rfeet, 2, point(.0, .0, .00), 600);\n" +
+                "\n" +
+                "MODIFYNODE(head, 2, point(.0, .0, .0), 1000);");
     }
 
     public static void main(String[] args) {

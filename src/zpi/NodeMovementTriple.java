@@ -47,6 +47,7 @@ public class NodeMovementTriple {
                 this.newAPoint = newPoint;
                 break;
         }
+        newPoint.time = time;
         this.time = time;
     }
 
