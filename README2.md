@@ -1,4 +1,4 @@
-# Instrukcja 
+# Instrukcja (depricated)
 
 ## Instalacja ANTLR'a:
 poradniki:
