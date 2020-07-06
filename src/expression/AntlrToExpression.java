@@ -73,12 +73,6 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 				if(!ctx.expr().isEmpty()) value = Double.valueOf(ctx.expr().getText());
 				return new VariableDeclaration<Double>(id, type, (Double) value);
 			case "NODE":
-				/*
-				 * jakos tak to pewnie by wygladalo:
-				 * 
-				 * return new VariableDeclaration<GMLGraph>(id, type, (GMLGraph) value);
-				 * 
-				 */
 				GMLNode temp = null;
 				if(!ctx.expr().isEmpty()) {
 					value = ctx.expr();
@@ -97,7 +91,6 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 				}
 
 				return new VariableDeclaration<GMLPoint>(id, type, point_temp);
-//			case ExprParser.RULE_graph:
 				
 			default:
 				return new VariableDeclaration<Object>(id, type, value);		// should not ever reach this code
@@ -180,41 +173,14 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 		return null;
 	}
 
-//	public Expression visitOperationDeclaration(ExprParser.OperationDeclarationContext ctx){
-//		Operation operation = (Operation)visit(ctx.operation());
-//
-//		return new OperationDeclaration(operation);
-//	}
-
-//	public Expression visit(ExprParser.OperationContext ctx) {
-//		Expression result = null;
-//
-//		if() result = visit(ctx.addNode());
-//		else if(ctx.addEdge() != null) result = visit(ctx.addEdge());
-//		else if(ctx.modifyNode() != null) result = visit(ctx.modifyNode());
-//
-//		return result;
-//	}
-
 	public Expression visitNodeAddition(NodeAdditionContext ctx) {
 		Expression result = null;
-//
-//		if(ctx.getChild(0).getText() == "ADDNODE"){
 
 			Expression node = this.visit(ctx.getChild(2));
 
 			result = new NodeAddition(node);
 
 			return result;
-//		}
-//		else if(ctx.getChild(0).getText() == "ADDEDGE") {
-//			result = null;
-//		}
-//		else if(ctx.getChild(0).getText() == "MODIFYNODE") {
-//			result = null;
-//		}
-//
-//		return result;
 	}
 
 	public Expression visitEdgeAddition(ExprParser.EdgeAdditionContext ctx) {

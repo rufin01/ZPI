@@ -34,12 +34,8 @@ public class ExpressionProcessor {
                 values.put(decl.id,  (Object) decl.value);
                 evaluations.add((Object) decl.value);
             }
-//			else if(e instanceof OperationDeclaration) {
-//				Operation result = ((OperationDeclaration) e).operation;
-//			}
             else if (e instanceof Number || e instanceof Variable || e instanceof Addition || e instanceof Multiplication){	// e instanceof Number, Variable, Addition, Multiplication
                 String input = e.toString();
-//				Object result = getEvalResult(e);
                 Object result = null;
                 evaluations.add(input + " is " + result);
             }
@@ -134,39 +130,6 @@ public class ExpressionProcessor {
             Variable var = (Variable) e;
             result = values.get(var.id);
         }
-//		else if(e instanceof NumericOperation) {
-//			/*
-//			 * Not working because it was originally pasted from tutorial
-//			 *
-//			 * The idea is to have more than one (int) numeric types and try to
-//			 * somehow navigate between them
-//			 */
-//
-//
-//			Addition add = (Addition) e;
-//			Object left = getEvalResult(add.left);
-//			Object right = getEvalResult(add.right);
-//			result = left + right;
-//		}
-//		else if(e instanceof Subtraction) {
-//			Subtraction sub = (Subtraction) e;
-//			Object left = getEvalResult(sub.left);
-//			Object right = getEvalResult(sub.right);
-//			result = left - right;
-//		}
-//		else if(e instanceof Multiplication) {
-//			Multiplication mul = (Multiplication) e;
-//			Object left = getEvalResult(mul.left);
-//			Object right = getEvalResult(mul.right);
-//			result = left * right;
-//		}
-//		else {	// e instanceof Division
-//			Division div = (Division) e;
-//			Object left = getEvalResult(div.left);
-//			Object right = getEvalResult(div.right);
-//			result = left / right;
-//		}
-
         return result;
     }
 

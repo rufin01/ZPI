@@ -20,18 +20,6 @@ public class GMLGraph_copy {
         this.edges = edges;
     }
 
-//    public GMLGraph(GMLGraph otherGraph){
-//        Gson gson = new Gson();
-//
-//        String jsonString = gson.toJson(otherGraph.nodes);
-//        Type type = new TypeToken<HashMap<String, GMLNode>>(){}.getType();
-//        this.nodes = gson.fromJson(jsonString, type);
-//
-//        jsonString = gson.toJson(otherGraph.nodes);
-//        type = new TypeToken<HashMap<String, GMLEdge>>(){}.getType();
-//        this.edges = gson.fromJson(jsonString, type);
-//    }
-
     public void addNode(String key, GMLNode node){
         this.nodes.put(key, node);
     }
@@ -70,11 +58,9 @@ public class GMLGraph_copy {
     }
 
     public void mergeGraph(GMLGraph_copy otherGraph){
-        // NI MOM POJENCIA CO ROBIE
     }
 
     public void executeMovement(){
-        // NIE MAM POJECIA CO TU POWINNO BYC KURLA RAZ DWA TRZY chyba nic bo nie ma wymiaru czasu
     }
 
     public HashMap<String, GMLNode> getNodes() {
