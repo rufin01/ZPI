@@ -91,6 +91,7 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 				}
 
 				return new VariableDeclaration<GMLPoint>(id, type, point_temp);
+//			case ExprParser.RULE_graph:
 				
 			default:
 				return new VariableDeclaration<Object>(id, type, value);		// should not ever reach this code
@@ -166,12 +167,13 @@ public class AntlrToExpression extends ExprBaseVisitor<Expression> {
 		for(ExprContext ex: ctx.expr()) {
 			dlist.add(this.visit(ex));
 		}
-		
+
 		if(dlist.size() == 3) return new GMLPoint(dlist.get(0), dlist.get(1), dlist.get(2));
 		if(dlist.size() == 4) return new GMLPoint(dlist.get(0), dlist.get(1), dlist.get(2), dlist.get(3));
 		if(dlist.size() > 0) return new GMLPoint(dlist.get(0), dlist.get(1), dlist.get(2), dlist.get(3), dlist.get(4), dlist.get(5), dlist.get(6));
 		return null;
 	}
+
 
 	public Expression visitNodeAddition(NodeAdditionContext ctx) {
 		Expression result = null;

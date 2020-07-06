@@ -30,14 +30,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     private double mouseOldX, mouseOldY;
     private final Rotate rotateX = new Rotate(190, Rotate.X_AXIS);
     private final Rotate rotateY = new Rotate(190, Rotate.Y_AXIS);
-    PerspectiveCamera camera;
-    double zoomFactor = 1.0;
 
     private Button runButton;
     private CodeArea codeArea;
     private SubScene subScene;
     private Model3D model3D;
-
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -49,17 +46,17 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         primaryStage.setMinWidth(1000);
         primaryStage.setMinHeight(800);
 
-        primaryStage.setTitle("zpi");
+        primaryStage.setTitle("4GML Visualizator");
         primaryStage.show();
 
         runButton = (Button) scene.lookup("#runButton");
         runButton.setOnAction(this);
 
         addCodeArea(scene);
+
         model3D = new Model3D();
 
-
-        camera = new PerspectiveCamera(true);
+        PerspectiveCamera camera = new PerspectiveCamera(true);
         camera.getTransforms().addAll(rotateX, rotateY, new Translate(0, 0, -35));
 
         Group root3D = new Group(camera, model3D.getModel());
@@ -106,7 +103,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         });
 
         subScene.setOnScroll((ScrollEvent event) -> {
-            zoomFactor = 1.05;
+            double zoomFactor = 1.05;
             double deltaY = event.getDeltaY();
             if (deltaY < 0){
                 zoomFactor = 2.0 - zoomFactor;
@@ -190,9 +187,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         if (event.getSource() == runButton) {
             model3D = new Model3D();
             Model3D.resetModel();
-
-            // ---------
-
             String code = codeArea.getText();
 
             ExprParser parser = getParser(code);
@@ -221,6 +215,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                     }
                 }
             }
+
+            // -------------
+
+            PerspectiveCamera camera = new PerspectiveCamera(true);
+            camera.getTransforms().addAll(rotateX, rotateY, new Translate(0, 0, -35));
 
             Group root3D = new Group(camera, model3D.getModel());
             subScene.setRoot(root3D);

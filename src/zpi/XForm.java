@@ -87,11 +87,6 @@ public class XForm extends Group {
         s.setZ(scaleFactor);
     }
 
-    // Cannot override these methods as they are final:
-    // public void setScaleX(double x) { s.setX(x); }
-    // public void setScaleY(double y) { s.setY(y); }
-    // public void setScaleZ(double z) { s.setZ(z); }
-    // Use these methods instead:
     public void setSx(double x) { s.setX(x); }
     public void setSy(double y) { s.setY(y); }
     public void setSz(double z) { s.setZ(z); }
